@@ -26,8 +26,7 @@ visualizador_jogos/
     └── js/board.js                # VIEW (renderização do tabuleiro e navegação)
 ```
 
-- **Model**: não importa `flask`. Pode ser testado e reaproveitado isoladamente
-  (inclusive em outra interface, se um dia quiser trocar a Web por outra coisa).
+- **Model**: Base de dados e motor genérico de tabuleiro 8x8.
 - **Controller**: traduz requisições HTTP em chamadas ao Model e decide o que
   devolver (página HTML ou JSON).
 - **View**: template Jinja2 + CSS + JS. O JS busca os dados já processados via
@@ -50,19 +49,3 @@ Acesse http://127.0.0.1:5000
    comentários), seguindo `rastros.py` ou `amazonas.py` como exemplo.
 2. Adicionar o jogo à lista em `models/games/registry.py`.
 
-Nenhum outro arquivo precisa mudar — é a prova de que o motor genérico não
-conhece as regras de nenhum jogo específico (passo 8/9 do roteiro).
-
-## Hospedagem
-
-Para produção, não use `app.run(debug=True)`. Sirva `app` (o objeto Flask
-criado em `app.py`) com um servidor WSGI, por exemplo:
-
-```bash
-pip install gunicorn
-gunicorn app:app
-```
-
-A estrutura em Blueprints/Model isolado já está pronta para isso — não há
-estado em memória global além dos dados fixos dos jogos, então múltiplos
-workers funcionam sem problema.
