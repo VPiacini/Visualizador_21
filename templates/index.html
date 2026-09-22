@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visualizador — 21 Jogos no Mesmo Tabuleiro</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+  <div id="app">
+    <nav id="game-selector">
+      {% for g in games %}
+        <button class="game-btn" data-game-id="{{ g.id }}">{{ g.name }}</button>
+      {% endfor %}
+    </nav>
+
+    <header id="game-header">
+      <h1 id="game-name"></h1>
+      <p id="game-subtitle"></p>
+    </header>
+
+    <div id="player-legend"></div>
+
+    <div id="board-frame">
+      <div id="board"></div>
+      <div id="rank-labels"></div>
+      <div id="file-labels"></div>
+    </div>
+
+    <div id="controls">
+      <button id="btn-prev" aria-label="Jogada anterior">&#8592;</button>
+      <span id="move-counter"></span>
+      <button id="btn-next" aria-label="Próxima jogada">&#8594;</button>
+      <button id="btn-reset" aria-label="Reiniciar">&#8635;</button>
+    </div>
+
+    <div id="comment-box"></div>
+  </div>
+
+  <script>
+    window.DEFAULT_GAME_ID = "{{ default_game }}";
+  </script>
+  <script src="{{ url_for('static', filename='js/board.js') }}"></script>
+</body>
+</html>
