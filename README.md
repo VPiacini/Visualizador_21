@@ -3,6 +3,8 @@
 Visualizador genérico de partidas anotadas em tabuleiro 8x8, escrito em
 Python com Flask, seguindo arquitetura MVC.
 
+Aplicação publicada em https://visualizador-21.onrender.com
+
 ## Estrutura (MVC)
 
 ```
