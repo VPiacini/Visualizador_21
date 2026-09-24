@@ -1,7 +1,3 @@
-"""
-Controller — única camada que conhece o Flask. Traduz requisições HTTP
-em chamadas ao Model e decide o que devolver (página renderizada ou JSON).
-"""
 from flask import Blueprint, abort, jsonify, render_template
 
 from models.games.game import Game
@@ -12,8 +8,7 @@ bp = Blueprint("game", __name__)
 
 
 def serialize_game(game: Game) -> dict:
-    """Monta o pacote de dados que a View (JS no navegador) precisa para
-    reproduzir a partida inteira sem novas requisições por jogada."""
+    # manda o histórico inteiro de uma vez, sem 1 request por jogada
     history = build_history(game.initial_pieces, game.moves)
     return {
         "id": game.id,

@@ -1,20 +1,10 @@
 """
-Estrutura de jogada + motor genérico de interpretação.
-
-Uma jogada é sempre: { player, actions: [...], comment }
-Cada action pode ser:
+Move = {player, actions: [...], comment}. Cada action:
   {"type": "move",   "pieceId": ..., "to": ...}
   {"type": "place",  "position": ..., "piece": {"type": ..., "player": ...}}
   {"type": "remove", "position": ...}
-
-Isso cobre tanto uma jogada simples (um único "move") quanto uma jogada
-complexa com múltiplas alterações no tabuleiro (ex.: mover peça + lançar
-bloqueio, como no Rastros e no Amazonas).
-
-Nenhuma regra de jogo é validada aqui — apenas a interpretação mecânica
-da jogada sobre a lista de peças.
 """
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any
 
 from .piece import Piece
@@ -27,8 +17,6 @@ class Move:
     comment: str = ""
 
     def move_action(self) -> dict[str, Any] | None:
-        """Primeira ação do tipo 'move' desta jogada (útil para destacar
-        origem/destino na interface)."""
         return next((a for a in self.actions if a["type"] == "move"), None)
 
 
@@ -69,8 +57,6 @@ def apply_move(pieces: list[Piece], move: Move) -> list[Piece]:
 def build_history(
     initial_pieces: list[Piece], moves: list[Move]
 ) -> list[list[Piece]]:
-    """Estado do tabuleiro em cada índice, derivado reduzindo a posição
-    inicial com moves[0..index-1]. history[0] é a posição inicial."""
     history = [initial_pieces]
     current = initial_pieces
     for move in moves:
