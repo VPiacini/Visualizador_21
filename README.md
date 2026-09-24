@@ -7,30 +7,30 @@ Python com Flask, seguindo arquitetura MVC.
 
 ```
 visualizador_jogos/
-├── app.py                        # cria e configura a aplicação Flask
-├── models/                       # MODEL — regras e dados, sem nenhuma dependência do Flask
+├── app.py                        # cria a app Flask
+├── models/                       # regras e dados — sem Flask
 │   ├── piece.py                  #   peça genérica {id, type, position, player}
 │   ├── board.py                  #   coordenadas do tabuleiro 8x8
-│   ├── move.py                   #   estrutura de jogada + motor genérico (apply_move/build_history)
+│   ├── move.py                   #   jogada + motor genérico (apply_move/build_history)
 │   └── games/
-│       ├── game.py               #   dataclass Game = config inicial + moves + comentários
-│       ├── rastros.py            #   dados do jogo Rastros (cap. 2 do livro)
-│       ├── amazonas.py           #   dados do jogo Amazonas (cap. 3 do livro)
-│       └── registry.py           #   registro central: adicionar um jogo novo = 1 arquivo aqui
+│       ├── game.py               #   Game = config inicial + moves + comentários
+│       ├── rastros.py            #   dados do jogo Rastros (cap. 2)
+│       ├── amazonas.py           #   dados do jogo Amazonas (cap. 3)
+│       └── registry.py           #   registro central de jogos
 ├── controllers/
-│   └── game_controller.py        # CONTROLLER — rotas Flask, único lugar que conhece o Flask
+│   └── game_controller.py        # rotas Flask
 ├── templates/
-│   └── index.html                # VIEW (estrutura da página, Jinja2)
+│   └── index.html                # estrutura da página (Jinja2)
 └── static/
-    ├── css/style.css             # VIEW (aparência)
-    └── js/board.js                # VIEW (renderização do tabuleiro e navegação)
+    ├── css/style.css             # aparência
+    └── js/board.js               # renderização do tabuleiro e navegação
 ```
 
-- **Model**: Base de dados e motor genérico de tabuleiro 8x8.
+- **Model**: dados e motor genérico do tabuleiro 8x8.
 - **Controller**: traduz requisições HTTP em chamadas ao Model e decide o que
   devolver (página HTML ou JSON).
 - **View**: template Jinja2 + CSS + JS. O JS busca os dados já processados via
-  `/api/games/<id>` e cuida apenas de desenhar o tabuleiro e navegar entre jogadas.
+  `/api/games/<id>` e cuida de desenhar o tabuleiro e navegar entre jogadas.
 
 ## Rodando localmente
 
@@ -43,9 +43,16 @@ python app.py
 
 Acesse http://127.0.0.1:5000
 
+## Testes
+
+```bash
+pip install -r requirements-dev.txt
+pytest tests/ -v
+```
+
 ## Adicionando um novo jogo do livro
 
 1. Criar `models/games/<jogo>.py` com um `Game` (posição inicial + `moves` com
    comentários), seguindo `rastros.py` ou `amazonas.py` como exemplo.
 2. Adicionar o jogo à lista em `models/games/registry.py`.
-
+3. Escrever o validador de regra correspondente em `tests/test_game_data.py`.

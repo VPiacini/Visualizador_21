@@ -1,12 +1,4 @@
-"""
-Registro de jogos disponíveis no visualizador.
-
-Para adicionar um novo jogo do livro: criar um novo módulo em
-models/games/<jogo>.py definindo um Game (configuração inicial +
-moves + comentários) e incluí-lo na lista GAMES abaixo. Nenhum outro
-arquivo do projeto precisa ser alterado — essa é a prova de que o
-motor genérico não conhece as regras de nenhum jogo específico.
-"""
+"""Registro central de jogos. Novo jogo = um módulo em models/games/ + uma entrada aqui."""
 from .amazonas import AMAZONAS
 from .game import Game
 from .rastros import RASTROS
