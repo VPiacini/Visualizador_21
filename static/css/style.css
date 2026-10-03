@@ -135,6 +135,33 @@ body {
   outline-offset: -3px;
 }
 
+.square.put {
+  outline: 3px solid var(--player1);
+  outline-offset: -3px;
+}
+
+.square.gone {
+  outline: 3px dotted #d9534f;
+  outline-offset: -3px;
+}
+
+#status-box {
+  width: min(88vw, 380px);
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  min-height: 1em;
+}
+
+.piece .disc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.7);
+}
+
 .piece {
   position: absolute;
   width: 12.5%;
@@ -153,6 +180,14 @@ body {
   border: 3px solid rgba(0, 0, 0, 0.35);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
+
+.disc[data-type="king"]::after { content: "♚"; }
+.disc[data-type="dama"]::after { content: "♛"; }
+.disc[data-type="knight"]::after { content: "♞"; }
+.disc[data-type="pawn"] { width: 50%; height: 50%; }
+.disc[data-type="guide"] { border-radius: 4px; }
+.disc[data-type="mark"] { width: 38%; height: 38%; }
+.disc[data-type="stone"] { width: 70%; height: 70%; }
 
 .piece .block {
   width: 46%;

@@ -12,6 +12,7 @@ const nameEl = document.getElementById("game-name");
 const subtitleEl = document.getElementById("game-subtitle");
 const commentEl = document.getElementById("comment-box");
 const counterEl = document.getElementById("move-counter");
+const statusEl = document.getElementById("status-box");
 const btnPrev = document.getElementById("btn-prev");
 const btnNext = document.getElementById("btn-next");
 const btnReset = document.getElementById("btn-reset");
@@ -54,8 +55,8 @@ function renderLegend(game) {
 }
 
 function clearHighlights() {
-  document.querySelectorAll(".square.from, .square.dest").forEach((el) => {
-    el.classList.remove("from", "dest");
+  document.querySelectorAll(".square.from, .square.dest, .square.put, .square.gone").forEach((el) => {
+    el.classList.remove("from", "dest", "put", "gone");
   });
 }
 
@@ -67,15 +68,23 @@ function renderState(index) {
   clearHighlights();
   boardEl.querySelectorAll(".piece").forEach((el) => el.remove());
 
-  if (lastMove && lastMove.move) {
+  if (lastMove) {
     const prevPieces = currentGame.history[index - 1];
-    const before = prevPieces.find((p) => p.id === lastMove.move.pieceId);
-    if (before) {
-      const fromEl = boardEl.querySelector(`[data-square="${before.position}"]`);
-      if (fromEl) fromEl.classList.add("from");
-    }
-    const destEl = boardEl.querySelector(`[data-square="${lastMove.move.to}"]`);
-    if (destEl) destEl.classList.add("dest");
+    const mark = (square, cls) => {
+      const el = boardEl.querySelector(`[data-square="${square}"]`);
+      if (el) el.classList.add(cls);
+    };
+    lastMove.actions.forEach((a) => {
+      if (a.type === "move") {
+        const before = prevPieces.find((p) => p.id === a.pieceId);
+        if (before) mark(before.position, "from");
+        mark(a.to, "dest");
+      } else if (a.type === "place" || a.type === "flip") {
+        mark(a.position, "put");
+      } else if (a.type === "remove") {
+        mark(a.position, "gone");
+      }
+    });
   }
 
   pieces.forEach((piece) => {
@@ -92,6 +101,7 @@ function renderState(index) {
     } else {
       const disc = document.createElement("div");
       disc.className = "disc";
+      disc.dataset.type = piece.type;
       const player = piece.player ?? (lastMove ? lastMove.player : null);
       disc.style.background =
         player === 1 ? "var(--player1)" : player === 2 ? "var(--player2)" : "#b9af9a";
@@ -101,6 +111,7 @@ function renderState(index) {
   });
 
   counterEl.textContent = `Jogada ${index} / ${currentGame.moves.length}`;
+  statusEl.textContent = lastMove ? lastMove.status : "";
   commentEl.textContent = lastMove ? lastMove.comment : currentGame.objective;
   btnPrev.disabled = index <= 0;
   btnNext.disabled = index >= currentGame.moves.length;

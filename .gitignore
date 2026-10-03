@@ -1,2 +1,4 @@
 21 Jogos no mesmo Tabuleiro vol3.pdf
 tests/
+__pycache__/
+*.pyc
