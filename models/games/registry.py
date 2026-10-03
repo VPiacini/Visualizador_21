@@ -2,17 +2,21 @@
 from .amazonas import AMAZONAS
 from .campanha import CAMPANHA
 from .daihasami import DAIHASAMI
+from .damaturca import DAMATURCA
 from .game import Game
 from .gogol import GOGOL
 from .gomoku import GOMOKU
+from .hasami import HASAMI
 from .intersecoes import INTERSECOES
 from .konane import KONANE
+from .makyek import MAKYEK
+from .mingmang import MINGMANG
 from .ligue4 import LIGUE4
 from .peoes import PEOES
 from .pahtum import PAHTUM
 from .rastros import RASTROS
 
-GAMES: dict[str, Game] = {g.id: g for g in [RASTROS, AMAZONAS, GOMOKU, LIGUE4, PAHTUM, CAMPANHA, INTERSECOES, KONANE, DAIHASAMI, PEOES, GOGOL]}
+GAMES: dict[str, Game] = {g.id: g for g in [RASTROS, AMAZONAS, GOMOKU, LIGUE4, PAHTUM, CAMPANHA, INTERSECOES, KONANE, DAIHASAMI, PEOES, GOGOL, DAMATURCA, HASAMI, MAKYEK, MINGMANG]}
 
 
 def get_game(game_id: str) -> Game | None:
