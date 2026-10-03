@@ -70,19 +70,25 @@ class Builder:
         self.moves.append(m)
 
 
-def run_length(b: Builder, pos: str, player: int, d: tuple[int, int]) -> int:
-    """Quantas peças de `player` estão alinhadas em `pos` no eixo d (contando pos)."""
+def run_length(
+    b: Builder, pos: str, player: int, d: tuple[int, int], types: tuple[str, ...] | None = None
+) -> int:
+    """Quantas peças de `player` (e `types`, se dado) estão alinhadas em `pos` no eixo d."""
+    def mine(s):
+        p = b.at(s) if s else None
+        return bool(p and p.player == player and (types is None or p.type in types))
+
     n = 1
     for sign in (1, -1):
         k = 1
         while True:
             nxt = step(pos, (d[0] * sign, d[1] * sign), k)
-            if nxt is None or b.owner(nxt) != player:
+            if not mine(nxt):
                 break
             n += 1
             k += 1
     return n
 
 
-def best_run(b: Builder, pos: str, player: int) -> int:
-    return max(run_length(b, pos, player, d) for d in LINES4)
+def best_run(b: Builder, pos: str, player: int, types: tuple[str, ...] | None = None) -> int:
+    return max(run_length(b, pos, player, d, types) for d in LINES4)
