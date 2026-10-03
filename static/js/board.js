@@ -140,6 +140,11 @@ btnNext.addEventListener("click", () => {
 });
 btnReset.addEventListener("click", () => renderState(0));
 
+document.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowLeft") btnPrev.click();
+  else if (e.key === "ArrowRight") btnNext.click();
+});
+
 selectorEl.addEventListener("click", (e) => {
   const btn = e.target.closest(".game-btn");
   if (btn) loadGame(btn.dataset.gameId);

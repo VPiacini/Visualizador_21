@@ -16,9 +16,9 @@ visualizador_jogos/
 │   ├── move.py                   #   jogada + motor genérico (apply_move/build_history)
 │   └── games/
 │       ├── game.py               #   Game = config inicial + moves + comentários
-│       ├── rastros.py            #   dados do jogo Rastros (cap. 2)
-│       ├── amazonas.py           #   dados do jogo Amazonas (cap. 3)
-│       └── registry.py           #   registro central de jogos
+│       ├── helpers.py            #   coordenadas, construtores de ação e Builder
+│       ├── <jogo>.py             #   um módulo por jogo (regras + partida de exemplo)
+│       └── registry.py           #   registro central dos 21 jogos, na ordem do livro
 ├── controllers/
 │   └── game_controller.py        # rotas Flask
 ├── templates/
@@ -33,6 +33,16 @@ visualizador_jogos/
   devolver (página HTML ou JSON).
 - **View**: template Jinja2 + CSS + JS. O JS busca os dados já processados via
   `/api/games/<id>` e cuida de desenhar o tabuleiro e navegar entre jogadas.
+
+## Jogos incluídos
+
+Os 21 jogos do livro (capítulos 2 a 22): Rastros, Amazonas, Konane, Gomoku e Quina,
+Ligue 4, Pah Tum, Dai Hasami Shogi, Campanha, Interseções, Halma, Batalha dos Peões,
+Gogol, Dama Turca, Hasami Shogi, Mak-Yek, Ming Mang, Othello, Linhas de Ação,
+Se Liga, Epaminondas e Sz'kwa. Cada partida é gerada a partir de uma lista
+de lances (`SCRIPT`) validada pelas regras do próprio módulo: lance ilegal
+levanta `AssertionError` ao importar. Posições iniciais de Mak-Yek e Ming Mang
+são adaptadas (a figura do livro não está no texto) — marcadas com `ponytail:`.
 
 ## Rodando localmente
 

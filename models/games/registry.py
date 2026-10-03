@@ -7,20 +7,30 @@ from .epaminondas import EPAMINONDAS
 from .game import Game
 from .gogol import GOGOL
 from .gomoku import GOMOKU
+from .halma import HALMA
 from .hasami import HASAMI
 from .intersecoes import INTERSECOES
 from .konane import KONANE
+from .ligue4 import LIGUE4
+from .linhasacao import LINHASACAO
 from .makyek import MAKYEK
 from .mingmang import MINGMANG
-from .linhasacao import LINHASACAO
-from .seliga import SELIGA
-from .ligue4 import LIGUE4
 from .othello import OTHELLO
-from .peoes import PEOES
 from .pahtum import PAHTUM
+from .peoes import PEOES
 from .rastros import RASTROS
+from .seliga import SELIGA
+from .szkwa import SZKWA
 
-GAMES: dict[str, Game] = {g.id: g for g in [RASTROS, AMAZONAS, GOMOKU, LIGUE4, PAHTUM, CAMPANHA, INTERSECOES, KONANE, DAIHASAMI, PEOES, GOGOL, DAMATURCA, HASAMI, MAKYEK, MINGMANG, OTHELLO, LINHASACAO, SELIGA, EPAMINONDAS]}
+# mesma ordem dos capítulos do livro (2 a 22)
+GAMES: dict[str, Game] = {
+    g.id: g
+    for g in [
+        RASTROS, AMAZONAS, KONANE, GOMOKU, LIGUE4, PAHTUM, DAIHASAMI, CAMPANHA,
+        INTERSECOES, HALMA, PEOES, GOGOL, DAMATURCA, HASAMI, MAKYEK, MINGMANG,
+        OTHELLO, LINHASACAO, SELIGA, EPAMINONDAS, SZKWA,
+    ]
+}
 
 
 def get_game(game_id: str) -> Game | None:
