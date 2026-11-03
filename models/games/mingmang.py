@@ -1,5 +1,6 @@
-from ..piece import Piece
-from .game import Game
+from ..move import Move, apply_move
+from ..piece import Piece, position_key
+from .game import Game, History, Rules
 from .hasami import custody
 from .helpers import Builder, flip, move, sq
 from .makyek import slides
@@ -63,6 +64,30 @@ def build() -> list:
     return b.moves
 
 
+def plays(pieces: list[Piece], player: int, history: History) -> list:
+    grid = {p.position: p.player for p in pieces}
+    out = []
+    for p in pieces:
+        if p.player != player:
+            continue
+        for to in slides(grid, p.position):
+            g2 = {s: pl for s, pl in grid.items() if s != p.position} | {to: player}
+            taken = captured(g2, to, player)
+            actions = [move(p.id, to)] + [flip(t, player) for t in taken]
+            if position_key(apply_move(pieces, Move(player, actions))) not in history.seen:
+                out.append(((p.position, to), actions))
+    return out
+
+
+def status(pieces: list[Piece], mover: int, history: History) -> tuple[str, bool]:
+    n1 = sum(p.player == 1 for p in pieces)
+    text = f"Peças — J1: {n1} · J2: {len(pieces) - n1}"
+    other = 3 - mover
+    if not any(p.player == other for p in pieces) or not plays(pieces, other, history):
+        return f"{text} · Vitória do jogador {mover}", True
+    return text, False
+
+
 MINGMANG = Game(
     id="mingmang",
     name="Ming Mang",
@@ -75,4 +100,5 @@ MINGMANG = Game(
     player_goal=None,
     initial_pieces=INITIAL,
     moves=build(),
+    rules=Rules(plays, status),
 )
