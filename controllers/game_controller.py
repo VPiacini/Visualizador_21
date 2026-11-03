@@ -103,7 +103,7 @@ def api_play(game_id: str):
         if player not in (1, 2) or not path or not all(isinstance(q, str) for q in path):
             abort(400)
         state = play(game, pieces, player, history, path)
-    except (KeyError, TypeError, ValueError, AttributeError):
+    except (KeyError, TypeError, ValueError, AttributeError, IndexError, StopIteration):
         abort(400)
     if state is None:
         abort(400)
