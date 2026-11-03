@@ -1,5 +1,5 @@
 from ..piece import Piece
-from .game import Game
+from .game import Game, History, Rules
 from .helpers import DIRS4, Builder, move, sq, step, xy
 
 TARGET = 4
@@ -66,6 +66,22 @@ def build() -> list:
     return b.moves
 
 
+def plays(pieces: list[Piece], player: int, history: History) -> list:
+    grid = {p.position: p.player for p in pieces}
+    return [
+        ((p.position, to), [move(p.id, to)])
+        for p in pieces
+        if p.player == player
+        for to in moves_from(grid, p.position)
+    ]
+
+
+def status(pieces: list[Piece], mover: int, history: History) -> tuple[str, bool]:
+    if aligned({p.position: p.player for p in pieces}, mover):
+        return f"Vitória do jogador {mover}", True
+    return "", False
+
+
 DAIHASAMI = Game(
     id="daihasami",
     name="Dai Hasami Shogi",
@@ -78,4 +94,5 @@ DAIHASAMI = Game(
     player_goal=None,
     initial_pieces=INITIAL,
     moves=build(),
+    rules=Rules(plays, status),
 )
