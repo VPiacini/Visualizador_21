@@ -1,5 +1,5 @@
 from ..piece import Piece
-from .game import Game
+from .game import Game, History, Rules
 from .helpers import Builder, move, remove, sq, step, xy
 
 INITIAL = [
@@ -80,6 +80,34 @@ def build() -> list:
     return b.moves
 
 
+def last_ep(pieces: list[Piece], history: History) -> str | None:
+    """Casa pulada pelo avanço duplo da jogada anterior, se houve."""
+    before = {q.id: q.position for q in history.last or []}
+    for q in pieces:
+        old = before.get(q.id)
+        if old and old != q.position and (target := ep_square(q.player, old, q.position)):
+            return target
+    return None
+
+
+def plays(pieces: list[Piece], player: int, history: History) -> list:
+    grid = {q.position: q.player for q in pieces}
+    ep = last_ep(pieces, history)
+    return [
+        ((q.position, to), ([remove(victim)] if victim else []) + [move(q.id, to)])
+        for q in pieces
+        if q.player == player
+        for to, victim in pawn_moves(grid, q.position, player, ep)
+    ]
+
+
+def status(pieces: list[Piece], mover: int, history: History) -> tuple[str, bool]:
+    goal = 7 if mover == 1 else 0
+    if any(q.player == mover and xy(q.position)[1] == goal for q in pieces):
+        return f"Vitória do jogador {mover}", True
+    return "", False
+
+
 PEOES = Game(
     id="peoes",
     name="Batalha dos Peões",
@@ -92,4 +120,5 @@ PEOES = Game(
     player_goal={1: "chegar à linha 8", 2: "chegar à linha 1"},
     initial_pieces=INITIAL,
     moves=build(),
+    rules=Rules(plays, status),
 )
