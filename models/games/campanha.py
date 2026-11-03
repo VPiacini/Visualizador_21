@@ -1,5 +1,5 @@
 from ..piece import Piece
-from .game import Game
+from .game import Game, History, Rules
 from .helpers import LINES4, Builder, move, place, sq, step, xy
 
 KNIGHT_JUMPS = [(1, 2), (2, 1), (-1, 2), (-2, 1), (1, -2), (2, -1), (-1, -2), (-2, -1)]
@@ -65,6 +65,21 @@ def build() -> list:
     return b.moves
 
 
+def plays(pieces: list[Piece], player: int, history: History) -> list:
+    b = Builder(pieces)
+    frm = knight_pos(b, player)
+    return [((to,), [move(f"n{player}", to), place(frm, "disc", player)]) for to in knight_moves(b, player)]
+
+
+def status(pieces: list[Piece], mover: int, history: History) -> tuple[str, bool]:
+    b = Builder(pieces)
+    if any(marks_run(b, p.position, mover) >= TARGET for p in pieces if p.type == "disc" and p.player == mover):
+        return f"Vitória do jogador {mover}", True
+    if not knight_moves(b, 3 - mover):
+        return f"Vitória do jogador {mover}", True
+    return "", False
+
+
 CAMPANHA = Game(
     id="campanha",
     name="Campanha",
@@ -77,4 +92,5 @@ CAMPANHA = Game(
     player_goal={1: "alinhar 4 (Cavalo claro)", 2: "alinhar 4 (Cavalo escuro)"},
     initial_pieces=INITIAL,
     moves=build(),
+    rules=Rules(plays, status),
 )
