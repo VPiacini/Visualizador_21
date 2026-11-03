@@ -1,5 +1,6 @@
-from .game import Game
-from .helpers import DIRS4, Builder, place, remove, step
+from ..piece import Piece
+from .game import Game, History, Rules
+from .helpers import DIRS4, Builder, place, remove, sq, step
 
 MAX_PIECES = 50
 # Casas jogadas, alternando jogador 1 e 2 (sempre se joga: não há passe).
@@ -73,6 +74,32 @@ def build() -> list:
     return b.moves
 
 
+def plays(pieces: list[Piece], player: int, history: History) -> list:
+    placed = (history.n + 1) // 2 if player == 1 else history.n // 2
+    if placed >= MAX_PIECES:
+        return []
+    grid = {p.position: p.player for p in pieces}
+    out = []
+    for r in range(8):
+        for c in range(8):
+            pos = sq(c, r)
+            if pos in grid:
+                continue
+            taken = captured_by({**grid, pos: player}, pos, player)
+            out.append(((pos,), [place(pos, "stone", player)] + [remove(t) for t in taken]))
+    return out
+
+
+def status(pieces: list[Piece], mover: int, history: History) -> tuple[str, bool]:
+    # J1 joga nas jogadas ímpares: capturas de um jogador = peças do outro postas e já fora do tabuleiro.
+    placed = {1: (history.n + 1) // 2, 2: history.n // 2}
+    caps = {q: placed[3 - q] - sum(p.player == 3 - q for p in pieces) for q in (1, 2)}
+    text = f"Capturas — J1: {caps[1]} · J2: {caps[2]}"
+    if len(pieces) < 64:
+        return text, False
+    return f"{text} · " + ("Empate" if caps[1] == caps[2] else f"Vitória do jogador {1 if caps[1] > caps[2] else 2}"), True
+
+
 SZKWA = Game(
     id="szkwa",
     name="Sz'kwa (Go e Envio)",
@@ -85,4 +112,5 @@ SZKWA = Game(
     player_goal=None,
     initial_pieces=[],
     moves=build(),
+    rules=Rules(plays, status),
 )
