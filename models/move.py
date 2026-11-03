@@ -3,6 +3,8 @@ Move = {player, actions: [...], comment}. Cada action:
   {"type": "move",   "pieceId": ..., "to": ...}
   {"type": "place",  "position": ..., "piece": {"type": ..., "player": ...}}
   {"type": "remove", "position": ...}
+  {"type": "flip",   "position": ..., "player": ...}   # troca o dono da peça
+Jogada sem actions = passar a vez. `status` é texto livre (placar, situação).
 """
 from dataclasses import dataclass
 from typing import Any
@@ -15,6 +17,7 @@ class Move:
     player: int
     actions: list[dict[str, Any]]
     comment: str = ""
+    status: str = ""
 
     def move_action(self) -> dict[str, Any] | None:
         return next((a for a in self.actions if a["type"] == "move"), None)
@@ -44,6 +47,14 @@ def apply_action(pieces: list[Piece], action: dict[str, Any]) -> list[Piece]:
 
     if kind == "remove":
         return [p for p in pieces if p.position != action["position"]]
+
+    if kind == "flip":
+        return [
+            Piece(p.id, p.type, p.position, action["player"])
+            if p.position == action["position"]
+            else p
+            for p in pieces
+        ]
 
     return pieces
 
