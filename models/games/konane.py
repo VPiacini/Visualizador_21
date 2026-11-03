@@ -1,5 +1,5 @@
 from ..piece import Piece
-from .game import Game, Rules
+from .game import Game, History, Rules
 from .helpers import DIRS4, Builder, move, remove, sq, step
 
 # P1 ocupa as casas com (coluna + linha) par (a1 é do jogador 1); P2 as ímpares.
@@ -70,20 +70,20 @@ def build() -> list:
     return b.moves
 
 
-def plays(pieces: list[Piece], player: int, n: int) -> list:
+def plays(pieces: list[Piece], player: int, history: History) -> list:
     b = Builder(pieces)
-    if n < 2:
+    if history.n < 2:
         # abertura: cada jogador retira uma peça sua; o 2º, vizinha da casa aberta
         gap = next((s for c in range(8) for r in range(8) if b.empty(s := sq(c, r))), None)
         near = {step(gap, d) for d in DIRS4} if gap else None
-        return [(None, p.position, [remove(p.position)]) for p in pieces
+        return [((p.position,), [remove(p.position)]) for p in pieces
                 if p.player == player and (near is None or p.position in near)]
-    return [(frm, to, [move(b.at(frm).id, to)] + [remove(t) for t in taken])
+    return [((frm, to), [move(b.at(frm).id, to)] + [remove(t) for t in taken])
             for frm, to, taken in jumps(b, player)]
 
 
-def status(pieces: list[Piece], mover: int, n: int) -> tuple[str, bool]:
-    if n >= 2 and not jumps(Builder(pieces), 3 - mover):
+def status(pieces: list[Piece], mover: int, history: History) -> tuple[str, bool]:
+    if history.n >= 2 and not jumps(Builder(pieces), 3 - mover):
         return f"Vitória do jogador {mover}", True
     return "", False
 

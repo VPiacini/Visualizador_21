@@ -1,5 +1,5 @@
 from ..piece import Piece
-from .game import Game, Rules
+from .game import Game, History, Rules
 from .helpers import DIRS8, Builder, flip, place, sq, step
 
 INITIAL = [
@@ -68,18 +68,18 @@ def build() -> list:
     return b.moves
 
 
-def plays(pieces: list[Piece], player: int, n: int) -> list:
+def plays(pieces: list[Piece], player: int, history: History) -> list:
     grid = {p.position: p.player for p in pieces}
     out = []
     for c in range(8):
         for r in range(8):
             pos = sq(c, r)
             if taken := flips(grid, pos, player):
-                out.append((None, pos, [place(pos, "stone", player)] + [flip(t, player) for t in taken]))
+                out.append(((pos,), [place(pos, "stone", player)] + [flip(t, player) for t in taken]))
     return out
 
 
-def status(pieces: list[Piece], mover: int, n: int) -> tuple[str, bool]:
+def status(pieces: list[Piece], mover: int, history: History) -> tuple[str, bool]:
     grid = {p.position: p.player for p in pieces}
     n1 = sum(p.player == 1 for p in pieces)
     n2 = sum(p.player == 2 for p in pieces)
