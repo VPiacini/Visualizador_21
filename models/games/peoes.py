@@ -80,19 +80,19 @@ def build() -> list:
     return b.moves
 
 
-def last_ep(pieces: list[Piece], history: History) -> str | None:
-    """Casa pulada pelo avanço duplo da jogada anterior, se houve."""
+def last_ep(pieces: list[Piece], player: int, history: History) -> str | None:
+    """Casa pulada pelo avanço duplo que o adversário de `player` acabou de fazer, se houve."""
     before = {q.id: q.position for q in history.last or []}
     for q in pieces:
         old = before.get(q.id)
-        if old and old != q.position and (target := ep_square(q.player, old, q.position)):
+        if old and old != q.position and q.player != player and (target := ep_square(q.player, old, q.position)):
             return target
     return None
 
 
 def plays(pieces: list[Piece], player: int, history: History) -> list:
     grid = {q.position: q.player for q in pieces}
-    ep = last_ep(pieces, history)
+    ep = last_ep(pieces, player, history)
     return [
         ((q.position, to), ([remove(victim)] if victim else []) + [move(q.id, to)])
         for q in pieces
