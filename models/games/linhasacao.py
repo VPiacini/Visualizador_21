@@ -1,5 +1,5 @@
 from ..piece import Piece
-from .game import Game
+from .game import Game, History, Rules
 from .helpers import DIRS8, Builder, move, remove, sq, step, xy
 
 # P1 nas linhas 1 e 8 (b..g); P2 nas colunas a e h (linhas 2..7): 12 peças cada.
@@ -81,6 +81,22 @@ def build() -> list:
     return b.moves
 
 
+def plays(pieces: list[Piece], player: int, history: History) -> list:
+    grid = {p.position: p.player for p in pieces}
+    return [
+        ((p.position, to), ([remove(to)] if grid.get(to) == 3 - player else []) + [move(p.id, to)])
+        for p in pieces
+        if p.player == player
+        for to in moves_from(grid, p.position)
+    ]
+
+
+def status(pieces: list[Piece], mover: int, history: History) -> tuple[str, bool]:
+    grid = {p.position: p.player for p in pieces}
+    winner = mover if connected(grid, mover) else (3 - mover if connected(grid, 3 - mover) else None)
+    return (f"Vitória do jogador {winner}", True) if winner else ("", False)
+
+
 LINHASACAO = Game(
     id="linhasacao",
     name="Linhas de Ação",
@@ -93,4 +109,5 @@ LINHASACAO = Game(
     player_goal=None,
     initial_pieces=INITIAL,
     moves=build(),
+    rules=Rules(plays, status),
 )
