@@ -1,5 +1,5 @@
 from ..piece import Piece
-from .game import Game
+from .game import Game, History, Rules
 from .helpers import DIRS4, Builder, move, remove, sq, step, xy
 
 INITIAL = [
@@ -73,6 +73,25 @@ def build() -> list:
     return b.moves
 
 
+def plays(pieces: list[Piece], player: int, history: History) -> list:
+    grid = {p.position: p.player for p in pieces}
+    out = []
+    for p in pieces:
+        if p.player != player:
+            continue
+        for to in step_moves(grid, p.position):
+            g2 = {s: pl for s, pl in grid.items() if s != p.position} | {to: player}
+            taken = custody(g2, to, player)
+            out.append(((p.position, to), [move(p.id, to)] + [remove(t) for t in taken]))
+    return out
+
+
+def status(pieces: list[Piece], mover: int, history: History) -> tuple[str, bool]:
+    if sum(p.player == 3 - mover for p in pieces) <= 1:
+        return f"Vitória do jogador {mover}", True
+    return "", False
+
+
 HASAMI = Game(
     id="hasami",
     name="Hasami Shogi",
@@ -85,4 +104,5 @@ HASAMI = Game(
     player_goal=None,
     initial_pieces=INITIAL,
     moves=build(),
+    rules=Rules(plays, status),
 )
