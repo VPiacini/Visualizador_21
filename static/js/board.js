@@ -21,7 +21,7 @@ const selectorEl = document.getElementById("game-selector");
 
 let currentGame = null; // dados serializados vindos de /api/games/<id>
 let currentIndex = 0;
-let live = null; // estado do modo Jogar: resposta de /start ou /play + selected
+let live = null; // estado do modo Jogar: resposta de /start ou /play + path (cliques do lance em curso)
 
 function squareToCoord(square) {
   const col = FILES.indexOf(square[0]);
@@ -57,8 +57,8 @@ function renderLegend(game) {
 }
 
 function clearHighlights() {
-  document.querySelectorAll(".square.from, .square.dest, .square.put, .square.gone").forEach((el) => {
-    el.classList.remove("from", "dest", "put", "gone");
+  document.querySelectorAll(".square.from, .square.dest, .square.put, .square.gone, .square.hint, .square.selected").forEach((el) => {
+    el.classList.remove("from", "dest", "put", "gone", "hint", "selected");
   });
 }
 
@@ -127,13 +127,21 @@ function setControlsDisabled(off) {
   btnPrev.disabled = btnNext.disabled = off;
 }
 
+const startsWith = (path, prefix) => prefix.every((sq, i) => path[i] === sq);
+const sameAs = (a, b) => a.length === b.length && startsWith(a, b);
+
+function candidates(path) {
+  return live.plays.filter((p) => startsWith(p.path, path));
+}
+
 function renderLive() {
   draw(live.pieces, live.prev, live.actions, live.mover);
-  const dests = live.plays.filter((p) => (live.selected ? p.from === live.selected : p.from === null));
-  const starts = live.selected ? [] : live.plays.filter((p) => p.from !== null);
-  dests.forEach((p) => markSquare(p.to, "hint"));
-  starts.forEach((p) => markSquare(p.from, "hint"));
-  if (live.selected) markSquare(live.selected, "selected");
+  const cands = candidates(live.path);
+  cands.forEach((p) => {
+    if (p.path.length > live.path.length) markSquare(p.path[live.path.length], "hint");
+    else markSquare(live.path[live.path.length - 1], "hint");
+  });
+  live.path.forEach((sq) => markSquare(sq, "selected"));
 
   setControlsDisabled(true);
   counterEl.textContent = live.over ? "Fim de jogo" : `Vez do Jogador ${live.player}`;
@@ -148,7 +156,7 @@ function markSquare(square, cls) {
 
 async function startLive() {
   const res = await fetch(`/api/games/${currentGame.id}/start`);
-  live = { ...(await res.json()), selected: null, prev: [], mover: null };
+  live = { ...(await res.json()), path: [], prev: [], mover: null };
   boardEl.classList.add("playing");
   btnMode.textContent = "Assistir";
   renderLive();
@@ -161,16 +169,34 @@ function stopLive() {
   renderState(0);
 }
 
-async function sendPlay(from, to) {
+async function sendPlay(path) {
   const res = await fetch(`/api/games/${currentGame.id}/play`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ pieces: live.pieces, player: live.player, n: live.n, from, to }),
+    body: JSON.stringify({ pieces: live.pieces, player: live.player, history: live.history, path }),
   });
   if (!res.ok) return;
   const prev = live.pieces;
   const mover = live.player;
-  live = { ...(await res.json()), selected: null, prev, mover };
+  live = { ...(await res.json()), path: [], prev, mover };
+  renderLive();
+}
+
+// Acumula o caminho de cliques; envia quando só resta uma jogada possível
+// (ou, havendo jogadas mais longas, quando se clica de novo na última casa).
+function pickSquare(square) {
+  const last = live.path[live.path.length - 1];
+  if (square === last && live.plays.some((p) => sameAs(p.path, live.path))) {
+    return sendPlay(live.path);
+  }
+  for (const path of [[...live.path, square], [square]]) {
+    const cands = candidates(path);
+    if (!cands.length) continue;
+    live.path = path;
+    if (cands.every((p) => sameAs(p.path, path))) return sendPlay(path);
+    return renderLive();
+  }
+  live.path = [];
   renderLive();
 }
 
@@ -180,14 +206,7 @@ boardEl.addEventListener("click", (e) => {
   const col = Math.floor(((e.clientX - rect.left) / rect.width) * 8);
   const row = 7 - Math.floor(((e.clientY - rect.top) / rect.height) * 8);
   if (col < 0 || col > 7 || row < 0 || row > 7) return;
-  const square = `${FILES[col]}${row + 1}`;
-
-  const direct = live.plays.find(
-    (p) => p.to === square && p.from === (live.selected ?? null)
-  );
-  if (direct) return sendPlay(direct.from, direct.to);
-  live.selected = live.plays.some((p) => p.from === square) ? square : null;
-  renderLive();
+  pickSquare(`${FILES[col]}${row + 1}`);
 });
 
 btnMode.addEventListener("click", () => {
