@@ -1,5 +1,5 @@
 from ..piece import Piece
-from .game import Game
+from .game import Game, History, Rules
 from .helpers import Builder, move, place, remove, sq, step, xy
 
 INITIAL = [
@@ -114,6 +114,26 @@ def build() -> list:
     return b.moves
 
 
+def plays(pieces: list[Piece], player: int, history: History) -> list:
+    by_pos = {p.position: p for p in pieces}
+    far = 7 if player == 1 else 0
+    out = []
+    for path, taken in legal_moves({p.position: (p.player, p.type == "dama") for p in pieces}, player).items():
+        piece, dest = by_pos[path[0]], path[-1]
+        actions = [move(piece.id, dest)] + [remove(t) for t in taken]
+        if piece.type != "dama" and xy(dest)[1] == far:
+            actions += [remove(dest), place(dest, "dama", player, piece.id)]
+        out.append((path, actions))
+    return out
+
+
+def status(pieces: list[Piece], mover: int, history: History) -> tuple[str, bool]:
+    grid = {p.position: (p.player, p.type == "dama") for p in pieces}
+    if not legal_moves(grid, 3 - mover):
+        return f"Vitória do jogador {mover}", True
+    return "", False
+
+
 DAMATURCA = Game(
     id="damaturca",
     name="Dama Turca (Tama)",
@@ -126,4 +146,5 @@ DAMATURCA = Game(
     player_goal=None,
     initial_pieces=INITIAL,
     moves=build(),
+    rules=Rules(plays, status),
 )
