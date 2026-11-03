@@ -1,6 +1,36 @@
 from ..move import Move
 from ..piece import Piece
-from .game import Game
+from .game import Game, History, Rules
+from .helpers import DIRS8, move, place, step
+
+def rays(occupied: set[str], pos: str):
+    """Casas livres em linha reta a partir de pos, até o primeiro obstáculo."""
+    for d in DIRS8:
+        k = 1
+        while (s := step(pos, d, k)) and s not in occupied:
+            yield s
+            k += 1
+
+
+def all_plays(pieces: list[Piece], player: int):
+    occupied = {p.position for p in pieces}
+    for p in pieces:
+        if p.type != "amazon" or p.player != player:
+            continue
+        for to in rays(occupied, p.position):
+            for arrow in rays(occupied - {p.position} | {to}, to):
+                yield (p.position, to, arrow), [move(p.id, to), place(arrow, "block")]
+
+
+def plays(pieces: list[Piece], player: int, history: History) -> list:
+    return list(all_plays(pieces, player))
+
+
+def status(pieces: list[Piece], mover: int, history: History) -> tuple[str, bool]:
+    if next(all_plays(pieces, 3 - mover), None) is None:
+        return f"Vitória do jogador {mover}", True
+    return "", False
+
 
 AMAZONAS = Game(
     id="amazonas",
@@ -68,4 +98,5 @@ AMAZONAS = Game(
             ),
         ),
     ],
+    rules=Rules(plays, status),
 )
