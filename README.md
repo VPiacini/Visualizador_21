@@ -128,7 +128,7 @@ em ordem. Cada lance é o `path`, a sequência de casas do lance: 1 casa =
 colocar, 2 = mover (origem e destino), mais = flecha ou saltos em cadeia. O
 jogador 1 começa, os turnos alternam sozinhos e `comment` é opcional.
 
-No site, clique em **Carregar partida** e escolha o arquivo. O servidor valida
+No site, **Baixar modelo** gera o JSON em branco do jogo aberto; clique em **Carregar partida** e escolha o arquivo. O servidor valida
 cada lance com as regras do jogo e responde 400 com o número do lance ilegal.
 Limites: 1 MB por arquivo, 500 lances e 2000 caracteres por comentário. Se o
 campo `game` for de outro jogo que o aberto, o site pergunta se deve abrir esse jogo.

@@ -311,4 +311,18 @@ fileLoadEl.addEventListener("change", async () => {
   }
 });
 
+document.getElementById("btn-template").addEventListener("click", () => {
+  const template = {
+    game: currentGame.id,
+    moves: [
+      { path: ["casa"], comment: "1 casa = colocar; 2 = mover (origem, destino); mais = flecha ou saltos. Comentário opcional." },
+    ],
+  };
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(template, null, 2)], { type: "application/json" }));
+  a.download = `modelo-${currentGame.id}.json`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+});
+
 loadGame(window.DEFAULT_GAME_ID);
