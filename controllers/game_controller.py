@@ -1,8 +1,10 @@
-from flask import Blueprint, abort, jsonify, render_template
+from flask import Blueprint, abort, jsonify, render_template, request
 
 from models.games.game import Game
 from models.games.registry import get_game, list_games
 from models.move import build_history
+from models.piece import Piece
+from models.play import play, start
 
 bp = Blueprint("game", __name__)
 
@@ -16,6 +18,7 @@ def serialize_game(game: Game) -> dict:
         "subtitle": game.subtitle,
         "objective": game.objective,
         "playerGoal": game.player_goal,
+        "playable": game.rules is not None,
         "history": [[p.to_dict() for p in state] for state in history],
         "moves": [
             {
@@ -53,3 +56,29 @@ def api_game(game_id: str):
     if game is None:
         abort(404)
     return jsonify(serialize_game(game))
+
+
+def playable_game(game_id: str) -> Game:
+    game = get_game(game_id)
+    if game is None or game.rules is None:
+        abort(404)
+    return game
+
+
+@bp.route("/api/games/<game_id>/start")
+def api_start(game_id: str):
+    return jsonify(start(playable_game(game_id)))
+
+
+@bp.route("/api/games/<game_id>/play", methods=["POST"])
+def api_play(game_id: str):
+    game = playable_game(game_id)
+    body = request.get_json(silent=True) or {}
+    try:
+        pieces = [Piece(**p) for p in body["pieces"]]
+        state = play(game, pieces, int(body["player"]), int(body["n"]), body.get("from"), body["to"])
+    except (KeyError, TypeError, ValueError):
+        abort(400)
+    if state is None:
+        abort(400)
+    return jsonify(state)

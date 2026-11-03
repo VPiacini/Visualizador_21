@@ -269,3 +269,27 @@ body {
   font-size: 13.5px;
   line-height: 1.5;
 }
+
+#controls button.text-btn {
+  width: auto;
+  padding: 0 14px;
+  font-size: 13px;
+}
+
+.square.hint::after {
+  content: "";
+  position: absolute;
+  inset: 38%;
+  border-radius: 50%;
+  background: rgba(78, 139, 107, 0.75);
+  pointer-events: none;
+}
+
+.square.selected {
+  outline: 3px solid #e0b43c;
+  outline-offset: -3px;
+}
+
+#board.playing {
+  cursor: pointer;
+}

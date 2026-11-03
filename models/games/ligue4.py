@@ -1,5 +1,5 @@
 from ..piece import Piece
-from .game import Game
+from .game import Game, Rules
 from .helpers import Builder, best_run, place, sq
 
 # (linha, gravidade): "E" empilha a partir da coluna a, "D" a partir da coluna h.
@@ -40,6 +40,19 @@ def build() -> list:
     return b.moves
 
 
+def plays(pieces: list[Piece], player: int, n: int) -> list:
+    b = Builder(pieces)
+    spots = {t for rank in range(1, 9) for side in "ED" if (t := target(b, rank, side))}
+    return [(None, s, [place(s, "disc", player)]) for s in sorted(spots)]
+
+
+def status(pieces: list[Piece], mover: int, n: int) -> tuple[str, bool]:
+    b = Builder(pieces)
+    if any(best_run(b, p.position, mover) >= 4 for p in pieces if p.player == mover):
+        return f"Vitória do jogador {mover}", True
+    return "", False
+
+
 LIGUE4 = Game(
     id="ligue4",
     name="Ligue 4",
@@ -51,4 +64,5 @@ LIGUE4 = Game(
     player_goal=None,
     initial_pieces=[],
     moves=build(),
+    rules=Rules(plays, status),
 )

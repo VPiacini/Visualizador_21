@@ -1,5 +1,6 @@
-from .game import Game
-from .helpers import DIRS8, Builder, best_run, place, remove, step
+from ..piece import Piece
+from .game import Game, Rules
+from .helpers import DIRS8, Builder, best_run, place, remove, sq, step
 
 # Casas jogadas, alternando jogador 1 e 2. Regras: Quina (Pente) — 5 em linha
 # ou 5 pares capturados. Um par é capturado ao ser flanqueado por quem joga.
@@ -53,6 +54,29 @@ def build() -> list:
     return b.moves
 
 
+def plays(pieces: list[Piece], player: int, n: int) -> list:
+    b = Builder(pieces)
+    out = []
+    for c in range(8):
+        for r in range(8):
+            pos = sq(c, r)
+            if b.empty(pos):
+                taken = captures(b, pos, player)
+                out.append((None, pos, [place(pos, "disc", player)] + [remove(t) for t in taken]))
+    return out
+
+
+def status(pieces: list[Piece], mover: int, n: int) -> tuple[str, bool]:
+    # J1 joga nas jogadas ímpares: pares capturados = peças postas e já fora do tabuleiro / 2.
+    placed = {1: (n + 1) // 2, 2: n // 2}
+    pairs = {q: (placed[3 - q] - sum(p.player == 3 - q for p in pieces)) // 2 for q in (1, 2)}
+    text = f"Pares capturados — J1: {pairs[1]} · J2: {pairs[2]}"
+    b = Builder(pieces)
+    if any(best_run(b, p.position, mover) >= 5 for p in pieces if p.player == mover) or pairs[mover] >= 5:
+        return f"{text} · Vitória do jogador {mover}", True
+    return text, False
+
+
 GOMOKU = Game(
     id="gomoku",
     name="Gomoku e Quina",
@@ -64,4 +88,5 @@ GOMOKU = Game(
     player_goal=None,
     initial_pieces=[],
     moves=build(),
+    rules=Rules(plays, status),
 )

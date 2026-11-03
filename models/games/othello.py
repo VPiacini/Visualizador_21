@@ -1,5 +1,5 @@
 from ..piece import Piece
-from .game import Game
+from .game import Game, Rules
 from .helpers import DIRS8, Builder, flip, place, sq, step
 
 INITIAL = [
@@ -68,6 +68,27 @@ def build() -> list:
     return b.moves
 
 
+def plays(pieces: list[Piece], player: int, n: int) -> list:
+    grid = {p.position: p.player for p in pieces}
+    out = []
+    for c in range(8):
+        for r in range(8):
+            pos = sq(c, r)
+            if taken := flips(grid, pos, player):
+                out.append((None, pos, [place(pos, "stone", player)] + [flip(t, player) for t in taken]))
+    return out
+
+
+def status(pieces: list[Piece], mover: int, n: int) -> tuple[str, bool]:
+    grid = {p.position: p.player for p in pieces}
+    n1 = sum(p.player == 1 for p in pieces)
+    n2 = sum(p.player == 2 for p in pieces)
+    text = f"Peças — J1: {n1} · J2: {n2}"
+    if valid_moves(grid, 1) or valid_moves(grid, 2):
+        return text, False
+    return f"{text} · " + ("Empate" if n1 == n2 else f"Vitória do jogador {1 if n1 > n2 else 2}"), True
+
+
 OTHELLO = Game(
     id="othello",
     name="Othello (Reversi)",
@@ -80,4 +101,5 @@ OTHELLO = Game(
     player_goal=None,
     initial_pieces=INITIAL,
     moves=build(),
+    rules=Rules(plays, status),
 )
