@@ -21,6 +21,8 @@ const selectorEl = document.getElementById("game-selector");
 
 let currentGame = null; // dados serializados vindos de /api/games/<id>
 let currentIndex = 0;
+let epoch = 0; // invalida respostas que chegam depois de reiniciar ou trocar de jogo
+let sending = false;
 let live = null; // estado do modo Jogar: resposta de /start ou /play + path (cliques do lance em curso)
 
 function squareToCoord(square) {
@@ -155,14 +157,18 @@ function markSquare(square, cls) {
 }
 
 async function startLive() {
+  const mine = ++epoch;
   const res = await fetch(`/api/games/${currentGame.id}/start`);
-  live = { ...(await res.json()), path: [], prev: [], mover: null };
+  const state = await res.json();
+  if (mine !== epoch) return;
+  live = { ...state, path: [], prev: [], mover: null };
   boardEl.classList.add("playing");
   btnMode.textContent = "Assistir";
   renderLive();
 }
 
 function stopLive() {
+  epoch++;
   live = null;
   boardEl.classList.remove("playing");
   btnMode.textContent = "Jogar";
@@ -170,16 +176,24 @@ function stopLive() {
 }
 
 async function sendPlay(path) {
-  const res = await fetch(`/api/games/${currentGame.id}/play`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ pieces: live.pieces, player: live.player, history: live.history, path }),
-  });
-  if (!res.ok) return;
-  const prev = live.pieces;
-  const mover = live.player;
-  live = { ...(await res.json()), path: [], prev, mover };
-  renderLive();
+  if (sending) return;
+  sending = true;
+  const mine = epoch;
+  const { pieces: prev, player: mover } = live;
+  try {
+    const res = await fetch(`/api/games/${currentGame.id}/play`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ pieces: prev, player: mover, history: live.history, path }),
+    });
+    if (!res.ok || mine !== epoch) return;
+    const state = await res.json();
+    if (mine !== epoch) return;
+    live = { ...state, path: [], prev, mover };
+    renderLive();
+  } finally {
+    sending = false;
+  }
 }
 
 // Acumula o caminho de cliques; envia quando só resta uma jogada possível
@@ -215,8 +229,11 @@ btnMode.addEventListener("click", () => {
 });
 
 async function loadGame(gameId) {
+  const mine = ++epoch;
   const res = await fetch(`/api/games/${gameId}`);
-  currentGame = await res.json();
+  const game = await res.json();
+  if (mine !== epoch) return;
+  currentGame = game;
   live = null;
   boardEl.classList.remove("playing");
   btnMode.disabled = !currentGame.playable;
