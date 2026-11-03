@@ -1,5 +1,5 @@
 from ..piece import Piece
-from .game import Game
+from .game import Game, History, Rules
 from .helpers import DIRS8, Builder, move, sq, step, xy
 
 CAMP1 = [sq(c, r) for c in range(8) for r in range(8) if c + r <= 3]    # canto a1
@@ -70,6 +70,22 @@ def build() -> list:
     return b.moves
 
 
+def plays(pieces: list[Piece], player: int, history: History) -> list:
+    grid = {p.position: p.player for p in pieces}
+    return [
+        (path, [move(p.id, path[-1])])
+        for p in pieces
+        if p.player == player
+        for path in paths_from(grid, p.position)
+    ]
+
+
+def status(pieces: list[Piece], mover: int, history: History) -> tuple[str, bool]:
+    if history.n >= 2 and goal_filled({p.position: p.player for p in pieces}, mover):
+        return f"Vitória do jogador {mover}", True
+    return "", False
+
+
 HALMA = Game(
     id="halma",
     name="Halma",
@@ -82,4 +98,5 @@ HALMA = Game(
     player_goal={1: "ocupar o canto h8", 2: "ocupar o canto a1"},
     initial_pieces=INITIAL,
     moves=build(),
+    rules=Rules(plays, status),
 )
