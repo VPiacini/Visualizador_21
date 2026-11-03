@@ -8,8 +8,8 @@ from typing import Callable
 from ..move import Move
 from ..piece import Piece, position_key
 
-# (origem ou None, destino, ações). Origem None = jogada por clique direto no destino.
-Play = tuple[str | None, str, list[dict]]
+# (caminho de cliques, ações): 1 casa = colocar, 2 = mover, mais = flecha ou salto em cadeia.
+Play = tuple[tuple[str, ...], list[dict]]
 
 
 @dataclass
@@ -66,10 +66,10 @@ class History:
 
 @dataclass
 class Rules:
-    # (peças, jogador, jogadas já feitas) -> jogadas legais
-    plays: Callable[[list[Piece], int, int], list[Play]]
-    # (peças, quem jogou, jogadas feitas incluindo esta) -> (texto de status, partida acabou)
-    status: Callable[[list[Piece], int, int], tuple[str, bool]]
+    # (peças, jogador, histórico anterior às peças) -> jogadas legais
+    plays: Callable[[list[Piece], int, History], list[Play]]
+    # (peças após a jogada, quem jogou, histórico anterior às peças) -> (texto de status, partida acabou)
+    status: Callable[[list[Piece], int, History], tuple[str, bool]]
 
 
 @dataclass

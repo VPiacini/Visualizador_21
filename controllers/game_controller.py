@@ -1,7 +1,10 @@
+import os
+
 from flask import Blueprint, abort, jsonify, render_template, request
 
 from models.games.game import Game
 from models.games.registry import get_game, list_games
+from models.games.game import History
 from models.move import build_history
 from models.piece import Piece
 from models.play import play, start
@@ -67,7 +70,8 @@ def playable_game(game_id: str) -> Game:
 
 @bp.route("/api/games/<game_id>/start")
 def api_start(game_id: str):
-    return jsonify(start(playable_game(game_id)))
+    mode = os.environ.get("HISTORY_MODE", "compact")
+    return jsonify(start(playable_game(game_id), mode))
 
 
 @bp.route("/api/games/<game_id>/play", methods=["POST"])
@@ -76,8 +80,13 @@ def api_play(game_id: str):
     body = request.get_json(silent=True) or {}
     try:
         pieces = [Piece(**p) for p in body["pieces"]]
-        state = play(game, pieces, int(body["player"]), int(body["n"]), body.get("from"), body["to"])
-    except (KeyError, TypeError, ValueError):
+        path = tuple(body["path"])
+        player = int(body["player"])
+        history = History.from_json(body["history"])
+        if player not in (1, 2) or not path or not all(isinstance(q, str) for q in path):
+            abort(400)
+        state = play(game, pieces, player, history, path)
+    except (KeyError, TypeError, ValueError, AttributeError):
         abort(400)
     if state is None:
         abort(400)
