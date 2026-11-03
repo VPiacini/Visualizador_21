@@ -57,6 +57,27 @@ regras do próprio módulo: lance ilegal levanta `AssertionError` ao importar.
 Posições iniciais de Mak-Yek e Ming Mang são adaptadas (a figura do livro não
 está no texto) — marcadas com `ponytail:`.
 
+## Modos Assistir e Jogar
+
+O botão **Jogar/Assistir** alterna entre navegar pela partida de exemplo e jogar
+em hot-seat: os turnos passam sozinhos entre o jogador 1 e o jogador 2. O lance
+é montado clicando nas casas em sequência (colocar = 1 clique, mover = origem e
+destino, mover e lançar flecha ou saltos em cadeia = o caminho inteiro; quando
+há lances mais longos que o já clicado, clicar de novo na última casa confirma).
+O servidor valida cada lance, resolve passes e detecta o fim da partida.
+
+Cada jogo declara `rules=Rules(plays, status)`: `plays(pieces, player, history)`
+devolve as jogadas legais como `(caminho, ações)` e `status(pieces, mover, history)`
+devolve o texto de situação e se a partida acabou. `History` guarda as posições
+anteriores (`n`, `last`, `seen`) para regras como en passant e repetição de posição.
+
+Variáveis de ambiente:
+
+| Variável | Valores | Efeito |
+|----------|---------|--------|
+| `HISTORY_MODE` | `compact` (padrão), `full` | `compact` reenvia ao servidor só contagem, posição anterior e hashes das posições vistas; `full` reenvia todas as posições, sem limite |
+| `METRICS` | `1` | imprime por jogada: jogo, modo, bytes da requisição e da resposta, tempo em ms e pico de memória (quando disponível) |
+
 ## Modelo de jogada
 
 Uma jogada (`Move`) tem `player`, `comment`, `status` (texto livre: placar,
@@ -79,6 +100,8 @@ Jogada sem `actions` = passar a vez. Os construtores `move()`, `place()`,
 | `GET /` | página do visualizador |
 | `GET /api/games` | lista `[{id, name, subtitle}]` |
 | `GET /api/games/<id>` | jogo completo: metadados, `moves` e `history` (estado do tabuleiro após cada jogada); 404 se o id não existir |
+| `GET /api/games/<id>/start` | estado inicial do modo Jogar: `pieces`, `player`, `history`, `plays` (caminhos legais) |
+| `POST /api/games/<id>/play` | recebe `{pieces, player, history, path}` e devolve o próximo estado (`pieces`, `player`, `history`, `status`, `over`, `actions`, `plays`); 400 para lance ou estado inválido |
 
 ## Rodando localmente
 
@@ -110,7 +133,8 @@ pytest tests/ -v
    `Game` montado com o `Builder` de `helpers.py` (veja `othello.py` ou
    `ligue4.py` como exemplo).
 2. Adicionar o jogo à lista em `models/games/registry.py`.
-3. Opcional: um validador de regra em `tests/test_game_data.py`
+3. Para o jogo ser jogável, passar `rules=Rules(plays, status)` ao `Game`.
+4. Opcional: um validador de regra em `tests/test_game_data.py`
    (`GAME_RULE_VALIDATORS`).
 
 ## Licença
