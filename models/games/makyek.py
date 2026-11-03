@@ -1,5 +1,5 @@
 from ..piece import Piece
-from .game import Game
+from .game import Game, History, Rules
 from .helpers import DIRS4, Builder, move, remove, sq, step
 from .hasami import custody
 
@@ -75,6 +75,25 @@ def build() -> list:
     return b.moves
 
 
+def plays(pieces: list[Piece], player: int, history: History) -> list:
+    grid = {p.position: p.player for p in pieces}
+    out = []
+    for p in pieces:
+        if p.player != player:
+            continue
+        for to in slides(grid, p.position):
+            g2 = {s: pl for s, pl in grid.items() if s != p.position} | {to: player}
+            cust, inter = captures(g2, to, player)
+            out.append(((p.position, to), [move(p.id, to)] + [remove(t) for t in cust + inter]))
+    return out
+
+
+def status(pieces: list[Piece], mover: int, history: History) -> tuple[str, bool]:
+    if not any(p.player == 3 - mover for p in pieces):
+        return f"Vitória do jogador {mover}", True
+    return "", False
+
+
 MAKYEK = Game(
     id="makyek",
     name="Mak-Yek",
@@ -87,4 +106,5 @@ MAKYEK = Game(
     player_goal=None,
     initial_pieces=INITIAL,
     moves=build(),
+    rules=Rules(plays, status),
 )
