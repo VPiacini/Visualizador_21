@@ -1,4 +1,5 @@
 import os
+import time
 
 from flask import Blueprint, abort, jsonify, render_template, request
 
@@ -74,8 +75,24 @@ def api_start(game_id: str):
     return jsonify(start(playable_game(game_id), mode))
 
 
+def log_metrics(game_id: str, started: float, resp_bytes: int) -> None:
+    try:
+        import resource
+
+        peak = f" maxrss={resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024:.0f}MB"
+    except ImportError:
+        peak = ""
+    mode = os.environ.get("HISTORY_MODE", "compact")
+    print(
+        f"[metrics] {game_id} {mode} req={request.content_length or 0}B "
+        f"resp={resp_bytes}B ms={(time.perf_counter() - started) * 1000:.1f}{peak}",
+        flush=True,
+    )
+
+
 @bp.route("/api/games/<game_id>/play", methods=["POST"])
 def api_play(game_id: str):
+    started = time.perf_counter()
     game = playable_game(game_id)
     body = request.get_json(silent=True) or {}
     try:
@@ -90,4 +107,7 @@ def api_play(game_id: str):
         abort(400)
     if state is None:
         abort(400)
-    return jsonify(state)
+    response = jsonify(state)
+    if os.environ.get("METRICS") == "1":
+        log_metrics(game_id, started, response.content_length or 0)
+    return response
