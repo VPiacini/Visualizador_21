@@ -2,7 +2,7 @@
 Jogo = configuração inicial + sequência de jogadas + comentários.
 Jogos jogáveis também trazem `rules`.
 """
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Callable
 
 from ..move import Move
@@ -80,5 +80,5 @@ class Game:
     objective: str
     player_goal: dict[int, str] | None
     initial_pieces: list[Piece]
-    moves: list[Move]
+    moves: list[Move] = field(default_factory=list)
     rules: Rules | None = None

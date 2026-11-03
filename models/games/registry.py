@@ -1,4 +1,9 @@
-"""Registro central de jogos. Novo jogo = um módulo em models/games/ + uma entrada aqui."""
+"""Registro central de jogos. Novo jogo = um módulo em models/games/ + uma entrada aqui
++ a partida do livro em partidas/livro/<id>.json."""
+import json
+from pathlib import Path
+
+from ..replay import replay
 from .amazonas import AMAZONAS
 from .campanha import CAMPANHA
 from .daihasami import DAIHASAMI
@@ -22,14 +27,22 @@ from .rastros import RASTROS
 from .seliga import SELIGA
 from .szkwa import SZKWA
 
+LIVRO = Path(__file__).resolve().parents[2] / "partidas" / "livro"
+
+
+def com_partida(g: Game) -> Game:
+    entries = json.loads((LIVRO / f"{g.id}.json").read_text(encoding="utf8"))["moves"]
+    return replay(g, entries)
+
+
 # mesma ordem dos capítulos do livro (2 a 22)
 GAMES: dict[str, Game] = {
     g.id: g
-    for g in [
+    for g in map(com_partida, [
         RASTROS, AMAZONAS, KONANE, GOMOKU, LIGUE4, PAHTUM, DAIHASAMI, CAMPANHA,
         INTERSECOES, HALMA, PEOES, GOGOL, DAMATURCA, HASAMI, MAKYEK, MINGMANG,
         OTHELLO, LINHASACAO, SELIGA, EPAMINONDAS, SZKWA,
-    ]
+    ])
 }
 
 

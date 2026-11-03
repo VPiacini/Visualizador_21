@@ -8,12 +8,6 @@ INITIAL = [
     Piece(id="n1", type="knight", position="d4", player=1),
     Piece(id="n2", type="knight", position="e5", player=2),
 ]
-# Casas de destino do Cavalo, alternando jogador 1 e 2.
-SCRIPT = [
-    "e6", "c4", "f8", "a5", "d7", "b7", "b6", "c5",
-    "c8", "a4", "e7", "c3", "g6", "a2", "h4", "c1",
-    "f5", "b3", "e3",
-]
 
 
 def knight_pos(b: Builder, player: int) -> str:
@@ -43,28 +37,6 @@ def marks_run(b: Builder, pos: str, player: int) -> int:
     return best
 
 
-def build() -> list:
-    b = Builder(INITIAL)
-    for i, to in enumerate(SCRIPT):
-        player = 1 if i % 2 == 0 else 2
-        frm = knight_pos(b, player)
-        assert to in knight_moves(b, player), f"lance ilegal {frm}->{to}"
-        b.add(player, [move(f"n{player}", to), place(frm, "disc", player)], "")
-        run = marks_run(b, frm, player)
-        text = f"Jogador {player} leva o Cavalo de {frm} a {to} e deixa uma peça em {frm}."
-        status = ""
-        if run >= TARGET:
-            text += f" Forma {run} em linha e vence."
-            status = f"Vitória do jogador {player}"
-        elif not knight_moves(b, 3 - player):
-            text += f" O Cavalo do jogador {3 - player} fica sem movimentos: vitória."
-            status = f"Vitória do jogador {player}"
-        elif run == TARGET - 1:
-            text += f" Já são {run} peças alinhadas: ameaça de vitória."
-        b.moves[-1].comment, b.moves[-1].status = text, status
-    return b.moves
-
-
 def plays(pieces: list[Piece], player: int, history: History) -> list:
     b = Builder(pieces)
     frm = knight_pos(b, player)
@@ -91,6 +63,5 @@ CAMPANHA = Game(
     ),
     player_goal={1: "alinhar 4 (Cavalo claro)", 2: "alinhar 4 (Cavalo escuro)"},
     initial_pieces=INITIAL,
-    moves=build(),
     rules=Rules(plays, status),
 )

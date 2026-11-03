@@ -1,0 +1,539 @@
+{
+ "game": "szkwa",
+ "moves": [
+  {
+   "path": [
+    "e7"
+   ],
+   "comment": "Jogador 1 coloca em e7."
+  },
+  {
+   "path": [
+    "d6"
+   ],
+   "comment": "Jogador 2 coloca em d6."
+  },
+  {
+   "path": [
+    "b4"
+   ],
+   "comment": "Jogador 1 coloca em b4."
+  },
+  {
+   "path": [
+    "g6"
+   ],
+   "comment": "Jogador 2 coloca em g6."
+  },
+  {
+   "path": [
+    "h7"
+   ],
+   "comment": "Jogador 1 coloca em h7."
+  },
+  {
+   "path": [
+    "g1"
+   ],
+   "comment": "Jogador 2 coloca em g1."
+  },
+  {
+   "path": [
+    "h6"
+   ],
+   "comment": "Jogador 1 coloca em h6."
+  },
+  {
+   "path": [
+    "b6"
+   ],
+   "comment": "Jogador 2 coloca em b6."
+  },
+  {
+   "path": [
+    "d8"
+   ],
+   "comment": "Jogador 1 coloca em d8."
+  },
+  {
+   "path": [
+    "c6"
+   ],
+   "comment": "Jogador 2 coloca em c6."
+  },
+  {
+   "path": [
+    "h3"
+   ],
+   "comment": "Jogador 1 coloca em h3."
+  },
+  {
+   "path": [
+    "e5"
+   ],
+   "comment": "Jogador 2 coloca em e5."
+  },
+  {
+   "path": [
+    "a6"
+   ],
+   "comment": "Jogador 1 coloca em a6."
+  },
+  {
+   "path": [
+    "a7"
+   ],
+   "comment": "Jogador 2 coloca em a7."
+  },
+  {
+   "path": [
+    "e6"
+   ],
+   "comment": "Jogador 1 coloca em e6."
+  },
+  {
+   "path": [
+    "a5"
+   ],
+   "comment": "Jogador 2 coloca em a5. Cerca e captura 1 peça(s): a6."
+  },
+  {
+   "path": [
+    "a2"
+   ],
+   "comment": "Jogador 1 coloca em a2."
+  },
+  {
+   "path": [
+    "b8"
+   ],
+   "comment": "Jogador 2 coloca em b8."
+  },
+  {
+   "path": [
+    "c1"
+   ],
+   "comment": "Jogador 1 coloca em c1."
+  },
+  {
+   "path": [
+    "g3"
+   ],
+   "comment": "Jogador 2 coloca em g3."
+  },
+  {
+   "path": [
+    "h1"
+   ],
+   "comment": "Jogador 1 coloca em h1."
+  },
+  {
+   "path": [
+    "h2"
+   ],
+   "comment": "Jogador 2 coloca em h2. Cerca e captura 1 peça(s): h1."
+  },
+  {
+   "path": [
+    "c7"
+   ],
+   "comment": "Jogador 1 coloca em c7."
+  },
+  {
+   "path": [
+    "h4"
+   ],
+   "comment": "Jogador 2 coloca em h4. Cerca e captura 1 peça(s): h3."
+  },
+  {
+   "path": [
+    "b1"
+   ],
+   "comment": "Jogador 1 coloca em b1."
+  },
+  {
+   "path": [
+    "h1"
+   ],
+   "comment": "Jogador 2 coloca em h1."
+  },
+  {
+   "path": [
+    "a1"
+   ],
+   "comment": "Jogador 1 coloca em a1."
+  },
+  {
+   "path": [
+    "f7"
+   ],
+   "comment": "Jogador 2 coloca em f7."
+  },
+  {
+   "path": [
+    "g5"
+   ],
+   "comment": "Jogador 1 coloca em g5."
+  },
+  {
+   "path": [
+    "f1"
+   ],
+   "comment": "Jogador 2 coloca em f1."
+  },
+  {
+   "path": [
+    "c5"
+   ],
+   "comment": "Jogador 1 coloca em c5."
+  },
+  {
+   "path": [
+    "f5"
+   ],
+   "comment": "Jogador 2 coloca em f5."
+  },
+  {
+   "path": [
+    "e1"
+   ],
+   "comment": "Jogador 1 coloca em e1."
+  },
+  {
+   "path": [
+    "d3"
+   ],
+   "comment": "Jogador 2 coloca em d3."
+  },
+  {
+   "path": [
+    "h3"
+   ],
+   "comment": "Jogador 1 coloca em h3."
+  },
+  {
+   "path": [
+    "c8"
+   ],
+   "comment": "Jogador 2 coloca em c8."
+  },
+  {
+   "path": [
+    "c3"
+   ],
+   "comment": "Jogador 1 coloca em c3."
+  },
+  {
+   "path": [
+    "f8"
+   ],
+   "comment": "Jogador 2 coloca em f8."
+  },
+  {
+   "path": [
+    "d4"
+   ],
+   "comment": "Jogador 1 coloca em d4."
+  },
+  {
+   "path": [
+    "g7"
+   ],
+   "comment": "Jogador 2 coloca em g7."
+  },
+  {
+   "path": [
+    "c2"
+   ],
+   "comment": "Jogador 1 coloca em c2."
+  },
+  {
+   "path": [
+    "c4"
+   ],
+   "comment": "Jogador 2 coloca em c4."
+  },
+  {
+   "path": [
+    "d1"
+   ],
+   "comment": "Jogador 1 coloca em d1."
+  },
+  {
+   "path": [
+    "g4"
+   ],
+   "comment": "Jogador 2 coloca em g4."
+  },
+  {
+   "path": [
+    "e3"
+   ],
+   "comment": "Jogador 1 coloca em e3."
+  },
+  {
+   "path": [
+    "h5"
+   ],
+   "comment": "Jogador 2 coloca em h5. Cerca e captura 1 peça(s): g5."
+  },
+  {
+   "path": [
+    "d2"
+   ],
+   "comment": "Jogador 1 coloca em d2. Cerca e captura 1 peça(s): d3."
+  },
+  {
+   "path": [
+    "h8"
+   ],
+   "comment": "Jogador 2 coloca em h8. Cerca e captura 2 peça(s): h6, h7."
+  },
+  {
+   "path": [
+    "e8"
+   ],
+   "comment": "Jogador 1 coloca em e8."
+  },
+  {
+   "path": [
+    "e4"
+   ],
+   "comment": "Jogador 2 coloca em e4."
+  },
+  {
+   "path": [
+    "d3"
+   ],
+   "comment": "Jogador 1 coloca em d3."
+  },
+  {
+   "path": [
+    "a3"
+   ],
+   "comment": "Jogador 2 coloca em a3."
+  },
+  {
+   "path": [
+    "g5"
+   ],
+   "comment": "Jogador 1 coloca em g5."
+  },
+  {
+   "path": [
+    "g2"
+   ],
+   "comment": "Jogador 2 coloca em g2."
+  },
+  {
+   "path": [
+    "e2"
+   ],
+   "comment": "Jogador 1 coloca em e2."
+  },
+  {
+   "path": [
+    "d7"
+   ],
+   "comment": "Jogador 2 coloca em d7."
+  },
+  {
+   "path": [
+    "a4"
+   ],
+   "comment": "Jogador 1 coloca em a4."
+  },
+  {
+   "path": [
+    "f6"
+   ],
+   "comment": "Jogador 2 coloca em f6. Cerca e captura 4 peça(s): d8, e6, e7, e8."
+  },
+  {
+   "path": [
+    "b3"
+   ],
+   "comment": "Jogador 1 coloca em b3. Cerca e captura 1 peça(s): a3."
+  },
+  {
+   "path": [
+    "b7"
+   ],
+   "comment": "Jogador 2 coloca em b7. Cerca e captura 1 peça(s): c7."
+  },
+  {
+   "path": [
+    "f3"
+   ],
+   "comment": "Jogador 1 coloca em f3."
+  },
+  {
+   "path": [
+    "a8"
+   ],
+   "comment": "Jogador 2 coloca em a8."
+  },
+  {
+   "path": [
+    "f2"
+   ],
+   "comment": "Jogador 1 coloca em f2."
+  },
+  {
+   "path": [
+    "d8"
+   ],
+   "comment": "Jogador 2 coloca em d8."
+  },
+  {
+   "path": [
+    "f4"
+   ],
+   "comment": "Jogador 1 coloca em f4."
+  },
+  {
+   "path": [
+    "e6"
+   ],
+   "comment": "Jogador 2 coloca em e6."
+  },
+  {
+   "path": [
+    "h6"
+   ],
+   "comment": "Jogador 1 coloca em h6. Cerca e captura 9 peça(s): f1, g1, g2, g3, g4, h1, h2, h4, h5."
+  },
+  {
+   "path": [
+    "g8"
+   ],
+   "comment": "Jogador 2 coloca em g8."
+  },
+  {
+   "path": [
+    "g1"
+   ],
+   "comment": "Jogador 1 coloca em g1."
+  },
+  {
+   "path": [
+    "a6"
+   ],
+   "comment": "Jogador 2 coloca em a6."
+  },
+  {
+   "path": [
+    "e8"
+   ],
+   "comment": "Jogador 1 coloca em e8."
+  },
+  {
+   "path": [
+    "e7"
+   ],
+   "comment": "Jogador 2 coloca em e7. Cerca e captura 1 peça(s): e8."
+  },
+  {
+   "path": [
+    "g4"
+   ],
+   "comment": "Jogador 1 coloca em g4."
+  },
+  {
+   "path": [
+    "b2"
+   ],
+   "comment": "Jogador 2 coloca em b2."
+  },
+  {
+   "path": [
+    "a3"
+   ],
+   "comment": "Jogador 1 coloca em a3."
+  },
+  {
+   "path": [
+    "h4"
+   ],
+   "comment": "Jogador 2 coloca em h4."
+  },
+  {
+   "path": [
+    "h5"
+   ],
+   "comment": "Jogador 1 coloca em h5. Cerca e captura 1 peça(s): h4."
+  },
+  {
+   "path": [
+    "h1"
+   ],
+   "comment": "Jogador 2 coloca em h1."
+  },
+  {
+   "path": [
+    "h2"
+   ],
+   "comment": "Jogador 1 coloca em h2. Cerca e captura 1 peça(s): h1."
+  },
+  {
+   "path": [
+    "f1"
+   ],
+   "comment": "Jogador 2 coloca em f1."
+  },
+  {
+   "path": [
+    "c7"
+   ],
+   "comment": "Jogador 1 coloca em c7."
+  },
+  {
+   "path": [
+    "h1"
+   ],
+   "comment": "Jogador 2 coloca em h1."
+  },
+  {
+   "path": [
+    "g2"
+   ],
+   "comment": "Jogador 1 coloca em g2."
+  },
+  {
+   "path": [
+    "e8"
+   ],
+   "comment": "Jogador 2 coloca em e8."
+  },
+  {
+   "path": [
+    "h7"
+   ],
+   "comment": "Jogador 1 coloca em h7."
+  },
+  {
+   "path": [
+    "h4"
+   ],
+   "comment": "Jogador 2 coloca em h4."
+  },
+  {
+   "path": [
+    "d5"
+   ],
+   "comment": "Jogador 1 coloca em d5."
+  },
+  {
+   "path": [
+    "b5"
+   ],
+   "comment": "Jogador 2 coloca em b5."
+  },
+  {
+   "path": [
+    "g3"
+   ],
+   "comment": "Jogador 1 coloca em g3. Tabuleiro cheio: vitória do jogador 1."
+  }
+ ]
+}

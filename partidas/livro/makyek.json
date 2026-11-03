@@ -1,0 +1,215 @@
+{
+ "game": "makyek",
+ "moves": [
+  {
+   "path": [
+    "c2",
+    "c5"
+   ],
+   "comment": "Jogador 1 move de c2 a c5."
+  },
+  {
+   "path": [
+    "b7",
+    "b5"
+   ],
+   "comment": "Jogador 2 move de b7 a b5."
+  },
+  {
+   "path": [
+    "a2",
+    "a5"
+   ],
+   "comment": "Jogador 1 move de a2 a a5. Captura por custódia (b5)."
+  },
+  {
+   "path": [
+    "b8",
+    "b5"
+   ],
+   "comment": "Jogador 2 move de b8 a b5. Captura por intervenção (c5, a5)."
+  },
+  {
+   "path": [
+    "e2",
+    "e6"
+   ],
+   "comment": "Jogador 1 move de e2 a e6."
+  },
+  {
+   "path": [
+    "c7",
+    "c2"
+   ],
+   "comment": "Jogador 2 move de c7 a c2. Captura por intervenção (d2, b2)."
+  },
+  {
+   "path": [
+    "e6",
+    "g6"
+   ],
+   "comment": "Jogador 1 move de e6 a g6."
+  },
+  {
+   "path": [
+    "b5",
+    "g5"
+   ],
+   "comment": "Jogador 2 move de b5 a g5. Captura por custódia (g6)."
+  },
+  {
+   "path": [
+    "b1",
+    "b8"
+   ],
+   "comment": "Jogador 1 move de b1 a b8. Captura por intervenção (c8, a8)."
+  },
+  {
+   "path": [
+    "c2",
+    "e2"
+   ],
+   "comment": "Jogador 2 move de c2 a e2."
+  },
+  {
+   "path": [
+    "d1",
+    "d2"
+   ],
+   "comment": "Jogador 1 move de d1 a d2. Captura por custódia (e2)."
+  },
+  {
+   "path": [
+    "e7",
+    "e2"
+   ],
+   "comment": "Jogador 2 move de e7 a e2. Captura por intervenção (f2, d2)."
+  },
+  {
+   "path": [
+    "h2",
+    "h6"
+   ],
+   "comment": "Jogador 1 move de h2 a h6."
+  },
+  {
+   "path": [
+    "d7",
+    "d1"
+   ],
+   "comment": "Jogador 2 move de d7 a d1. Captura por intervenção (e1, c1)."
+  },
+  {
+   "path": [
+    "h6",
+    "g6"
+   ],
+   "comment": "Jogador 1 move de h6 a g6. Captura por intervenção (g7, g5)."
+  },
+  {
+   "path": [
+    "e2",
+    "f2"
+   ],
+   "comment": "Jogador 2 move de e2 a f2."
+  },
+  {
+   "path": [
+    "g6",
+    "g7"
+   ],
+   "comment": "Jogador 1 move de g6 a g7. Captura por intervenção (h7, f7)."
+  },
+  {
+   "path": [
+    "h8",
+    "h2"
+   ],
+   "comment": "Jogador 2 move de h8 a h2. Captura por custódia (g2)."
+  },
+  {
+   "path": [
+    "g7",
+    "g2"
+   ],
+   "comment": "Jogador 1 move de g7 a g2. Captura por intervenção (h2, f2)."
+  },
+  {
+   "path": [
+    "a7",
+    "a2"
+   ],
+   "comment": "Jogador 2 move de a7 a a2."
+  },
+  {
+   "path": [
+    "g2",
+    "b2"
+   ],
+   "comment": "Jogador 1 move de g2 a b2."
+  },
+  {
+   "path": [
+    "d1",
+    "b1"
+   ],
+   "comment": "Jogador 2 move de d1 a b1. Captura por custódia (a1)."
+  },
+  {
+   "path": [
+    "b8",
+    "c8"
+   ],
+   "comment": "Jogador 1 move de b8 a c8."
+  },
+  {
+   "path": [
+    "g8",
+    "g2"
+   ],
+   "comment": "Jogador 2 move de g8 a g2."
+  },
+  {
+   "path": [
+    "b2",
+    "f2"
+   ],
+   "comment": "Jogador 1 move de b2 a f2."
+  },
+  {
+   "path": [
+    "e8",
+    "e2"
+   ],
+   "comment": "Jogador 2 move de e8 a e2. Captura por custódia (f2)."
+  },
+  {
+   "path": [
+    "f1",
+    "f2"
+   ],
+   "comment": "Jogador 1 move de f1 a f2. Captura por intervenção (g2, e2)."
+  },
+  {
+   "path": [
+    "b1",
+    "b8"
+   ],
+   "comment": "Jogador 2 move de b1 a b8. Captura por custódia (c8)."
+  },
+  {
+   "path": [
+    "f2",
+    "f6"
+   ],
+   "comment": "Jogador 1 move de f2 a f6."
+  },
+  {
+   "path": [
+    "a2",
+    "h2"
+   ],
+   "comment": "Jogador 2 move de a2 a h2."
+  }
+ ]
+}

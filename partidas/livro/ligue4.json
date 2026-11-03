@@ -1,0 +1,101 @@
+{
+ "game": "ligue4",
+ "moves": [
+  {
+   "path": [
+    "h3"
+   ],
+   "comment": "Jogador 1 coloca na linha 3 pela gravidade da direita; a peça para em h3."
+  },
+  {
+   "path": [
+    "h2"
+   ],
+   "comment": "Jogador 2 coloca na linha 2 pela gravidade da direita; a peça para em h2."
+  },
+  {
+   "path": [
+    "a8"
+   ],
+   "comment": "Jogador 1 coloca na linha 8 pela gravidade da esquerda; a peça para em a8."
+  },
+  {
+   "path": [
+    "a6"
+   ],
+   "comment": "Jogador 2 coloca na linha 6 pela gravidade da esquerda; a peça para em a6."
+  },
+  {
+   "path": [
+    "h4"
+   ],
+   "comment": "Jogador 1 coloca na linha 4 pela gravidade da direita; a peça para em h4."
+  },
+  {
+   "path": [
+    "a4"
+   ],
+   "comment": "Jogador 2 coloca na linha 4 pela gravidade da esquerda; a peça para em a4."
+  },
+  {
+   "path": [
+    "h8"
+   ],
+   "comment": "Jogador 1 coloca na linha 8 pela gravidade da direita; a peça para em h8."
+  },
+  {
+   "path": [
+    "g8"
+   ],
+   "comment": "Jogador 2 coloca na linha 8 pela gravidade da direita; a peça para em g8."
+  },
+  {
+   "path": [
+    "g3"
+   ],
+   "comment": "Jogador 1 coloca na linha 3 pela gravidade da direita; a peça para em g3."
+  },
+  {
+   "path": [
+    "f8"
+   ],
+   "comment": "Jogador 2 coloca na linha 8 pela gravidade da direita; a peça para em f8."
+  },
+  {
+   "path": [
+    "h5"
+   ],
+   "comment": "Jogador 1 coloca na linha 5 pela gravidade da direita; a peça para em h5. Cria uma sequência de 3: o adversário precisa reagir."
+  },
+  {
+   "path": [
+    "h6"
+   ],
+   "comment": "Jogador 2 coloca na linha 6 pela gravidade da direita; a peça para em h6."
+  },
+  {
+   "path": [
+    "b8"
+   ],
+   "comment": "Jogador 1 coloca na linha 8 pela gravidade da esquerda; a peça para em b8."
+  },
+  {
+   "path": [
+    "a5"
+   ],
+   "comment": "Jogador 2 coloca na linha 5 pela gravidade da esquerda; a peça para em a5. Cria uma sequência de 3: o adversário precisa reagir."
+  },
+  {
+   "path": [
+    "a3"
+   ],
+   "comment": "Jogador 1 coloca na linha 3 pela gravidade da esquerda; a peça para em a3."
+  },
+  {
+   "path": [
+    "a7"
+   ],
+   "comment": "Jogador 2 coloca na linha 7 pela gravidade da esquerda; a peça para em a7. Forma 4 em linha e vence a partida."
+  }
+ ]
+}

@@ -1,0 +1,243 @@
+{
+ "game": "hasami",
+ "moves": [
+  {
+   "path": [
+    "e1",
+    "e2"
+   ],
+   "comment": "Jogador 1 move de e1 a e2."
+  },
+  {
+   "path": [
+    "c8",
+    "c7"
+   ],
+   "comment": "Jogador 2 move de c8 a c7."
+  },
+  {
+   "path": [
+    "c1",
+    "c2"
+   ],
+   "comment": "Jogador 1 move de c1 a c2."
+  },
+  {
+   "path": [
+    "e8",
+    "e7"
+   ],
+   "comment": "Jogador 2 move de e8 a e7."
+  },
+  {
+   "path": [
+    "c2",
+    "c3"
+   ],
+   "comment": "Jogador 1 move de c2 a c3."
+  },
+  {
+   "path": [
+    "c7",
+    "c8"
+   ],
+   "comment": "Jogador 2 move de c7 a c8."
+  },
+  {
+   "path": [
+    "e2",
+    "e3"
+   ],
+   "comment": "Jogador 1 move de e2 a e3."
+  },
+  {
+   "path": [
+    "c8",
+    "c7"
+   ],
+   "comment": "Jogador 2 move de c8 a c7."
+  },
+  {
+   "path": [
+    "e3",
+    "e4"
+   ],
+   "comment": "Jogador 1 move de e3 a e4."
+  },
+  {
+   "path": [
+    "d8",
+    "d7"
+   ],
+   "comment": "Jogador 2 move de d8 a d7."
+  },
+  {
+   "path": [
+    "c3",
+    "c4"
+   ],
+   "comment": "Jogador 1 move de c3 a c4."
+  },
+  {
+   "path": [
+    "d7",
+    "d6"
+   ],
+   "comment": "Jogador 2 move de d7 a d6."
+  },
+  {
+   "path": [
+    "c4",
+    "c5"
+   ],
+   "comment": "Jogador 1 move de c4 a c5."
+  },
+  {
+   "path": [
+    "e7",
+    "e6"
+   ],
+   "comment": "Jogador 2 move de e7 a e6."
+  },
+  {
+   "path": [
+    "c5",
+    "d5"
+   ],
+   "comment": "Jogador 1 move de c5 a d5."
+  },
+  {
+   "path": [
+    "e6",
+    "e5"
+   ],
+   "comment": "Jogador 2 move de e6 a e5."
+  },
+  {
+   "path": [
+    "d5",
+    "c5"
+   ],
+   "comment": "Jogador 1 move de d5 a c5."
+  },
+  {
+   "path": [
+    "d6",
+    "e6"
+   ],
+   "comment": "Jogador 2 move de d6 a e6."
+  },
+  {
+   "path": [
+    "e4",
+    "f4"
+   ],
+   "comment": "Jogador 1 move de e4 a f4."
+  },
+  {
+   "path": [
+    "e6",
+    "f6"
+   ],
+   "comment": "Jogador 2 move de e6 a f6."
+  },
+  {
+   "path": [
+    "f4",
+    "f5"
+   ],
+   "comment": "Jogador 1 move de f4 a f5."
+  },
+  {
+   "path": [
+    "e5",
+    "d5"
+   ],
+   "comment": "Jogador 2 move de e5 a d5."
+  },
+  {
+   "path": [
+    "f5",
+    "e5"
+   ],
+   "comment": "Jogador 1 move de f5 a e5 e captura por custódia: d5."
+  },
+  {
+   "path": [
+    "f6",
+    "e6"
+   ],
+   "comment": "Jogador 2 move de f6 a e6."
+  },
+  {
+   "path": [
+    "e5",
+    "f5"
+   ],
+   "comment": "Jogador 1 move de e5 a f5."
+  },
+  {
+   "path": [
+    "e6",
+    "e5"
+   ],
+   "comment": "Jogador 2 move de e6 a e5."
+  },
+  {
+   "path": [
+    "c5",
+    "d5"
+   ],
+   "comment": "Jogador 1 move de c5 a d5 e captura por custódia: e5."
+  },
+  {
+   "path": [
+    "c7",
+    "c6"
+   ],
+   "comment": "Jogador 2 move de c7 a c6."
+  },
+  {
+   "path": [
+    "d5",
+    "d6"
+   ],
+   "comment": "Jogador 1 move de d5 a d6."
+  },
+  {
+   "path": [
+    "c6",
+    "b6"
+   ],
+   "comment": "Jogador 2 move de c6 a b6."
+  },
+  {
+   "path": [
+    "d6",
+    "c6"
+   ],
+   "comment": "Jogador 1 move de d6 a c6."
+  },
+  {
+   "path": [
+    "b8",
+    "c8"
+   ],
+   "comment": "Jogador 2 move de b8 a c8."
+  },
+  {
+   "path": [
+    "c6",
+    "c7"
+   ],
+   "comment": "Jogador 1 move de c6 a c7."
+  },
+  {
+   "path": [
+    "b6",
+    "c6"
+   ],
+   "comment": "Jogador 2 move de b6 a c6 e captura por custódia: c7."
+  }
+ ]
+}

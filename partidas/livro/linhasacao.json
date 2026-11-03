@@ -1,0 +1,180 @@
+{
+ "game": "linhasacao",
+ "moves": [
+  {
+   "path": [
+    "b1",
+    "h1"
+   ],
+   "comment": "Jogador 1 move de b1 a h1."
+  },
+  {
+   "path": [
+    "a2",
+    "a8"
+   ],
+   "comment": "Jogador 2 move de a2 a a8."
+  },
+  {
+   "path": [
+    "g8",
+    "f7"
+   ],
+   "comment": "Jogador 1 move de g8 a f7."
+  },
+  {
+   "path": [
+    "h2",
+    "g2"
+   ],
+   "comment": "Jogador 2 move de h2 a g2."
+  },
+  {
+   "path": [
+    "b8",
+    "b7"
+   ],
+   "comment": "Jogador 1 move de b8 a b7."
+  },
+  {
+   "path": [
+    "h7",
+    "g6"
+   ],
+   "comment": "Jogador 2 move de h7 a g6."
+  },
+  {
+   "path": [
+    "b7",
+    "e7"
+   ],
+   "comment": "Jogador 1 move de b7 a e7."
+  },
+  {
+   "path": [
+    "g2",
+    "g5"
+   ],
+   "comment": "Jogador 2 move de g2 a g5."
+  },
+  {
+   "path": [
+    "c8",
+    "e6"
+   ],
+   "comment": "Jogador 1 move de c8 a e6."
+  },
+  {
+   "path": [
+    "g6",
+    "g3"
+   ],
+   "comment": "Jogador 2 move de g6 a g3."
+  },
+  {
+   "path": [
+    "d8",
+    "d6"
+   ],
+   "comment": "Jogador 1 move de d8 a d6."
+  },
+  {
+   "path": [
+    "h4",
+    "f4"
+   ],
+   "comment": "Jogador 2 move de h4 a f4."
+  },
+  {
+   "path": [
+    "f7",
+    "d5"
+   ],
+   "comment": "Jogador 1 move de f7 a d5."
+  },
+  {
+   "path": [
+    "h3",
+    "e3"
+   ],
+   "comment": "Jogador 2 move de h3 a e3."
+  },
+  {
+   "path": [
+    "h1",
+    "e4"
+   ],
+   "comment": "Jogador 1 move de h1 a e4."
+  },
+  {
+   "path": [
+    "h6",
+    "h4"
+   ],
+   "comment": "Jogador 2 move de h6 a h4."
+  },
+  {
+   "path": [
+    "f8",
+    "f5"
+   ],
+   "comment": "Jogador 1 move de f8 a f5."
+  },
+  {
+   "path": [
+    "g3",
+    "d3"
+   ],
+   "comment": "Jogador 2 move de g3 a d3."
+  },
+  {
+   "path": [
+    "d6",
+    "f4"
+   ],
+   "comment": "Jogador 1 move de d6 a f4 e captura a peça adversária."
+  },
+  {
+   "path": [
+    "e3",
+    "b6"
+   ],
+   "comment": "Jogador 2 move de e3 a b6."
+  },
+  {
+   "path": [
+    "f4",
+    "e5"
+   ],
+   "comment": "Jogador 1 move de f4 a e5."
+  },
+  {
+   "path": [
+    "d3",
+    "b3"
+   ],
+   "comment": "Jogador 2 move de d3 a b3."
+  },
+  {
+   "path": [
+    "e8",
+    "e2"
+   ],
+   "comment": "Jogador 1 move de e8 a e2."
+  },
+  {
+   "path": [
+    "h5",
+    "g6"
+   ],
+   "comment": "Jogador 2 move de h5 a g6."
+  },
+  {
+   "path": [
+    "c1",
+    "e3"
+   ],
+   "comment": "Jogador 1 move de c1 a e3. Todas as peças do jogador 1 ficam conectadas."
+  }
+ ]
+}

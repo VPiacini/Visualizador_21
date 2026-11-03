@@ -1,0 +1,236 @@
+{
+ "game": "peoes",
+ "moves": [
+  {
+   "path": [
+    "f2",
+    "f4"
+   ],
+   "comment": "Jogador 1 avança duas casas, de f2 a f4 (primeiro movimento do peão)."
+  },
+  {
+   "path": [
+    "a7",
+    "a6"
+   ],
+   "comment": "Jogador 2 avança de a7 a a6."
+  },
+  {
+   "path": [
+    "h2",
+    "h3"
+   ],
+   "comment": "Jogador 1 avança de h2 a h3."
+  },
+  {
+   "path": [
+    "g7",
+    "g6"
+   ],
+   "comment": "Jogador 2 avança de g7 a g6."
+  },
+  {
+   "path": [
+    "f4",
+    "f5"
+   ],
+   "comment": "Jogador 1 avança de f4 a f5."
+  },
+  {
+   "path": [
+    "g6",
+    "f5"
+   ],
+   "comment": "Jogador 2 captura em f5, saindo de g6."
+  },
+  {
+   "path": [
+    "d2",
+    "d3"
+   ],
+   "comment": "Jogador 1 avança de d2 a d3."
+  },
+  {
+   "path": [
+    "b7",
+    "b6"
+   ],
+   "comment": "Jogador 2 avança de b7 a b6."
+  },
+  {
+   "path": [
+    "a2",
+    "a3"
+   ],
+   "comment": "Jogador 1 avança de a2 a a3."
+  },
+  {
+   "path": [
+    "a6",
+    "a5"
+   ],
+   "comment": "Jogador 2 avança de a6 a a5."
+  },
+  {
+   "path": [
+    "d3",
+    "d4"
+   ],
+   "comment": "Jogador 1 avança de d3 a d4."
+  },
+  {
+   "path": [
+    "f5",
+    "f4"
+   ],
+   "comment": "Jogador 2 avança de f5 a f4."
+  },
+  {
+   "path": [
+    "a3",
+    "a4"
+   ],
+   "comment": "Jogador 1 avança de a3 a a4."
+  },
+  {
+   "path": [
+    "f4",
+    "f3"
+   ],
+   "comment": "Jogador 2 avança de f4 a f3."
+  },
+  {
+   "path": [
+    "e2",
+    "f3"
+   ],
+   "comment": "Jogador 1 captura em f3, saindo de e2."
+  },
+  {
+   "path": [
+    "b6",
+    "b5"
+   ],
+   "comment": "Jogador 2 avança de b6 a b5."
+  },
+  {
+   "path": [
+    "d4",
+    "d5"
+   ],
+   "comment": "Jogador 1 avança de d4 a d5."
+  },
+  {
+   "path": [
+    "b5",
+    "a4"
+   ],
+   "comment": "Jogador 2 captura em a4, saindo de b5."
+  },
+  {
+   "path": [
+    "f3",
+    "f4"
+   ],
+   "comment": "Jogador 1 avança de f3 a f4."
+  },
+  {
+   "path": [
+    "d7",
+    "d6"
+   ],
+   "comment": "Jogador 2 avança de d7 a d6."
+  },
+  {
+   "path": [
+    "c2",
+    "c4"
+   ],
+   "comment": "Jogador 1 avança duas casas, de c2 a c4 (primeiro movimento do peão)."
+  },
+  {
+   "path": [
+    "h7",
+    "h6"
+   ],
+   "comment": "Jogador 2 avança de h7 a h6."
+  },
+  {
+   "path": [
+    "c4",
+    "c5"
+   ],
+   "comment": "Jogador 1 avança de c4 a c5."
+  },
+  {
+   "path": [
+    "d6",
+    "c5"
+   ],
+   "comment": "Jogador 2 captura em c5, saindo de d6."
+  },
+  {
+   "path": [
+    "f4",
+    "f5"
+   ],
+   "comment": "Jogador 1 avança de f4 a f5."
+  },
+  {
+   "path": [
+    "h6",
+    "h5"
+   ],
+   "comment": "Jogador 2 avança de h6 a h5."
+  },
+  {
+   "path": [
+    "h3",
+    "h4"
+   ],
+   "comment": "Jogador 1 avança de h3 a h4."
+  },
+  {
+   "path": [
+    "e7",
+    "e5"
+   ],
+   "comment": "Jogador 2 avança duas casas, de e7 a e5 (primeiro movimento do peão)."
+  },
+  {
+   "path": [
+    "f5",
+    "e6"
+   ],
+   "comment": "Jogador 1 captura en passant: de f5 a e6, retirando o peão de e5."
+  },
+  {
+   "path": [
+    "c5",
+    "c4"
+   ],
+   "comment": "Jogador 2 avança de c5 a c4."
+  },
+  {
+   "path": [
+    "e6",
+    "f7"
+   ],
+   "comment": "Jogador 1 captura em f7, saindo de e6."
+  },
+  {
+   "path": [
+    "c7",
+    "c6"
+   ],
+   "comment": "Jogador 2 avança de c7 a c6."
+  },
+  {
+   "path": [
+    "f7",
+    "f8"
+   ],
+   "comment": "Jogador 1 avança de f7 a f8. Chegou ao outro lado do tabuleiro e vence."
+  }
+ ]
+}

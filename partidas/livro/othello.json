@@ -1,0 +1,365 @@
+{
+ "game": "othello",
+ "moves": [
+  {
+   "path": [
+    "c4"
+   ],
+   "comment": "Jogador 1 coloca em c4 e conquista 1 peça(s): d4."
+  },
+  {
+   "path": [
+    "e3"
+   ],
+   "comment": "Jogador 2 coloca em e3 e conquista 1 peça(s): e4."
+  },
+  {
+   "path": [
+    "f5"
+   ],
+   "comment": "Jogador 1 coloca em f5 e conquista 1 peça(s): e5."
+  },
+  {
+   "path": [
+    "g6"
+   ],
+   "comment": "Jogador 2 coloca em g6 e conquista 1 peça(s): f5."
+  },
+  {
+   "path": [
+    "e2"
+   ],
+   "comment": "Jogador 1 coloca em e2 e conquista 2 peça(s): e3, e4."
+  },
+  {
+   "path": [
+    "c5"
+   ],
+   "comment": "Jogador 2 coloca em c5 e conquista 2 peça(s): d5, e5."
+  },
+  {
+   "path": [
+    "f6"
+   ],
+   "comment": "Jogador 1 coloca em f6 e conquista 1 peça(s): e5."
+  },
+  {
+   "path": [
+    "c3"
+   ],
+   "comment": "Jogador 2 coloca em c3 e conquista 1 peça(s): c4."
+  },
+  {
+   "path": [
+    "h6"
+   ],
+   "comment": "Jogador 1 coloca em h6 e conquista 1 peça(s): g6."
+  },
+  {
+   "path": [
+    "f3"
+   ],
+   "comment": "Jogador 2 coloca em f3 e conquista 1 peça(s): e4."
+  },
+  {
+   "path": [
+    "g4"
+   ],
+   "comment": "Jogador 1 coloca em g4 e conquista 1 peça(s): f3."
+  },
+  {
+   "path": [
+    "e6"
+   ],
+   "comment": "Jogador 2 coloca em e6 e conquista 1 peça(s): e5."
+  },
+  {
+   "path": [
+    "d6"
+   ],
+   "comment": "Jogador 1 coloca em d6 e conquista 2 peça(s): e6, d5."
+  },
+  {
+   "path": [
+    "f7"
+   ],
+   "comment": "Jogador 2 coloca em f7 e conquista 3 peça(s): f6, e6, d5."
+  },
+  {
+   "path": [
+    "b4"
+   ],
+   "comment": "Jogador 1 coloca em b4 e conquista 2 peça(s): c4, c5."
+  },
+  {
+   "path": [
+    "h5"
+   ],
+   "comment": "Jogador 2 coloca em h5 e conquista 1 peça(s): g6."
+  },
+  {
+   "path": [
+    "h4"
+   ],
+   "comment": "Jogador 1 coloca em h4 e conquista 1 peça(s): h5."
+  },
+  {
+   "path": [
+    "c6"
+   ],
+   "comment": "Jogador 2 coloca em c6 e conquista 3 peça(s): d6, c5, c4."
+  },
+  {
+   "path": [
+    "e7"
+   ],
+   "comment": "Jogador 1 coloca em e7 e conquista 5 peça(s): e6, e5, e4, d6, c5."
+  },
+  {
+   "path": [
+    "a5"
+   ],
+   "comment": "Jogador 2 coloca em a5 e conquista 1 peça(s): b4."
+  },
+  {
+   "path": [
+    "a4"
+   ],
+   "comment": "Jogador 1 coloca em a4 e conquista 2 peça(s): b4, c4."
+  },
+  {
+   "path": [
+    "b3"
+   ],
+   "comment": "Jogador 2 coloca em b3 e conquista 1 peça(s): c4."
+  },
+  {
+   "path": [
+    "e8"
+   ],
+   "comment": "Jogador 1 coloca em e8 e conquista 2 peça(s): f7, g6."
+  },
+  {
+   "path": [
+    "f8"
+   ],
+   "comment": "Jogador 2 coloca em f8 e conquista 1 peça(s): f7."
+  },
+  {
+   "path": [
+    "c7"
+   ],
+   "comment": "Jogador 1 coloca em c7 e conquista 1 peça(s): c6."
+  },
+  {
+   "path": [
+    "a3"
+   ],
+   "comment": "Jogador 2 coloca em a3 e conquista 5 peça(s): a4, b4, c5, d6, e7."
+  },
+  {
+   "path": [
+    "b5"
+   ],
+   "comment": "Jogador 1 coloca em b5 e conquista 2 peça(s): c5, d5."
+  },
+  {
+   "path": [
+    "a6"
+   ],
+   "comment": "Jogador 2 coloca em a6 e conquista 1 peça(s): b5."
+  },
+  {
+   "path": [
+    "c2"
+   ],
+   "comment": "Jogador 1 coloca em c2 e conquista 2 peça(s): c3, c4."
+  },
+  {
+   "path": [
+    "d1"
+   ],
+   "comment": "Jogador 2 coloca em d1 e conquista 1 peça(s): c2."
+  },
+  {
+   "path": [
+    "d7"
+   ],
+   "comment": "Jogador 1 coloca em d7 e conquista 1 peça(s): d6."
+  },
+  {
+   "path": [
+    "d8"
+   ],
+   "comment": "Jogador 2 coloca em d8 e conquista 1 peça(s): e8."
+  },
+  {
+   "path": [
+    "c1"
+   ],
+   "comment": "Jogador 1 coloca em c1 e conquista 1 peça(s): c2."
+  },
+  {
+   "path": [
+    "f4"
+   ],
+   "comment": "Jogador 2 coloca em f4 e conquista 3 peça(s): e4, d4, c4."
+  },
+  {
+   "path": [
+    "g5"
+   ],
+   "comment": "Jogador 1 coloca em g5 e conquista 2 peça(s): f5, f4."
+  },
+  {
+   "path": [
+    "d2"
+   ],
+   "comment": "Jogador 2 coloca em d2 e conquista 1 peça(s): c3."
+  },
+  {
+   "path": [
+    "d3"
+   ],
+   "comment": "Jogador 1 coloca em d3 e conquista 2 peça(s): d4, e4."
+  },
+  {
+   "path": [
+    "e1"
+   ],
+   "comment": "Jogador 2 coloca em e1 e conquista 5 peça(s): e2, e3, e4, e5, e6."
+  },
+  {
+   "path": [
+    "f1"
+   ],
+   "comment": "Jogador 1 coloca em f1 e conquista 3 peça(s): e1, d1, e2."
+  },
+  {
+   "path": [
+    "f2"
+   ],
+   "comment": "Jogador 2 coloca em f2 e conquista 4 peça(s): e2, f3, f4, f5."
+  },
+  {
+   "path": [
+    "g3"
+   ],
+   "comment": "Jogador 1 coloca em g3 e conquista 5 peça(s): f3, e3, f4, e5, f2."
+  },
+  {
+   "path": [
+    "c8"
+   ],
+   "comment": "Jogador 2 coloca em c8 e conquista 4 peça(s): c7, c6, c5, d7."
+  },
+  {
+   "path": [
+    "b6"
+   ],
+   "comment": "Jogador 1 coloca em b6 e conquista 2 peça(s): c6, c5."
+  },
+  {
+   "path": [
+    "h3"
+   ],
+   "comment": "Jogador 2 coloca em h3 e conquista 5 peça(s): g3, f3, e3, d3, g4."
+  },
+  {
+   "path": [
+    "g8"
+   ],
+   "comment": "Jogador 1 coloca em g8 e conquista 2 peça(s): f7, e6."
+  },
+  {
+   "path": [
+    "h8"
+   ],
+   "comment": "Jogador 2 coloca em h8 e conquista 1 peça(s): g8."
+  },
+  {
+   "path": [
+    "b8"
+   ],
+   "comment": "Jogador 1 coloca em b8 e conquista 1 peça(s): c7."
+  },
+  {
+   "path": [
+    "a8"
+   ],
+   "comment": "Jogador 2 coloca em a8 e conquista 1 peça(s): b8."
+  },
+  {
+   "path": [
+    "a2"
+   ],
+   "comment": "Jogador 1 coloca em a2 e conquista 2 peça(s): b3, c4."
+  },
+  {
+   "path": [
+    "a1"
+   ],
+   "comment": "Jogador 2 coloca em a1 e conquista 1 peça(s): a2."
+  },
+  {
+   "path": [
+    "h2"
+   ],
+   "comment": "Jogador 1 coloca em h2 e conquista 2 peça(s): h3, g3."
+  },
+  {
+   "path": [
+    "a7"
+   ],
+   "comment": "Jogador 2 coloca em a7 e conquista 3 peça(s): b6, c5, d4."
+  },
+  {
+   "path": [
+    "b7"
+   ],
+   "comment": "Jogador 1 coloca em b7 e conquista 3 peça(s): b6, b5, b4."
+  },
+  {
+   "path": [
+    "g1"
+   ],
+   "comment": "Jogador 2 coloca em g1 e conquista 1 peça(s): f2."
+  },
+  {
+   "path": [
+    "h1"
+   ],
+   "comment": "Jogador 1 coloca em h1 e conquista 1 peça(s): g1."
+  },
+  {
+   "path": [
+    "h7"
+   ],
+   "comment": "Jogador 2 coloca em h7 e conquista 1 peça(s): g6."
+  },
+  {
+   "path": [
+    "g2"
+   ],
+   "comment": "Jogador 1 coloca em g2 e conquista 5 peça(s): f2, e2, d2, f3, e4."
+  },
+  {
+   "path": [
+    "b1"
+   ],
+   "comment": "Jogador 2 coloca em b1 e conquista 1 peça(s): c2."
+  },
+  {
+   "path": [
+    "b2"
+   ],
+   "comment": "Jogador 1 coloca em b2 e conquista 3 peça(s): c2, c3, d4."
+  },
+  {
+   "path": [
+    "g7"
+   ],
+   "comment": "Jogador 2 coloca em g7 e conquista 1 peça(s): f7. Ninguém mais pode jogar: 36 x 28 — vitória do jogador 1."
+  }
+ ]
+}

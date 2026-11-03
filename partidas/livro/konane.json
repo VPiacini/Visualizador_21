@@ -1,0 +1,213 @@
+{
+ "game": "konane",
+ "moves": [
+  {
+   "path": [
+    "e5"
+   ],
+   "comment": "Jogador 1 retira a sua peça de e5, abrindo a primeira casa livre."
+  },
+  {
+   "path": [
+    "d5"
+   ],
+   "comment": "Jogador 2 retira a sua peça de d5, abrindo a primeira casa livre."
+  },
+  {
+   "path": [
+    "g5",
+    "e5"
+   ],
+   "comment": "Jogador 1 salta de g5 a e5 e captura f5."
+  },
+  {
+   "path": [
+    "f3",
+    "f5"
+   ],
+   "comment": "Jogador 2 salta de f3 a f5 e captura f4."
+  },
+  {
+   "path": [
+    "d4",
+    "f4"
+   ],
+   "comment": "Jogador 1 salta de d4 a f4 e captura e4."
+  },
+  {
+   "path": [
+    "g4",
+    "e4"
+   ],
+   "comment": "Jogador 2 salta de g4 a e4 e captura f4."
+  },
+  {
+   "path": [
+    "d2",
+    "d4"
+   ],
+   "comment": "Jogador 1 salta de d2 a d4 e captura d3."
+  },
+  {
+   "path": [
+    "h3",
+    "f3"
+   ],
+   "comment": "Jogador 2 salta de h3 a f3 e captura g3."
+  },
+  {
+   "path": [
+    "f2",
+    "f4"
+   ],
+   "comment": "Jogador 1 salta de f2 a f4 e captura f3."
+  },
+  {
+   "path": [
+    "e4",
+    "g4"
+   ],
+   "comment": "Jogador 2 salta de e4 a g4 e captura f4."
+  },
+  {
+   "path": [
+    "h2",
+    "d2"
+   ],
+   "comment": "Jogador 1 salta de h2 a d2 e captura g2, e2 (captura múltipla em linha reta)."
+  },
+  {
+   "path": [
+    "c2",
+    "e2"
+   ],
+   "comment": "Jogador 2 salta de c2 a e2 e captura d2."
+  },
+  {
+   "path": [
+    "f6",
+    "f4"
+   ],
+   "comment": "Jogador 1 salta de f6 a f4 e captura f5."
+  },
+  {
+   "path": [
+    "d7",
+    "d3"
+   ],
+   "comment": "Jogador 2 salta de d7 a d3 e captura d6, d4 (captura múltipla em linha reta)."
+  },
+  {
+   "path": [
+    "b4",
+    "d4"
+   ],
+   "comment": "Jogador 1 salta de b4 a d4 e captura c4."
+  },
+  {
+   "path": [
+    "b5",
+    "f5"
+   ],
+   "comment": "Jogador 2 salta de b5 a f5 e captura c5, e5 (captura múltipla em linha reta)."
+  },
+  {
+   "path": [
+    "f8",
+    "f6"
+   ],
+   "comment": "Jogador 1 salta de f8 a f6 e captura f7."
+  },
+  {
+   "path": [
+    "h5",
+    "h3"
+   ],
+   "comment": "Jogador 2 salta de h5 a h3 e captura h4."
+  },
+  {
+   "path": [
+    "b2",
+    "b4"
+   ],
+   "comment": "Jogador 1 salta de b2 a b4 e captura b3."
+  },
+  {
+   "path": [
+    "b7",
+    "b3"
+   ],
+   "comment": "Jogador 2 salta de b7 a b3 e captura b6, b4 (captura múltipla em linha reta)."
+  },
+  {
+   "path": [
+    "g7",
+    "g5"
+   ],
+   "comment": "Jogador 1 salta de g7 a g5 e captura g6."
+  },
+  {
+   "path": [
+    "f5",
+    "f3"
+   ],
+   "comment": "Jogador 2 salta de f5 a f3 e captura f4."
+  },
+  {
+   "path": [
+    "d4",
+    "d2"
+   ],
+   "comment": "Jogador 1 salta de d4 a d2 e captura d3."
+  },
+  {
+   "path": [
+    "e2",
+    "e4"
+   ],
+   "comment": "Jogador 2 salta de e2 a e4 e captura e3."
+  },
+  {
+   "path": [
+    "f6",
+    "b6"
+   ],
+   "comment": "Jogador 1 salta de f6 a b6 e captura e6, c6 (captura múltipla em linha reta)."
+  },
+  {
+   "path": [
+    "c8",
+    "c6"
+   ],
+   "comment": "Jogador 2 salta de c8 a c6 e captura c7."
+  },
+  {
+   "path": [
+    "d8",
+    "f8"
+   ],
+   "comment": "Jogador 1 salta de d8 a f8 e captura e8."
+  },
+  {
+   "path": [
+    "g4",
+    "g6"
+   ],
+   "comment": "Jogador 2 salta de g4 a g6 e captura g5."
+  },
+  {
+   "path": [
+    "b6",
+    "d6"
+   ],
+   "comment": "Jogador 1 salta de b6 a d6 e captura c6."
+  },
+  {
+   "path": [
+    "h7",
+    "h5"
+   ],
+   "comment": "Jogador 2 salta de h7 a h5 e captura h6. O jogador 1 não tem mais capturas e perde."
+  }
+ ]
+}

@@ -1,6 +1,6 @@
 from ..piece import Piece
 from .game import Game, History, Rules
-from .helpers import DIRS4, Builder, move, sq, step, xy
+from .helpers import DIRS4, move, sq, step, xy
 
 TARGET = 4
 INITIAL = [
@@ -9,18 +9,6 @@ INITIAL = [
     for r in ranks
     for c in range(8)
 ]
-# Lances (origem, destino), alternando jogador 1 e 2.
-SCRIPT: list = [
-    ("e2", "e5"), ("f7", "f5"), ("d2", "d6"), ("e7", "e6"),
-    ("f2", "f4"), ("g7", "g3"), ("g2", "g4"), ("e6", "e4"),
-    ("d1", "d3"), ("d7", "d5"), ("c2", "c6"), ("e8", "e6"),
-    ("b2", "b6"), ("a8", "a6"), ("c1", "c3"), ("e4", "c4"),
-    ("b1", "b3"), ("d5", "d4"), ("e1", "e3"),
-]
-
-
-def grid_of(b: Builder) -> dict[str, int]:
-    return {p.position: p.player for p in b.pieces}
 
 
 def moves_from(grid: dict[str, int], pos: str) -> list[str]:
@@ -47,23 +35,6 @@ def aligned(grid: dict[str, int], player: int) -> bool:
             if all(step(s, d, k) in mine for k in range(1, TARGET)):
                 return True
     return False
-
-
-def build() -> list:
-    b = Builder(INITIAL)
-    for i, (frm, to) in enumerate(SCRIPT):
-        player = 1 if i % 2 == 0 else 2
-        grid = grid_of(b)
-        assert grid.get(frm) == player and to in moves_from(grid, frm), f"lance ilegal {frm}->{to}"
-        jumped = abs(xy(frm)[0] - xy(to)[0]) + abs(xy(frm)[1] - xy(to)[1]) == 2 and \
-            step(frm, ((xy(to)[0] - xy(frm)[0]) // 2, (xy(to)[1] - xy(frm)[1]) // 2)) in grid
-        pid = b.at(frm).id
-        b.add(player, [move(pid, to)],
-              f"Jogador {player} {'salta' if jumped else 'desliza'} de {frm} a {to}.")
-        if aligned(grid_of(b), player):
-            b.moves[-1].comment += f" Forma {TARGET} em linha na região central e vence."
-            b.moves[-1].status = f"Vitória do jogador {player}"
-    return b.moves
 
 
 def plays(pieces: list[Piece], player: int, history: History) -> list:
@@ -93,6 +64,5 @@ DAIHASAMI = Game(
     ),
     player_goal=None,
     initial_pieces=INITIAL,
-    moves=build(),
     rules=Rules(plays, status),
 )

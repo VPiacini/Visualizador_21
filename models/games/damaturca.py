@@ -1,26 +1,12 @@
 from ..piece import Piece
 from .game import Game, History, Rules
-from .helpers import Builder, move, place, remove, sq, step, xy
+from .helpers import move, place, remove, sq, step, xy
 
 INITIAL = [
     Piece(id=f"p{pl}-{sq(c, r)}", type="stone", position=sq(c, r), player=pl)
     for pl, ranks in ((1, (1, 2)), (2, (5, 6)))
     for r in ranks
     for c in range(8)
-]
-# Cada lance é a lista de casas percorridas: (origem, destino) ou (origem, salto1, salto2...).
-SCRIPT: list = [
-    ("b3", "b4"), ("b6", "b5"), ("b4", "b6", "b8"),
-    ("c6", "c5"), ("e3", "e4"), ("h6", "h5"),
-    ("f3", "f4"), ("f6", "f5"), ("f4", "f6", "h6", "h8"),
-    ("h5", "h4"), ("h3", "h5"), ("f7", "f6"),
-    ("h5", "h6"), ("e6", "e5"), ("e4", "e6", "c6", "c8"),
-    ("d7", "d6"), ("c8", "c4"), ("g7", "g6"),
-    ("c4", "c7"), ("g6", "g5"), ("c7", "f7", "f5", "h5"),
-    ("a6", "a5"), ("c3", "c4"), ("d6", "d5"),
-    ("h5", "c5"), ("a7", "a6"), ("c5", "c8"),
-    ("a6", "b6"), ("b8", "b5"), ("a5", "c5", "c3", "e3", "e1"),
-    ("d2", "d3"), ("e1", "e2"), ("f2", "d2"),
 ]
 
 
@@ -83,37 +69,6 @@ def legal_moves(grid: dict, player: int) -> dict[tuple, tuple]:
     return caps or plain
 
 
-def grid_of(b: Builder) -> dict:
-    return {p.position: (p.player, p.type == "dama") for p in b.pieces}
-
-
-def build() -> list:
-    b = Builder(INITIAL)
-    for i, path in enumerate(SCRIPT):
-        player = 1 if i % 2 == 0 else 2
-        path = tuple(path)
-        legal = legal_moves(grid_of(b), player)
-        assert path in legal, f"lance ilegal {path}"
-        taken = legal[path]
-        pid, was_dama = b.at(path[0]).id, b.at(path[0]).type == "dama"
-        dest = path[-1]
-        actions = [move(pid, dest)] + [remove(t) for t in taken]
-        promoted = not was_dama and xy(dest)[1] == (7 if player == 1 else 0)
-        if promoted:
-            actions += [remove(dest), place(dest, "dama", player, pid)]
-        trail = " → ".join(path)
-        text = f"Jogador {player} joga {trail}."
-        if taken:
-            text = f"Jogador {player} captura {len(taken)} peça(s) ({', '.join(taken)}): {trail}."
-        if promoted:
-            text += " A peça chega ao fim do tabuleiro e vira Dama (anda várias casas)."
-        b.add(player, actions, text)
-        if not legal_moves(grid_of(b), 3 - player):
-            b.moves[-1].comment += f" O jogador {3 - player} fica sem jogadas."
-            b.moves[-1].status = f"Vitória do jogador {player}"
-    return b.moves
-
-
 def plays(pieces: list[Piece], player: int, history: History) -> list:
     by_pos = {p.position: p for p in pieces}
     far = 7 if player == 1 else 0
@@ -145,6 +100,5 @@ DAMATURCA = Game(
     ),
     player_goal=None,
     initial_pieces=INITIAL,
-    moves=build(),
     rules=Rules(plays, status),
 )

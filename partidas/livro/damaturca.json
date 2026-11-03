@@ -1,0 +1,246 @@
+{
+ "game": "damaturca",
+ "moves": [
+  {
+   "path": [
+    "b3",
+    "b4"
+   ],
+   "comment": "Jogador 1 joga b3 → b4."
+  },
+  {
+   "path": [
+    "b6",
+    "b5"
+   ],
+   "comment": "Jogador 2 joga b6 → b5."
+  },
+  {
+   "path": [
+    "b4",
+    "b6",
+    "b8"
+   ],
+   "comment": "Jogador 1 captura 2 peça(s) (b5, b7): b4 → b6 → b8. A peça chega ao fim do tabuleiro e vira Dama (anda várias casas)."
+  },
+  {
+   "path": [
+    "c6",
+    "c5"
+   ],
+   "comment": "Jogador 2 joga c6 → c5."
+  },
+  {
+   "path": [
+    "e3",
+    "e4"
+   ],
+   "comment": "Jogador 1 joga e3 → e4."
+  },
+  {
+   "path": [
+    "h6",
+    "h5"
+   ],
+   "comment": "Jogador 2 joga h6 → h5."
+  },
+  {
+   "path": [
+    "f3",
+    "f4"
+   ],
+   "comment": "Jogador 1 joga f3 → f4."
+  },
+  {
+   "path": [
+    "f6",
+    "f5"
+   ],
+   "comment": "Jogador 2 joga f6 → f5."
+  },
+  {
+   "path": [
+    "f4",
+    "f6",
+    "h6",
+    "h8"
+   ],
+   "comment": "Jogador 1 captura 3 peça(s) (f5, g6, h7): f4 → f6 → h6 → h8. A peça chega ao fim do tabuleiro e vira Dama (anda várias casas)."
+  },
+  {
+   "path": [
+    "h5",
+    "h4"
+   ],
+   "comment": "Jogador 2 joga h5 → h4."
+  },
+  {
+   "path": [
+    "h3",
+    "h5"
+   ],
+   "comment": "Jogador 1 captura 1 peça(s) (h4): h3 → h5."
+  },
+  {
+   "path": [
+    "f7",
+    "f6"
+   ],
+   "comment": "Jogador 2 joga f7 → f6."
+  },
+  {
+   "path": [
+    "h5",
+    "h6"
+   ],
+   "comment": "Jogador 1 joga h5 → h6."
+  },
+  {
+   "path": [
+    "e6",
+    "e5"
+   ],
+   "comment": "Jogador 2 joga e6 → e5."
+  },
+  {
+   "path": [
+    "e4",
+    "e6",
+    "c6",
+    "c8"
+   ],
+   "comment": "Jogador 1 captura 3 peça(s) (e5, d6, c7): e4 → e6 → c6 → c8. A peça chega ao fim do tabuleiro e vira Dama (anda várias casas)."
+  },
+  {
+   "path": [
+    "d7",
+    "d6"
+   ],
+   "comment": "Jogador 2 joga d7 → d6."
+  },
+  {
+   "path": [
+    "c8",
+    "c4"
+   ],
+   "comment": "Jogador 1 captura 1 peça(s) (c5): c8 → c4."
+  },
+  {
+   "path": [
+    "g7",
+    "g6"
+   ],
+   "comment": "Jogador 2 joga g7 → g6."
+  },
+  {
+   "path": [
+    "c4",
+    "c7"
+   ],
+   "comment": "Jogador 1 joga c4 → c7."
+  },
+  {
+   "path": [
+    "g6",
+    "g5"
+   ],
+   "comment": "Jogador 2 joga g6 → g5."
+  },
+  {
+   "path": [
+    "c7",
+    "f7",
+    "f5",
+    "h5"
+   ],
+   "comment": "Jogador 1 captura 3 peça(s) (e7, f6, g5): c7 → f7 → f5 → h5."
+  },
+  {
+   "path": [
+    "a6",
+    "a5"
+   ],
+   "comment": "Jogador 2 joga a6 → a5."
+  },
+  {
+   "path": [
+    "c3",
+    "c4"
+   ],
+   "comment": "Jogador 1 joga c3 → c4."
+  },
+  {
+   "path": [
+    "d6",
+    "d5"
+   ],
+   "comment": "Jogador 2 joga d6 → d5."
+  },
+  {
+   "path": [
+    "h5",
+    "c5"
+   ],
+   "comment": "Jogador 1 captura 1 peça(s) (d5): h5 → c5."
+  },
+  {
+   "path": [
+    "a7",
+    "a6"
+   ],
+   "comment": "Jogador 2 joga a7 → a6."
+  },
+  {
+   "path": [
+    "c5",
+    "c8"
+   ],
+   "comment": "Jogador 1 joga c5 → c8."
+  },
+  {
+   "path": [
+    "a6",
+    "b6"
+   ],
+   "comment": "Jogador 2 joga a6 → b6."
+  },
+  {
+   "path": [
+    "b8",
+    "b5"
+   ],
+   "comment": "Jogador 1 captura 1 peça(s) (b6): b8 → b5."
+  },
+  {
+   "path": [
+    "a5",
+    "c5",
+    "c3",
+    "e3",
+    "e1"
+   ],
+   "comment": "Jogador 2 captura 4 peça(s) (b5, c4, d3, e2): a5 → c5 → c3 → e3 → e1. A peça chega ao fim do tabuleiro e vira Dama (anda várias casas)."
+  },
+  {
+   "path": [
+    "d2",
+    "d3"
+   ],
+   "comment": "Jogador 1 joga d2 → d3."
+  },
+  {
+   "path": [
+    "e1",
+    "e2"
+   ],
+   "comment": "Jogador 2 joga e1 → e2."
+  },
+  {
+   "path": [
+    "f2",
+    "d2"
+   ],
+   "comment": "Jogador 1 captura 1 peça(s) (e2): f2 → d2. O jogador 2 fica sem jogadas."
+  }
+ ]
+}

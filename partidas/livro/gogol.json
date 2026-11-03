@@ -1,0 +1,129 @@
+{
+ "game": "gogol",
+ "moves": [
+  {
+   "path": [
+    "f4"
+   ],
+   "comment": "Jogador 1 coloca o seu Rei em f4, numa das quatro linhas centrais."
+  },
+  {
+   "path": [
+    "d4"
+   ],
+   "comment": "Jogador 2 coloca o seu Rei em d4, numa das quatro linhas centrais."
+  },
+  {
+   "path": [
+    "f4",
+    "f6"
+   ],
+   "comment": "Jogador 1 move o Rei de f4 a f6."
+  },
+  {
+   "path": [
+    "d4",
+    "d3"
+   ],
+   "comment": "Jogador 2 move o Rei de d4 a d3."
+  },
+  {
+   "path": [
+    "c1",
+    "c2"
+   ],
+   "comment": "Jogador 1 move um Soldado de c1 a c2."
+  },
+  {
+   "path": [
+    "d3",
+    "f3"
+   ],
+   "comment": "Jogador 2 move o Rei de d3 a f3."
+  },
+  {
+   "path": [
+    "c2",
+    "c3"
+   ],
+   "comment": "Jogador 1 move um Soldado de c2 a c3."
+  },
+  {
+   "path": [
+    "a8",
+    "a7"
+   ],
+   "comment": "Jogador 2 move um Soldado de a8 a a7."
+  },
+  {
+   "path": [
+    "e1",
+    "f2"
+   ],
+   "comment": "Jogador 1 move um Soldado de e1 a f2."
+  },
+  {
+   "path": [
+    "f3",
+    "g4"
+   ],
+   "comment": "Jogador 2 move o Rei de f3 a g4."
+  },
+  {
+   "path": [
+    "h1",
+    "h2"
+   ],
+   "comment": "Jogador 1 move um Soldado de h1 a h2."
+  },
+  {
+   "path": [
+    "c8",
+    "c7"
+   ],
+   "comment": "Jogador 2 move um Soldado de c8 a c7."
+  },
+  {
+   "path": [
+    "b1",
+    "a2"
+   ],
+   "comment": "Jogador 1 move um Soldado de b1 a a2."
+  },
+  {
+   "path": [
+    "g8",
+    "h7"
+   ],
+   "comment": "Jogador 2 move um Soldado de g8 a h7."
+  },
+  {
+   "path": [
+    "f2",
+    "g3"
+   ],
+   "comment": "Jogador 1 move um Soldado de f2 a g3."
+  },
+  {
+   "path": [
+    "g4",
+    "e4"
+   ],
+   "comment": "Jogador 2 move o Rei de g4 a e4."
+  },
+  {
+   "path": [
+    "f1",
+    "e2"
+   ],
+   "comment": "Jogador 1 move um Soldado de f1 a e2."
+  },
+  {
+   "path": [
+    "e4",
+    "h1"
+   ],
+   "comment": "Jogador 2 move o Rei de e4 a h1. O Rei chegou ao outro lado do tabuleiro: vitória."
+  }
+ ]
+}

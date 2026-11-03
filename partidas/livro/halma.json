@@ -1,0 +1,457 @@
+{
+ "game": "halma",
+ "moves": [
+  {
+   "path": [
+    "a1",
+    "c3"
+   ],
+   "comment": "Jogador 1 salta a1 → c3 (1 salto(s) em sequência)."
+  },
+  {
+   "path": [
+    "g8",
+    "e6"
+   ],
+   "comment": "Jogador 2 salta g8 → e6 (1 salto(s) em sequência)."
+  },
+  {
+   "path": [
+    "a2",
+    "c4"
+   ],
+   "comment": "Jogador 1 salta a2 → c4 (1 salto(s) em sequência)."
+  },
+  {
+   "path": [
+    "h8",
+    "f6",
+    "d6"
+   ],
+   "comment": "Jogador 2 salta h8 → f6 → d6 (2 salto(s) em sequência)."
+  },
+  {
+   "path": [
+    "b3",
+    "d5",
+    "d7",
+    "f5"
+   ],
+   "comment": "Jogador 1 salta b3 → d5 → d7 → f5 (3 salto(s) em sequência)."
+  },
+  {
+   "path": [
+    "f7",
+    "d5",
+    "b3"
+   ],
+   "comment": "Jogador 2 salta f7 → d5 → b3 (2 salto(s) em sequência)."
+  },
+  {
+   "path": [
+    "c3",
+    "c5",
+    "e7"
+   ],
+   "comment": "Jogador 1 salta c3 → c5 → e7 (2 salto(s) em sequência)."
+  },
+  {
+   "path": [
+    "h7",
+    "f7",
+    "d7",
+    "d5"
+   ],
+   "comment": "Jogador 2 salta h7 → f7 → d7 → d5 (3 salto(s) em sequência)."
+  },
+  {
+   "path": [
+    "c1",
+    "a1",
+    "c3",
+    "c5",
+    "e5",
+    "g5"
+   ],
+   "comment": "Jogador 1 salta c1 → c3 → c5 → e5 → g5 (4 salto(s) em sequência)."
+  },
+  {
+   "path": [
+    "h6",
+    "f6",
+    "f4"
+   ],
+   "comment": "Jogador 2 salta h6 → f4 (1 salto(s) em sequência)."
+  },
+  {
+   "path": [
+    "a3",
+    "c3",
+    "c5",
+    "e5",
+    "c7"
+   ],
+   "comment": "Jogador 1 salta a3 → c3 → c5 → e5 → c7 (4 salto(s) em sequência)."
+  },
+  {
+   "path": [
+    "f8",
+    "d8",
+    "b6"
+   ],
+   "comment": "Jogador 2 salta f8 → d8 → b6 (2 salto(s) em sequência)."
+  },
+  {
+   "path": [
+    "b1",
+    "d3",
+    "b5",
+    "b7",
+    "d7",
+    "f7",
+    "h7"
+   ],
+   "comment": "Jogador 1 salta b1 → d3 → b5 → b7 → d7 → f7 → h7 (6 salto(s) em sequência)."
+  },
+  {
+   "path": [
+    "h5",
+    "f7",
+    "d7",
+    "b7",
+    "b5",
+    "d3",
+    "b1"
+   ],
+   "comment": "Jogador 2 salta h5 → f7 → d7 → b7 → b5 → d3 → b1 (6 salto(s) em sequência)."
+  },
+  {
+   "path": [
+    "b2",
+    "b4",
+    "d4"
+   ],
+   "comment": "Jogador 1 salta b2 → b4 → d4 (2 salto(s) em sequência)."
+  },
+  {
+   "path": [
+    "g6",
+    "g4",
+    "e4",
+    "c6",
+    "a6"
+   ],
+   "comment": "Jogador 2 salta g6 → g4 → e4 → c6 → a6 (4 salto(s) em sequência)."
+  },
+  {
+   "path": [
+    "c4",
+    "e4",
+    "g4",
+    "g6",
+    "g8"
+   ],
+   "comment": "Jogador 1 salta c4 → e4 → g4 → g6 → g8 (4 salto(s) em sequência)."
+  },
+  {
+   "path": [
+    "e6",
+    "c6",
+    "e4",
+    "c4",
+    "a2"
+   ],
+   "comment": "Jogador 2 salta e6 → c6 → e4 → c4 → a2 (4 salto(s) em sequência)."
+  },
+  {
+   "path": [
+    "c7",
+    "d8"
+   ],
+   "comment": "Jogador 1 avança de c7 a d8."
+  },
+  {
+   "path": [
+    "e8",
+    "e6",
+    "c6",
+    "e4",
+    "c4"
+   ],
+   "comment": "Jogador 2 salta e8 → e6 → g4 → e4 → c4 (4 salto(s) em sequência)."
+  },
+  {
+   "path": [
+    "d4",
+    "e5"
+   ],
+   "comment": "Jogador 1 avança de d4 a e5."
+  },
+  {
+   "path": [
+    "d6",
+    "d4",
+    "b4",
+    "b2"
+   ],
+   "comment": "Jogador 2 salta d6 → d4 → b4 → b2 (3 salto(s) em sequência)."
+  },
+  {
+   "path": [
+    "d8",
+    "f6",
+    "h8"
+   ],
+   "comment": "Jogador 1 salta d8 → f6 → d4 → d6 → f8 → h6 → h8 (6 salto(s) em sequência)."
+  },
+  {
+   "path": [
+    "f4",
+    "f6",
+    "d4",
+    "b4"
+   ],
+   "comment": "Jogador 2 salta f4 → f6 → d4 → b4 (3 salto(s) em sequência)."
+  },
+  {
+   "path": [
+    "c2",
+    "d3"
+   ],
+   "comment": "Jogador 1 avança de c2 a d3."
+  },
+  {
+   "path": [
+    "g7",
+    "f6"
+   ],
+   "comment": "Jogador 2 avança de g7 a f6."
+  },
+  {
+   "path": [
+    "a4",
+    "c2",
+    "e4",
+    "e6",
+    "g6"
+   ],
+   "comment": "Jogador 1 salta a4 → c2 → e4 → g6 (3 salto(s) em sequência)."
+  },
+  {
+   "path": [
+    "f6",
+    "h6",
+    "f4",
+    "d6",
+    "d4",
+    "d2"
+   ],
+   "comment": "Jogador 2 salta f6 → f4 → d6 → d4 → d2 (4 salto(s) em sequência)."
+  },
+  {
+   "path": [
+    "d3",
+    "e4"
+   ],
+   "comment": "Jogador 1 avança de d3 a e4."
+  },
+  {
+   "path": [
+    "b4",
+    "a3"
+   ],
+   "comment": "Jogador 2 avança de b4 a a3."
+  },
+  {
+   "path": [
+    "e4",
+    "e6",
+    "e8"
+   ],
+   "comment": "Jogador 1 salta e4 → e6 → e8 (2 salto(s) em sequência)."
+  },
+  {
+   "path": [
+    "b6",
+    "a5"
+   ],
+   "comment": "Jogador 2 avança de b6 a a5."
+  },
+  {
+   "path": [
+    "d1",
+    "d3",
+    "b5"
+   ],
+   "comment": "Jogador 1 salta d1 → d3 → b5 (2 salto(s) em sequência)."
+  },
+  {
+   "path": [
+    "a5",
+    "c5",
+    "c3",
+    "a1"
+   ],
+   "comment": "Jogador 2 salta a5 → c5 → c3 → a1 (3 salto(s) em sequência)."
+  },
+  {
+   "path": [
+    "f5",
+    "h5",
+    "f7"
+   ],
+   "comment": "Jogador 1 salta f5 → h5 → f7 (2 salto(s) em sequência)."
+  },
+  {
+   "path": [
+    "d2",
+    "c1"
+   ],
+   "comment": "Jogador 2 avança de d2 a c1."
+  },
+  {
+   "path": [
+    "g5",
+    "h6"
+   ],
+   "comment": "Jogador 1 avança de g5 a h6."
+  },
+  {
+   "path": [
+    "c4",
+    "e6",
+    "e4",
+    "c6",
+    "a4",
+    "c2"
+   ],
+   "comment": "Jogador 2 salta c4 → e6 → e4 → c6 → a4 → c2 (5 salto(s) em sequência)."
+  },
+  {
+   "path": [
+    "e7",
+    "f8"
+   ],
+   "comment": "Jogador 1 avança de e7 a f8."
+  },
+  {
+   "path": [
+    "d5",
+    "c4"
+   ],
+   "comment": "Jogador 2 avança de d5 a c4."
+  },
+  {
+   "path": [
+    "b5",
+    "c6"
+   ],
+   "comment": "Jogador 1 avança de b5 a c6."
+  },
+  {
+   "path": [
+    "c4",
+    "c3"
+   ],
+   "comment": "Jogador 2 avança de c4 a c3."
+  },
+  {
+   "path": [
+    "g6",
+    "g7"
+   ],
+   "comment": "Jogador 1 avança de g6 a g7."
+  },
+  {
+   "path": [
+    "c2",
+    "a4"
+   ],
+   "comment": "Jogador 2 salta c2 → a4 (1 salto(s) em sequência)."
+  },
+  {
+   "path": [
+    "e5",
+    "f6"
+   ],
+   "comment": "Jogador 1 avança de e5 a f6."
+  },
+  {
+   "path": [
+    "c3",
+    "c2"
+   ],
+   "comment": "Jogador 2 avança de c3 a c2."
+  },
+  {
+   "path": [
+    "c6",
+    "c7"
+   ],
+   "comment": "Jogador 1 avança de c6 a c7."
+  },
+  {
+   "path": [
+    "a6",
+    "b5"
+   ],
+   "comment": "Jogador 2 avança de a6 a b5."
+  },
+  {
+   "path": [
+    "c7",
+    "c8"
+   ],
+   "comment": "Jogador 1 avança de c7 a c8."
+  },
+  {
+   "path": [
+    "c2",
+    "d1"
+   ],
+   "comment": "Jogador 2 avança de c2 a d1."
+  },
+  {
+   "path": [
+    "f6",
+    "g6"
+   ],
+   "comment": "Jogador 1 avança de f6 a g6."
+  },
+  {
+   "path": [
+    "b5",
+    "b4"
+   ],
+   "comment": "Jogador 2 avança de b5 a b4."
+  },
+  {
+   "path": [
+    "c8",
+    "d8"
+   ],
+   "comment": "Jogador 1 avança de c8 a d8."
+  },
+  {
+   "path": [
+    "b4",
+    "c3"
+   ],
+   "comment": "Jogador 2 avança de b4 a c3."
+  },
+  {
+   "path": [
+    "g6",
+    "h5"
+   ],
+   "comment": "Jogador 1 avança de g6 a h5."
+  },
+  {
+   "path": [
+    "c3",
+    "c2"
+   ],
+   "comment": "Jogador 2 avança de c3 a c2. O campo inicial adversário está completamente ocupado: vitória."
+  }
+ ]
+}

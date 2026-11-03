@@ -16,11 +16,15 @@ visualizador_jogos/
 │   ├── piece.py                  #   peça genérica {id, type, position, player}
 │   ├── board.py                  #   coordenadas do tabuleiro 8x8
 │   ├── move.py                   #   jogada + motor genérico (apply_move/build_history)
+│   ├── replay.py                 #   reproduz uma partida real (lista de lances) com as regras
 │   └── games/
 │       ├── game.py               #   Game = config inicial + moves + comentários
 │       ├── helpers.py            #   coordenadas, construtores de ação e Builder
-│       ├── <jogo>.py             #   um módulo por jogo (regras + partida de exemplo)
+│       ├── <jogo>.py             #   um módulo por jogo (regras e posição inicial)
 │       └── registry.py           #   registro central dos 21 jogos, na ordem do livro
+├── partidas/                     # dados das partidas, sem código
+│   ├── livro/<jogo>.json         #   partida de exemplo de cada jogo do livro
+│   └── modelo.json               #   modelo para quem quer mostrar a própria partida
 ├── controllers/
 │   └── game_controller.py        # rotas Flask (página + API JSON)
 ├── templates/
@@ -52,31 +56,20 @@ Os 21 jogos do livro, na ordem dos capítulos (2 a 22):
 | 7 | Pah Tum | 14 | Dama Turca | 21 | Epaminondas |
 | 8 | Dai Hasami Shogi | 15 | Hasami Shogi | 22 | Sz'kwa |
 
-Cada partida é gerada a partir de uma lista de lances (`SCRIPT`) validada pelas
-regras do próprio módulo: lance ilegal levanta `AssertionError` ao importar.
-Posições iniciais de Mak-Yek e Ming Mang são adaptadas (a figura do livro não
-está no texto) — marcadas com `ponytail:`.
+Cada partida do livro é um arquivo `partidas/livro/<jogo>.json` com a lista de
+lances (`path` e `comment`). O `registry.py` reproduz cada lista com as regras do
+próprio jogo: lance ilegal levanta `ValueError` ao importar. Posições iniciais
+de Mak-Yek e Ming Mang são adaptadas (a figura do livro não está no texto) —
+marcadas com `ponytail:`.
 
-## Modos Assistir e Jogar
-
-O botão **Jogar/Assistir** alterna entre navegar pela partida de exemplo e jogar
-em hot-seat: os turnos passam sozinhos entre o jogador 1 e o jogador 2. O lance
-é montado clicando nas casas em sequência (colocar = 1 clique, mover = origem e
-destino, mover e lançar flecha ou saltos em cadeia = o caminho inteiro; quando
-há lances mais longos que o já clicado, clicar de novo na última casa confirma).
-O servidor valida cada lance, resolve passes e detecta o fim da partida.
+## Regras
 
 Cada jogo declara `rules=Rules(plays, status)`: `plays(pieces, player, history)`
 devolve as jogadas legais como `(caminho, ações)` e `status(pieces, mover, history)`
 devolve o texto de situação e se a partida acabou. `History` guarda as posições
 anteriores (`n`, `last`, `seen`) para regras como en passant e repetição de posição.
-
-Variáveis de ambiente:
-
-| Variável | Valores | Efeito |
-|----------|---------|--------|
-| `HISTORY_MODE` | `compact` (padrão), `full` | `compact` reenvia ao servidor só contagem, posição anterior e hashes das posições vistas; `full` reenvia todas as posições, sem limite |
-| `METRICS` | `1` | imprime por jogada: jogo, modo, bytes da requisição e da resposta, tempo em ms e pico de memória (quando disponível) |
+É com essas regras que o servidor valida cada lance das partidas do livro e das
+partidas enviadas, resolve passes de vez e detecta o fim da partida.
 
 ## Modelo de jogada
 
@@ -100,8 +93,7 @@ Jogada sem `actions` = passar a vez. Os construtores `move()`, `place()`,
 | `GET /` | página do visualizador |
 | `GET /api/games` | lista `[{id, name, subtitle}]` |
 | `GET /api/games/<id>` | jogo completo: metadados, `moves` e `history` (estado do tabuleiro após cada jogada); 404 se o id não existir |
-| `GET /api/games/<id>/start` | estado inicial do modo Jogar: `pieces`, `player`, `history`, `plays` (caminhos legais) |
-| `POST /api/games/<id>/play` | recebe `{pieces, player, history, path}` e devolve o próximo estado (`pieces`, `player`, `history`, `status`, `over`, `actions`, `plays`); 400 para lance ou estado inválido |
+| `POST /api/replay` | recebe `{game, moves: [{path, comment?}]}` e devolve a partida como `GET /api/games/<id>`; 400 com `error` se um lance for ilegal |
 
 ## Rodando localmente
 
@@ -127,13 +119,32 @@ pip install pytest
 pytest tests/ -v
 ```
 
+## Visualizando uma partida sua
+
+O formato é o mesmo de `partidas/livro/`. Qualquer um dos 21 jogos pode mostrar uma partida real. Copie
+[`partidas/modelo.json`](partidas/modelo.json), troque `game` pelo id do jogo
+(`ligue4`, `othello`, `rastros`... os mesmos de `/api/games`) e liste os lances
+em ordem. Cada lance é o `path`, a sequência de casas do lance: 1 casa =
+colocar, 2 = mover (origem e destino), mais = flecha ou saltos em cadeia. O
+jogador 1 começa, os turnos alternam sozinhos e `comment` é opcional.
+
+No site, clique em **Carregar partida** e escolha o arquivo. O servidor valida
+cada lance com as regras do jogo e responde 400 com o número do lance ilegal.
+Limites: 1 MB por arquivo, 500 lances e 2000 caracteres por comentário. Se o
+campo `game` for de outro jogo que o aberto, o site pergunta se deve abrir esse jogo.
+
+Cada jogo mostra os botões **Livro** e **Minha partida** acima do tabuleiro. A
+partida enviada fica guardada no `localStorage` do navegador (uma por jogo) e é
+revalidada pelo servidor a cada abertura; o **✕** a remove. O servidor não
+guarda nada: `POST /api/replay` com o mesmo JSON devolve a partida no formato de
+`GET /api/games/<id>`.
+
 ## Adicionando um novo jogo
 
-1. Criar `models/games/<jogo>.py` com as regras, um `SCRIPT` de lances e um
-   `Game` montado com o `Builder` de `helpers.py` (veja `othello.py` ou
-   `ligue4.py` como exemplo).
-2. Adicionar o jogo à lista em `models/games/registry.py`.
-3. Para o jogo ser jogável, passar `rules=Rules(plays, status)` ao `Game`.
+1. Criar `models/games/<jogo>.py` com as regras, a posição inicial e um `Game`
+   com `rules=Rules(plays, status)` (veja `othello.py` ou `ligue4.py`).
+2. Criar `partidas/livro/<jogo>.json` com a partida de exemplo.
+3. Adicionar o jogo à lista em `models/games/registry.py`.
 4. Opcional: um validador de regra em `tests/test_game_data.py`
    (`GAME_RULE_VALIDATORS`).
 

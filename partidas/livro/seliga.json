@@ -1,0 +1,220 @@
+{
+ "game": "seliga",
+ "moves": [
+  {
+   "path": [
+    "e4"
+   ],
+   "comment": "Jogador 1 coloca a peça 1 em e4 (no centro)."
+  },
+  {
+   "path": [
+    "d4"
+   ],
+   "comment": "Jogador 2 coloca a peça 1 em d4 (no centro)."
+  },
+  {
+   "path": [
+    "d3"
+   ],
+   "comment": "Jogador 1 coloca a peça 2 em d3, vizinha a uma peça sua."
+  },
+  {
+   "path": [
+    "d5"
+   ],
+   "comment": "Jogador 2 coloca a peça 2 em d5, vizinha a uma peça sua."
+  },
+  {
+   "path": [
+    "c4"
+   ],
+   "comment": "Jogador 1 coloca a peça 3 em c4, vizinha a uma peça sua."
+  },
+  {
+   "path": [
+    "c3"
+   ],
+   "comment": "Jogador 2 coloca a peça 3 em c3, vizinha a uma peça sua."
+  },
+  {
+   "path": [
+    "e5"
+   ],
+   "comment": "Jogador 1 coloca a peça 4 em e5, vizinha a uma peça sua."
+  },
+  {
+   "path": [
+    "c5"
+   ],
+   "comment": "Jogador 2 coloca a peça 4 em c5, vizinha a uma peça sua."
+  },
+  {
+   "path": [
+    "b4"
+   ],
+   "comment": "Jogador 1 coloca a peça 5 em b4, vizinha a uma peça sua."
+  },
+  {
+   "path": [
+    "b3"
+   ],
+   "comment": "Jogador 2 coloca a peça 5 em b3, vizinha a uma peça sua."
+  },
+  {
+   "path": [
+    "e6"
+   ],
+   "comment": "Jogador 1 coloca a peça 6 em e6, vizinha a uma peça sua."
+  },
+  {
+   "path": [
+    "a4"
+   ],
+   "comment": "Jogador 2 coloca a peça 6 em a4, vizinha a uma peça sua."
+  },
+  {
+   "path": [
+    "c2"
+   ],
+   "comment": "Jogador 1 coloca a peça 7 em c2, vizinha a uma peça sua."
+  },
+  {
+   "path": [
+    "a3"
+   ],
+   "comment": "Jogador 2 coloca a peça 7 em a3, vizinha a uma peça sua."
+  },
+  {
+   "path": [
+    "b5"
+   ],
+   "comment": "Jogador 1 coloca a peça 8 em b5, vizinha a uma peça sua."
+  },
+  {
+   "path": [
+    "c6"
+   ],
+   "comment": "Jogador 2 coloca a peça 8 em c6, vizinha a uma peça sua."
+  },
+  {
+   "path": [
+    "d6"
+   ],
+   "comment": "Jogador 1 coloca a peça 9 em d6, vizinha a uma peça sua."
+  },
+  {
+   "path": [
+    "b2"
+   ],
+   "comment": "Jogador 2 coloca a peça 9 em b2, vizinha a uma peça sua."
+  },
+  {
+   "path": [
+    "b6"
+   ],
+   "comment": "Jogador 1 coloca a peça 10 em b6, vizinha a uma peça sua."
+  },
+  {
+   "path": [
+    "a5"
+   ],
+   "comment": "Jogador 2 coloca a peça 10 em a5, vizinha a uma peça sua."
+  },
+  {
+   "path": [
+    "d2"
+   ],
+   "comment": "Jogador 1 coloca a peça 11 em d2, vizinha a uma peça sua."
+  },
+  {
+   "path": [
+    "c1"
+   ],
+   "comment": "Jogador 2 coloca a peça 11 em c1, vizinha a uma peça sua."
+  },
+  {
+   "path": [
+    "e3"
+   ],
+   "comment": "Jogador 1 coloca a peça 12 em e3, vizinha a uma peça sua."
+  },
+  {
+   "path": [
+    "d7"
+   ],
+   "comment": "Jogador 2 coloca a peça 12 em d7, vizinha a uma peça sua."
+  },
+  {
+   "path": [
+    "c2",
+    "a2"
+   ],
+   "comment": "Jogador 1 salta c2 → a2 e captura b2."
+  },
+  {
+   "path": [
+    "d5",
+    "f5"
+   ],
+   "comment": "Jogador 2 salta d5 → f5 e captura e5."
+  },
+  {
+   "path": [
+    "b5",
+    "d5"
+   ],
+   "comment": "Jogador 1 salta b5 → d5 e captura c5."
+  },
+  {
+   "path": [
+    "c6",
+    "a6"
+   ],
+   "comment": "Jogador 2 salta c6 → a6 e captura b6."
+  },
+  {
+   "path": [
+    "c4",
+    "c2"
+   ],
+   "comment": "Jogador 1 salta c4 → c2 e captura c3."
+  },
+  {
+   "path": [
+    "c1",
+    "c3"
+   ],
+   "comment": "Jogador 2 salta c1 → c3 e captura c2."
+  },
+  {
+   "path": [
+    "e4",
+    "c4"
+   ],
+   "comment": "Jogador 1 salta e4 → c4 e captura d4."
+  },
+  {
+   "path": [
+    "b3",
+    "b5"
+   ],
+   "comment": "Jogador 2 salta b3 → b5 e captura b4."
+  },
+  {
+   "path": [
+    "d3",
+    "b3"
+   ],
+   "comment": "Jogador 1 salta d3 → b3 e captura c3. Grupos desconectados eliminados: d2, e3."
+  },
+  {
+   "path": [
+    "a3",
+    "c3",
+    "c5"
+   ],
+   "comment": "Jogador 2 salta a3 → c3 → c5 e captura b3, c4. Grupos desconectados eliminados: a2. O jogador 1 não tem lance válido e perde."
+  }
+ ]
+}

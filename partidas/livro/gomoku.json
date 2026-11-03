@@ -1,0 +1,161 @@
+{
+ "game": "gomoku",
+ "moves": [
+  {
+   "path": [
+    "d5"
+   ],
+   "comment": "Jogador 1 coloca em d5."
+  },
+  {
+   "path": [
+    "c5"
+   ],
+   "comment": "Jogador 2 coloca em c5."
+  },
+  {
+   "path": [
+    "d6"
+   ],
+   "comment": "Jogador 1 coloca em d6."
+  },
+  {
+   "path": [
+    "d4"
+   ],
+   "comment": "Jogador 2 coloca em d4."
+  },
+  {
+   "path": [
+    "c4"
+   ],
+   "comment": "Jogador 1 coloca em c4."
+  },
+  {
+   "path": [
+    "d7"
+   ],
+   "comment": "Jogador 2 coloca em d7. Captura o par d6-d5."
+  },
+  {
+   "path": [
+    "b4"
+   ],
+   "comment": "Jogador 1 coloca em b4."
+  },
+  {
+   "path": [
+    "a4"
+   ],
+   "comment": "Jogador 2 coloca em a4. Captura o par b4-c4."
+  },
+  {
+   "path": [
+    "e5"
+   ],
+   "comment": "Jogador 1 coloca em e5."
+  },
+  {
+   "path": [
+    "b6"
+   ],
+   "comment": "Jogador 2 coloca em b6. Forma 3 em linha."
+  },
+  {
+   "path": [
+    "e3"
+   ],
+   "comment": "Jogador 1 coloca em e3."
+  },
+  {
+   "path": [
+    "a7"
+   ],
+   "comment": "Jogador 2 coloca em a7. Forma 4 em linha: ameaça de 5."
+  },
+  {
+   "path": [
+    "e4"
+   ],
+   "comment": "Jogador 1 coloca em e4. Forma 3 em linha."
+  },
+  {
+   "path": [
+    "e6"
+   ],
+   "comment": "Jogador 2 coloca em e6."
+  },
+  {
+   "path": [
+    "e2"
+   ],
+   "comment": "Jogador 1 coloca em e2. Forma 4 em linha: ameaça de 5."
+  },
+  {
+   "path": [
+    "e1"
+   ],
+   "comment": "Jogador 2 coloca em e1."
+  },
+  {
+   "path": [
+    "f5"
+   ],
+   "comment": "Jogador 1 coloca em f5."
+  },
+  {
+   "path": [
+    "d3"
+   ],
+   "comment": "Jogador 2 coloca em d3."
+  },
+  {
+   "path": [
+    "c8"
+   ],
+   "comment": "Jogador 1 coloca em c8. Captura o par d7-e6."
+  },
+  {
+   "path": [
+    "e6"
+   ],
+   "comment": "Jogador 2 coloca em e6."
+  },
+  {
+   "path": [
+    "d5"
+   ],
+   "comment": "Jogador 1 coloca em d5. Forma 3 em linha."
+  },
+  {
+   "path": [
+    "g6"
+   ],
+   "comment": "Jogador 2 coloca em g6. Captura o par f5-e4."
+  },
+  {
+   "path": [
+    "d2"
+   ],
+   "comment": "Jogador 1 coloca em d2. Captura o par d3-d4."
+  },
+  {
+   "path": [
+    "e4"
+   ],
+   "comment": "Jogador 2 coloca em e4. Captura o par e3-e2."
+  },
+  {
+   "path": [
+    "d4"
+   ],
+   "comment": "Jogador 1 coloca em d4."
+  },
+  {
+   "path": [
+    "f5"
+   ],
+   "comment": "Jogador 2 coloca em f5. Captura o par e5-d5. Chega a 5 pares capturados e vence."
+  }
+ ]
+}

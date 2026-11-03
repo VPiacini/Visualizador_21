@@ -1,0 +1,122 @@
+{
+ "game": "intersecoes",
+ "moves": [
+  {
+   "path": [
+    "a7"
+   ],
+   "comment": "Jogador 1 coloca a sua peça guia em a7, na coluna a."
+  },
+  {
+   "path": [
+    "h8"
+   ],
+   "comment": "Jogador 2 coloca a guia em h8 (linha 8) e uma peça na interseção h7: coluna da guia dele, linha da guia do adversário."
+  },
+  {
+   "path": [
+    "a7",
+    "a3"
+   ],
+   "comment": "Jogador 1 move a guia de a7 a a3; a interseção é h3 e ali fica uma peça sua."
+  },
+  {
+   "path": [
+    "h8",
+    "c8"
+   ],
+   "comment": "Jogador 2 move a guia de h8 a c8; a interseção é c3 e ali fica uma peça sua."
+  },
+  {
+   "path": [
+    "a3",
+    "a2"
+   ],
+   "comment": "Jogador 1 move a guia de a3 a a2; a interseção é c2 e ali fica uma peça sua."
+  },
+  {
+   "path": [
+    "c8",
+    "h8"
+   ],
+   "comment": "Jogador 2 move a guia de c8 a h8; a interseção é h2 e ali fica uma peça sua."
+  },
+  {
+   "path": [
+    "a2",
+    "a4"
+   ],
+   "comment": "Jogador 1 move a guia de a2 a a4; a interseção é h4 e ali fica uma peça sua."
+  },
+  {
+   "path": [
+    "h8",
+    "d8"
+   ],
+   "comment": "Jogador 2 move a guia de h8 a d8; a interseção é d4 e ali fica uma peça sua."
+  },
+  {
+   "path": [
+    "a4",
+    "a1"
+   ],
+   "comment": "Jogador 1 move a guia de a4 a a1; a interseção é d1 e ali fica uma peça sua."
+  },
+  {
+   "path": [
+    "d8",
+    "g8"
+   ],
+   "comment": "Jogador 2 move a guia de d8 a g8; a interseção é g1 e ali fica uma peça sua."
+  },
+  {
+   "path": [
+    "a1",
+    "a5"
+   ],
+   "comment": "Jogador 1 move a guia de a1 a a5; a interseção é g5 e ali fica uma peça sua."
+  },
+  {
+   "path": [
+    "g8",
+    "e8"
+   ],
+   "comment": "Jogador 2 move a guia de g8 a e8; a interseção é e5 e ali fica uma peça sua."
+  },
+  {
+   "path": [
+    "a5",
+    "a1"
+   ],
+   "comment": "Jogador 1 move a guia de a5 a a1; a interseção é e1 e ali fica uma peça sua."
+  },
+  {
+   "path": [
+    "e8",
+    "f8"
+   ],
+   "comment": "Jogador 2 move a guia de e8 a f8; a interseção é f1 e ali fica uma peça sua."
+  },
+  {
+   "path": [
+    "a1",
+    "a6"
+   ],
+   "comment": "Jogador 1 move a guia de a1 a a6; a interseção é f6 e ali fica uma peça sua."
+  },
+  {
+   "path": [
+    "f8",
+    "e8"
+   ],
+   "comment": "Jogador 2 move a guia de f8 a e8; a interseção é e6 e ali fica uma peça sua."
+  },
+  {
+   "path": [
+    "a6",
+    "a7"
+   ],
+   "comment": "Jogador 1 move a guia de a6 a a7; a interseção é e7 e ali fica uma peça sua. Forma 4 em linha para o jogador 1."
+  }
+ ]
+}

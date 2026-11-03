@@ -16,14 +16,46 @@ const statusEl = document.getElementById("status-box");
 const btnPrev = document.getElementById("btn-prev");
 const btnNext = document.getElementById("btn-next");
 const btnReset = document.getElementById("btn-reset");
-const btnMode = document.getElementById("btn-mode");
+const btnEnd = document.getElementById("btn-end");
+const btnPlay = document.getElementById("btn-play");
+const speedEl = document.getElementById("play-speed");
+const notationEl = document.getElementById("notation-box");
 const selectorEl = document.getElementById("game-selector");
 
 let currentGame = null; // dados serializados vindos de /api/games/<id>
 let currentIndex = 0;
 let epoch = 0; // invalida respostas que chegam depois de reiniciar ou trocar de jogo
-let sending = false;
-let live = null; // estado do modo Jogar: resposta de /start ou /play + path (cliques do lance em curso)
+
+// Notação das ações de uma jogada: "d4→e5", "+e5" (colocar), "×e5" (remover), "⟳e5" (virar).
+function notation(actions, prevPieces) {
+  return (
+    actions
+      .map((a) => {
+        if (a.type === "move") {
+          const before = prevPieces.find((p) => p.id === a.pieceId);
+          return `${before ? before.position : "?"}→${a.to}`;
+        }
+        if (a.type === "place") return `+${a.position}`;
+        if (a.type === "remove") return `×${a.position}`;
+        return `⟳${a.position}`;
+      })
+      .join(" ") || "passa a vez"
+  );
+}
+
+let timer = null; // reprodução automática
+
+function stopAutoplay() {
+  clearTimeout(timer);
+  timer = null;
+  btnPlay.innerHTML = "&#9654;";
+}
+
+function tick() {
+  if (currentIndex >= currentGame.moves.length) return stopAutoplay();
+  renderState(currentIndex + 1);
+  timer = setTimeout(tick, 1000 / Number(speedEl.value));
+}
 
 function squareToCoord(square) {
   const col = FILES.indexOf(square[0]);
@@ -53,14 +85,21 @@ function renderLegend(game) {
   legendEl.innerHTML = [1, 2]
     .map((p) => {
       const goal = game.playerGoal ? ` — ${game.playerGoal[p]}` : "";
-      return `<div class="legend-item"><span class="legend-dot p${p}"></span>Jogador ${p}${goal}</div>`;
+      return `<div class="legend-item p${p}"><span class="legend-dot p${p}"></span><span><b>Jogador ${p}</b>${goal}</span></div>`;
     })
     .join("");
 }
 
+// destaca no quadro de jogadores quem fez a jogada em exibição
+function markActivePlayer(player) {
+  legendEl.querySelectorAll(".legend-item").forEach((el) => {
+    el.classList.toggle("active", el.classList.contains(`p${player}`));
+  });
+}
+
 function clearHighlights() {
-  document.querySelectorAll(".square.from, .square.dest, .square.put, .square.gone, .square.hint, .square.selected").forEach((el) => {
-    el.classList.remove("from", "dest", "put", "gone", "hint", "selected");
+  document.querySelectorAll(".square.from, .square.dest, .square.put, .square.gone").forEach((el) => {
+    el.classList.remove("from", "dest", "put", "gone");
   });
 }
 
@@ -118,126 +157,72 @@ function renderState(index) {
     lastMove ? lastMove.player : null
   );
 
-  counterEl.textContent = `Jogada ${index} / ${currentGame.moves.length}`;
+  counterEl.textContent = `${index}/${currentGame.moves.length}`;
+  markActivePlayer(lastMove ? lastMove.player : 0);
   statusEl.textContent = lastMove ? lastMove.status : "";
+  notationEl.textContent = lastMove ? notation(lastMove.actions, currentGame.history[index - 1]) : "";
   commentEl.textContent = lastMove ? lastMove.comment : currentGame.objective;
   btnPrev.disabled = index <= 0;
-  btnNext.disabled = index >= currentGame.moves.length;
+  btnNext.disabled = btnEnd.disabled = index >= currentGame.moves.length;
 }
 
-function setControlsDisabled(off) {
-  btnPrev.disabled = btnNext.disabled = off;
-}
+const STORE = "partida:"; // localStorage: texto do JSON enviado, por jogo
+const srcLivro = document.getElementById("src-livro");
+const srcMine = document.getElementById("src-mine");
+const srcRemove = document.getElementById("src-remove");
+let source = "livro";
 
-const startsWith = (path, prefix) => prefix.every((sq, i) => path[i] === sq);
-const sameAs = (a, b) => a.length === b.length && startsWith(a, b);
-
-function candidates(path) {
-  return live.plays.filter((p) => startsWith(p.path, path));
-}
-
-function renderLive() {
-  draw(live.pieces, live.prev, live.actions, live.mover);
-  const cands = candidates(live.path);
-  cands.forEach((p) => {
-    if (p.path.length > live.path.length) markSquare(p.path[live.path.length], "hint");
-    else markSquare(live.path[live.path.length - 1], "hint");
-  });
-  live.path.forEach((sq) => markSquare(sq, "selected"));
-
-  setControlsDisabled(true);
-  counterEl.textContent = live.over ? "Fim de jogo" : `Vez do Jogador ${live.player}`;
-  statusEl.textContent = live.status;
-  commentEl.textContent = currentGame.objective;
-}
-
-function markSquare(square, cls) {
-  const el = boardEl.querySelector(`[data-square="${square}"]`);
-  if (el) el.classList.add(cls);
-}
-
-async function startLive() {
-  const mine = ++epoch;
-  const res = await fetch(`/api/games/${currentGame.id}/start`);
-  const state = await res.json();
-  if (mine !== epoch) return;
-  live = { ...state, path: [], prev: [], mover: null };
-  boardEl.classList.add("playing");
-  btnMode.textContent = "Assistir";
-  renderLive();
-}
-
-function stopLive() {
-  epoch++;
-  live = null;
-  boardEl.classList.remove("playing");
-  btnMode.textContent = "Jogar";
-  renderState(0);
-}
-
-async function sendPlay(path) {
-  if (sending) return;
-  sending = true;
-  const mine = epoch;
-  const { pieces: prev, player: mover } = live;
+function stored(gameId) {
   try {
-    const res = await fetch(`/api/games/${currentGame.id}/play`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ pieces: prev, player: mover, history: live.history, path }),
-    });
-    if (!res.ok || mine !== epoch) return;
-    const state = await res.json();
-    if (mine !== epoch) return;
-    live = { ...state, path: [], prev, mover };
-    renderLive();
-  } finally {
-    sending = false;
+    return localStorage.getItem(STORE + gameId);
+  } catch {
+    return null;
   }
 }
 
-// Acumula o caminho de cliques; envia quando só resta uma jogada possível
-// (ou, havendo jogadas mais longas, quando se clica de novo na última casa).
-function pickSquare(square) {
-  const last = live.path[live.path.length - 1];
-  if (square === last && live.plays.some((p) => sameAs(p.path, live.path))) {
-    return sendPlay(live.path);
+function store(gameId, text) {
+  try {
+    if (text === null) localStorage.removeItem(STORE + gameId);
+    else localStorage.setItem(STORE + gameId, text);
+  } catch {
+    /* sem armazenamento: a partida vale só até trocar de jogo */
   }
-  for (const path of [[...live.path, square], [square]]) {
-    const cands = candidates(path);
-    if (!cands.length) continue;
-    live.path = path;
-    if (cands.every((p) => sameAs(p.path, path))) return sendPlay(path);
-    return renderLive();
-  }
-  live.path = [];
-  renderLive();
 }
-
-boardEl.addEventListener("click", (e) => {
-  if (!live || live.over) return;
-  const rect = boardEl.getBoundingClientRect();
-  const col = Math.floor(((e.clientX - rect.left) / rect.width) * 8);
-  const row = 7 - Math.floor(((e.clientY - rect.top) / rect.height) * 8);
-  if (col < 0 || col > 7 || row < 0 || row > 7) return;
-  pickSquare(`${FILES[col]}${row + 1}`);
-});
-
-btnMode.addEventListener("click", () => {
-  if (live) stopLive();
-  else startLive();
-});
 
 async function loadGame(gameId) {
   const mine = ++epoch;
   const res = await fetch(`/api/games/${gameId}`);
   const game = await res.json();
   if (mine !== epoch) return;
+  showGame(game, "livro");
+}
+
+async function postReplay(text) {
+  const res = await fetch("/api/replay", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: text,
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || "partida inválida");
+  return data;
+}
+
+async function loadMine(gameId, text) {
+  const mine = ++epoch;
+  const game = await postReplay(text);
+  if (mine === epoch) showGame(game, "mine");
+}
+
+function showGame(game, from) {
+  const gameId = game.id;
   currentGame = game;
-  live = null;
-  boardEl.classList.remove("playing");
-  btnMode.disabled = !currentGame.playable;
-  btnMode.textContent = "Jogar";
+  source = from;
+  srcLivro.classList.toggle("active", from === "livro");
+  srcMine.classList.toggle("active", from === "mine");
+  srcMine.hidden = srcRemove.hidden = stored(gameId) === null;
+  document.getElementById("source-switch").classList.toggle("empty", srcMine.hidden);
+  stopAutoplay();
 
   nameEl.textContent = currentGame.name;
   subtitleEl.textContent = currentGame.subtitle;
@@ -250,13 +235,46 @@ async function loadGame(gameId) {
   });
 }
 
+srcLivro.addEventListener("click", () => loadGame(currentGame.id));
+srcMine.addEventListener("click", () =>
+  loadMine(currentGame.id, stored(currentGame.id)).catch((err) => {
+    alert(`Não foi possível abrir a partida guardada: ${err.message}`);
+    store(currentGame.id, null);
+    loadGame(currentGame.id);
+  })
+);
+srcRemove.addEventListener("click", () => {
+  if (!confirm("Remover a partida guardada deste jogo?")) return;
+  store(currentGame.id, null);
+  if (source === "mine") loadGame(currentGame.id);
+  else {
+    srcMine.hidden = srcRemove.hidden = true;
+    document.getElementById("source-switch").classList.add("empty");
+  }
+});
+
 btnPrev.addEventListener("click", () => {
+  stopAutoplay();
   if (currentIndex > 0) renderState(currentIndex - 1);
 });
 btnNext.addEventListener("click", () => {
+  stopAutoplay();
   if (currentIndex < currentGame.moves.length) renderState(currentIndex + 1);
 });
-btnReset.addEventListener("click", () => (live ? startLive() : renderState(0)));
+btnReset.addEventListener("click", () => {
+  stopAutoplay();
+  renderState(0);
+});
+btnEnd.addEventListener("click", () => {
+  stopAutoplay();
+  renderState(currentGame.moves.length);
+});
+btnPlay.addEventListener("click", () => {
+  if (timer) return stopAutoplay();
+  if (currentIndex >= currentGame.moves.length) renderState(0);
+  btnPlay.innerHTML = "&#10074;&#10074;";
+  timer = setTimeout(tick, 1000 / Number(speedEl.value));
+});
 
 document.addEventListener("keydown", (e) => {
   if (e.key === "ArrowLeft") btnPrev.click();
@@ -266,6 +284,31 @@ document.addEventListener("keydown", (e) => {
 selectorEl.addEventListener("click", (e) => {
   const btn = e.target.closest(".game-btn");
   if (btn) loadGame(btn.dataset.gameId);
+});
+
+const fileLoadEl = document.getElementById("file-load");
+document.getElementById("btn-load").addEventListener("click", () => fileLoadEl.click());
+fileLoadEl.addEventListener("change", async () => {
+  const file = fileLoadEl.files[0];
+  fileLoadEl.value = "";
+  if (!file) return;
+  try {
+    const text = await file.text();
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      throw new Error("o arquivo não é um JSON válido");
+    }
+    const target = data && data.game;
+    if (target && target !== currentGame.id && !confirm(`Este arquivo é da partida de "${target}", não do jogo aberto. Abrir esse jogo?`)) return;
+    const game = await postReplay(text);
+    ++epoch;
+    store(game.id, text);
+    showGame(game, "mine");
+  } catch (err) {
+    alert(`Não foi possível carregar a partida: ${err.message}`);
+  }
 });
 
 loadGame(window.DEFAULT_GAME_ID);

@@ -1,4 +1,4 @@
-"""Motor de partida ao vivo: valida a jogada pedida e calcula o próximo estado."""
+"""Valida uma jogada pelas regras do jogo e calcula o próximo estado."""
 from .games.game import Game, History
 from .move import Move, apply_move
 from .piece import Piece
@@ -15,11 +15,6 @@ def _state(game: Game, pieces: list[Piece], player: int, history: History, statu
         "actions": actions,
         "plays": [{"path": list(path)} for path, _ in plays],
     }
-
-
-def start(game: Game, mode: str = "compact") -> dict:
-    history = (History.full if mode == "full" else History.compact)([])
-    return _state(game, game.initial_pieces, 1, history, "", False, [])
 
 
 def play(game: Game, pieces: list[Piece], player: int, history: History, path: tuple[str, ...]) -> dict | None:

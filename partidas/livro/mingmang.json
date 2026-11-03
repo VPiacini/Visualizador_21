@@ -1,0 +1,215 @@
+{
+ "game": "mingmang",
+ "moves": [
+  {
+   "path": [
+    "h2",
+    "h5"
+   ],
+   "comment": "Jogador 1 move de h2 a h5."
+  },
+  {
+   "path": [
+    "e7",
+    "e3"
+   ],
+   "comment": "Jogador 2 move de e7 a e3."
+  },
+  {
+   "path": [
+    "a2",
+    "a6"
+   ],
+   "comment": "Jogador 1 move de a2 a a6."
+  },
+  {
+   "path": [
+    "c7",
+    "c3"
+   ],
+   "comment": "Jogador 2 move de c7 a c3."
+  },
+  {
+   "path": [
+    "a6",
+    "g6"
+   ],
+   "comment": "Jogador 1 move de a6 a g6."
+  },
+  {
+   "path": [
+    "d7",
+    "d3"
+   ],
+   "comment": "Jogador 2 move de d7 a d3."
+  },
+  {
+   "path": [
+    "f2",
+    "f4"
+   ],
+   "comment": "Jogador 1 move de f2 a f4."
+  },
+  {
+   "path": [
+    "a7",
+    "a2"
+   ],
+   "comment": "Jogador 2 move de a7 a a2."
+  },
+  {
+   "path": [
+    "f4",
+    "c4"
+   ],
+   "comment": "Jogador 1 move de f4 a c4. Cerca c3: essas peças passam a ser do jogador 1."
+  },
+  {
+   "path": [
+    "f7",
+    "f2"
+   ],
+   "comment": "Jogador 2 move de f7 a f2. Cerca e2, d2, c2, b2: essas peças passam a ser do jogador 2."
+  },
+  {
+   "path": [
+    "c4",
+    "d4"
+   ],
+   "comment": "Jogador 1 move de c4 a d4. Cerca d3, d2: essas peças passam a ser do jogador 1."
+  },
+  {
+   "path": [
+    "b2",
+    "b3"
+   ],
+   "comment": "Jogador 2 move de b2 a b3. Cerca c3, d3: essas peças passam a ser do jogador 2."
+  },
+  {
+   "path": [
+    "d4",
+    "e4"
+   ],
+   "comment": "Jogador 1 move de d4 a e4. Cerca e3, e2: essas peças passam a ser do jogador 1."
+  },
+  {
+   "path": [
+    "f8",
+    "f3"
+   ],
+   "comment": "Jogador 2 move de f8 a f3. Cerca e3: essas peças passam a ser do jogador 2."
+  },
+  {
+   "path": [
+    "e4",
+    "f4"
+   ],
+   "comment": "Jogador 1 move de e4 a f4. Cerca f3, f2: essas peças passam a ser do jogador 1."
+  },
+  {
+   "path": [
+    "e8",
+    "e4"
+   ],
+   "comment": "Jogador 2 move de e8 a e4."
+  },
+  {
+   "path": [
+    "h5",
+    "e5"
+   ],
+   "comment": "Jogador 1 move de h5 a e5. Cerca e4, e3: essas peças passam a ser do jogador 1."
+  },
+  {
+   "path": [
+    "h7",
+    "h2"
+   ],
+   "comment": "Jogador 2 move de h7 a h2. Cerca g2, f2, e2, d2: essas peças passam a ser do jogador 2."
+  },
+  {
+   "path": [
+    "e4",
+    "c4"
+   ],
+   "comment": "Jogador 1 move de e4 a c4. Cerca c3, c2: essas peças passam a ser do jogador 1."
+  },
+  {
+   "path": [
+    "g2",
+    "g3"
+   ],
+   "comment": "Jogador 2 move de g2 a g3. Cerca f3, e3: essas peças passam a ser do jogador 2."
+  },
+  {
+   "path": [
+    "g1",
+    "g2"
+   ],
+   "comment": "Jogador 1 move de g1 a g2. Cerca f2, e2, d2: essas peças passam a ser do jogador 1."
+  },
+  {
+   "path": [
+    "b3",
+    "b2"
+   ],
+   "comment": "Jogador 2 move de b3 a b2. Cerca c2, d2, e2, f2, g2: essas peças passam a ser do jogador 2."
+  },
+  {
+   "path": [
+    "f4",
+    "d4"
+   ],
+   "comment": "Jogador 1 move de f4 a d4. Cerca d3, d2: essas peças passam a ser do jogador 1."
+  },
+  {
+   "path": [
+    "c8",
+    "c5"
+   ],
+   "comment": "Jogador 2 move de c8 a c5. Cerca c4, c3: essas peças passam a ser do jogador 2."
+  },
+  {
+   "path": [
+    "g6",
+    "c6"
+   ],
+   "comment": "Jogador 1 move de g6 a c6. Cerca c5, c4, c3, c2: essas peças passam a ser do jogador 1."
+  },
+  {
+   "path": [
+    "b7",
+    "b3"
+   ],
+   "comment": "Jogador 2 move de b7 a b3. Cerca c3, d3: essas peças passam a ser do jogador 2."
+  },
+  {
+   "path": [
+    "e5",
+    "e4"
+   ],
+   "comment": "Jogador 1 move de e5 a e4. Cerca e3, e2: essas peças passam a ser do jogador 1."
+  },
+  {
+   "path": [
+    "g7",
+    "c7"
+   ],
+   "comment": "Jogador 2 move de g7 a c7. Cerca c6, c5, c4: essas peças passam a ser do jogador 2."
+  },
+  {
+   "path": [
+    "e4",
+    "f4"
+   ],
+   "comment": "Jogador 1 move de e4 a f4. Cerca f3, f2: essas peças passam a ser do jogador 1."
+  },
+  {
+   "path": [
+    "d8",
+    "d5"
+   ],
+   "comment": "Jogador 2 move de d8 a d5. Cerca d4: essas peças passam a ser do jogador 2."
+  }
+ ]
+}

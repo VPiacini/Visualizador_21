@@ -1,18 +1,9 @@
 from ..piece import Piece
 from .game import Game, History, Rules
-from .helpers import DIRS4, DIRS8, Builder, move, place, remove, sq, step
+from .helpers import DIRS4, DIRS8, move, place, remove, sq, step
 
 CENTER = ["d4", "e4", "d5", "e5"]
 PIECES = 12
-# Primeiro as 24 colocações (casas), depois capturas como caminhos (origem, salto1, ...).
-SCRIPT: list = [
-    "e4", "d4", "d3", "d5", "c4", "c3",
-    "e5", "c5", "b4", "b3", "e6", "a4",
-    "c2", "a3", "b5", "c6", "d6", "b2",
-    "b6", "a5", "d2", "c1", "e3", "d7",
-    ("c2", "a2"), ("d5", "f5"), ("b5", "d5"), ("c6", "a6"), ("c4", "c2"), ("c1", "c3"),
-    ("e4", "c4"), ("b3", "b5"), ("d3", "b3"), ("a3", "c3", "c5"),
-]
 
 
 def components(grid: dict[str, int]) -> list[set[str]]:
@@ -89,40 +80,6 @@ def can_place(grid: dict[str, int], pos: str, player: int) -> bool:
     return any(step(pos, d) in mine for d in DIRS8)
 
 
-def build() -> list:
-    b = Builder([])
-    count = {1: 0, 2: 0}
-    for i, item in enumerate(SCRIPT):
-        player = 1 if i % 2 == 0 else 2
-        grid = {p.position: p.player for p in b.pieces}
-        if i < 2 * PIECES:
-            assert can_place(grid, item, player), f"colocação inválida {item}"
-            count[player] += 1
-            first = count[player] == 1
-            b.add(player, [place(item, "stone", player, f"p{player}-{count[player]}")],
-                  f"Jogador {player} coloca a peça {count[player]} em {item}"
-                  + (" (no centro)." if first else ", vizinha a uma peça sua."))
-            continue
-        path = tuple(item)
-        taken = safe_moves(grid, player).get(path)
-        assert taken is not None, f"lance ilegal ou perdedor {path}"
-        pid = next(p.id for p in b.pieces if p.position == path[0])
-        final, dropped = result_of(grid, path, taken, player)
-        actions = [move(pid, path[-1])] + [remove(t) for t in taken] + [remove(s) for s in dropped]
-        text = f"Jogador {player} salta {' → '.join(path)} e captura {', '.join(taken)}."
-        if dropped:
-            text += f" Grupos desconectados eliminados: {', '.join(sorted(dropped))}."
-        b.add(player, actions, text)
-        n1 = sum(1 for p in b.pieces if p.player == 1)
-        n2 = sum(1 for p in b.pieces if p.player == 2)
-        b.moves[-1].status = f"Peças — J1: {n1} · J2: {n2}"
-        nxt = {p.position: p.player for p in b.pieces}
-        if not safe_moves(nxt, 3 - player):
-            b.moves[-1].comment += f" O jogador {3 - player} não tem lance válido e perde."
-            b.moves[-1].status += f" · Vitória do jogador {player}"
-    return b.moves
-
-
 def plays(pieces: list[Piece], player: int, history: History) -> list:
     grid = {p.position: p.player for p in pieces}
     if history.n < 2 * PIECES:
@@ -162,6 +119,5 @@ SELIGA = Game(
     ),
     player_goal=None,
     initial_pieces=[],
-    moves=build(),
     rules=Rules(plays, status),
 )

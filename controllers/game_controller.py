@@ -1,16 +1,15 @@
-import os
-import time
+from dataclasses import replace
 
+from werkzeug.exceptions import RequestEntityTooLarge
 from flask import Blueprint, abort, jsonify, render_template, request
 
 from models.games.game import Game
 from models.games.registry import get_game, list_games
-from models.games.game import History
 from models.move import build_history
-from models.piece import Piece
-from models.play import play, start
+from models.replay import replay
 
 bp = Blueprint("game", __name__)
+MAX_UPLOAD = 1_000_000  # bytes
 
 
 def serialize_game(game: Game) -> dict:
@@ -22,7 +21,6 @@ def serialize_game(game: Game) -> dict:
         "subtitle": game.subtitle,
         "objective": game.objective,
         "playerGoal": game.player_goal,
-        "playable": game.rules is not None,
         "history": [[p.to_dict() for p in state] for state in history],
         "moves": [
             {
@@ -62,52 +60,19 @@ def api_game(game_id: str):
     return jsonify(serialize_game(game))
 
 
-def playable_game(game_id: str) -> Game:
-    game = get_game(game_id)
-    if game is None or game.rules is None:
-        abort(404)
-    return game
-
-
-@bp.route("/api/games/<game_id>/start")
-def api_start(game_id: str):
-    mode = os.environ.get("HISTORY_MODE", "compact")
-    return jsonify(start(playable_game(game_id), mode))
-
-
-def log_metrics(game_id: str, started: float, resp_bytes: int) -> None:
+@bp.route("/api/replay", methods=["POST"])
+def api_replay():
+    request.max_content_length = MAX_UPLOAD
     try:
-        import resource
-
-        peak = f" maxrss={resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024:.0f}MB"
-    except ImportError:
-        peak = ""
-    mode = os.environ.get("HISTORY_MODE", "compact")
-    print(
-        f"[metrics] {game_id} {mode} req={request.content_length or 0}B "
-        f"resp={resp_bytes}B ms={(time.perf_counter() - started) * 1000:.1f}{peak}",
-        flush=True,
-    )
-
-
-@bp.route("/api/games/<game_id>/play", methods=["POST"])
-def api_play(game_id: str):
-    started = time.perf_counter()
-    game = playable_game(game_id)
-    body = request.get_json(silent=True) or {}
+        body = request.get_json(silent=True)
+    except RequestEntityTooLarge:
+        return jsonify(error="arquivo maior que 1 MB"), 413
+    if not isinstance(body, dict):
+        return jsonify(error="o arquivo precisa ser um JSON com game e moves"), 400
+    game = get_game(body.get("game"))
+    if game is None:
+        return jsonify(error=f"jogo desconhecido: {body.get('game')!r}"), 404
     try:
-        pieces = [Piece(**p) for p in body["pieces"]]
-        path = tuple(body["path"])
-        player = int(body["player"])
-        history = History.from_json(body["history"])
-        if player not in (1, 2) or not path or not all(isinstance(q, str) for q in path):
-            abort(400)
-        state = play(game, pieces, player, history, path)
-    except (KeyError, TypeError, ValueError, AttributeError, IndexError, StopIteration):
-        abort(400)
-    if state is None:
-        abort(400)
-    response = jsonify(state)
-    if os.environ.get("METRICS") == "1":
-        log_metrics(game_id, started, response.content_length or 0)
-    return response
+        return jsonify(serialize_game(replace(replay(game, body.get("moves")), subtitle="Partida carregada")))
+    except (KeyError, TypeError, ValueError, AttributeError) as e:
+        return jsonify(error=str(e) or "partida inválida"), 400

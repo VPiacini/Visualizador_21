@@ -1,0 +1,138 @@
+{
+ "game": "daihasami",
+ "moves": [
+  {
+   "path": [
+    "e2",
+    "e5"
+   ],
+   "comment": "Jogador 1 desliza de e2 a e5."
+  },
+  {
+   "path": [
+    "f7",
+    "f5"
+   ],
+   "comment": "Jogador 2 desliza de f7 a f5."
+  },
+  {
+   "path": [
+    "d2",
+    "d6"
+   ],
+   "comment": "Jogador 1 desliza de d2 a d6."
+  },
+  {
+   "path": [
+    "e7",
+    "e6"
+   ],
+   "comment": "Jogador 2 desliza de e7 a e6."
+  },
+  {
+   "path": [
+    "f2",
+    "f4"
+   ],
+   "comment": "Jogador 1 desliza de f2 a f4."
+  },
+  {
+   "path": [
+    "g7",
+    "g3"
+   ],
+   "comment": "Jogador 2 desliza de g7 a g3."
+  },
+  {
+   "path": [
+    "g2",
+    "g4"
+   ],
+   "comment": "Jogador 1 salta de g2 a g4."
+  },
+  {
+   "path": [
+    "e6",
+    "e4"
+   ],
+   "comment": "Jogador 2 salta de e6 a e4."
+  },
+  {
+   "path": [
+    "d1",
+    "d3"
+   ],
+   "comment": "Jogador 1 desliza de d1 a d3."
+  },
+  {
+   "path": [
+    "d7",
+    "d5"
+   ],
+   "comment": "Jogador 2 salta de d7 a d5."
+  },
+  {
+   "path": [
+    "c2",
+    "c6"
+   ],
+   "comment": "Jogador 1 desliza de c2 a c6."
+  },
+  {
+   "path": [
+    "e8",
+    "e6"
+   ],
+   "comment": "Jogador 2 desliza de e8 a e6."
+  },
+  {
+   "path": [
+    "b2",
+    "b6"
+   ],
+   "comment": "Jogador 1 desliza de b2 a b6."
+  },
+  {
+   "path": [
+    "a8",
+    "a6"
+   ],
+   "comment": "Jogador 2 salta de a8 a a6."
+  },
+  {
+   "path": [
+    "c1",
+    "c3"
+   ],
+   "comment": "Jogador 1 desliza de c1 a c3."
+  },
+  {
+   "path": [
+    "e4",
+    "c4"
+   ],
+   "comment": "Jogador 2 desliza de e4 a c4."
+  },
+  {
+   "path": [
+    "b1",
+    "b3"
+   ],
+   "comment": "Jogador 1 desliza de b1 a b3."
+  },
+  {
+   "path": [
+    "d5",
+    "d4"
+   ],
+   "comment": "Jogador 2 desliza de d5 a d4."
+  },
+  {
+   "path": [
+    "e1",
+    "e3"
+   ],
+   "comment": "Jogador 1 desliza de e1 a e3. Forma 4 em linha na região central e vence."
+  }
+ ]
+}

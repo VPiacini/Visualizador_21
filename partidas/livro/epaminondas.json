@@ -1,0 +1,139 @@
+{
+ "game": "epaminondas",
+ "moves": [
+  {
+   "path": [
+    "f1",
+    "e2",
+    "c4"
+   ],
+   "comment": "Jogador 1 move uma falange de 2 peças (f1…e2) 2 casa(s) na diagonal ↖."
+  },
+  {
+   "path": [
+    "b8",
+    "b7",
+    "b5"
+   ],
+   "comment": "Jogador 2 move uma falange de 2 peças (b8…b7) 2 casa(s) para baixo."
+  },
+  {
+   "path": [
+    "b1",
+    "d3",
+    "g6"
+   ],
+   "comment": "Jogador 1 move uma falange de 3 peças (b1…d3) 3 casa(s) na diagonal ↗."
+  },
+  {
+   "path": [
+    "f8",
+    "f7",
+    "f5"
+   ],
+   "comment": "Jogador 2 move uma falange de 2 peças (f8…f7) 2 casa(s) para baixo. Ao chegar à falange adversária de 1 peça(s), captura f5."
+  },
+  {
+   "path": [
+    "e1",
+    "f2",
+    "h4"
+   ],
+   "comment": "Jogador 1 move uma falange de 2 peças (e1…f2) 2 casa(s) na diagonal ↗."
+  },
+  {
+   "path": [
+    "e7",
+    "f6",
+    "h4"
+   ],
+   "comment": "Jogador 2 move uma falange de 2 peças (e7…f6) 2 casa(s) na diagonal ↘. Ao chegar à falange adversária de 1 peça(s), captura h4."
+  },
+  {
+   "path": [
+    "g1",
+    "g3",
+    "g5"
+   ],
+   "comment": "Jogador 1 move uma falange de 3 peças (g1…g3) 2 casa(s) para cima. Ao chegar à falange adversária de 1 peça(s), captura g5."
+  },
+  {
+   "path": [
+    "h8",
+    "h7",
+    "h5"
+   ],
+   "comment": "Jogador 2 move uma falange de 2 peças (h8…h7) 2 casa(s) para baixo."
+  },
+  {
+   "path": [
+    "g3",
+    "g6",
+    "g7"
+   ],
+   "comment": "Jogador 1 move uma falange de 4 peças (g3…g6) 1 casa(s) para cima. Ao chegar à falange adversária de 2 peça(s), captura g7, g8."
+  },
+  {
+   "path": [
+    "h6",
+    "h4",
+    "h2"
+   ],
+   "comment": "Jogador 2 move uma falange de 3 peças (h6…h4) 2 casa(s) para baixo. Ao chegar à falange adversária de 2 peça(s), captura h2, h1."
+  },
+  {
+   "path": [
+    "g7",
+    "f8"
+   ],
+   "comment": "Jogador 1 move uma peça (g7…g7) 1 casa(s) na diagonal ↖."
+  },
+  {
+   "path": [
+    "h4",
+    "h2",
+    "h1"
+   ],
+   "comment": "Jogador 2 move uma falange de 3 peças (h4…h2) 1 casa(s) para baixo."
+  },
+  {
+   "path": [
+    "g5",
+    "g6",
+    "g8"
+   ],
+   "comment": "Jogador 1 move uma falange de 2 peças (g5…g6) 2 casa(s) para cima."
+  },
+  {
+   "path": [
+    "c8",
+    "e8",
+    "f8"
+   ],
+   "comment": "Jogador 2 move uma falange de 3 peças (c8…e8) 1 casa(s) para a direita. Ao chegar à falange adversária de 2 peça(s), captura f8, g8."
+  },
+  {
+   "path": [
+    "g7",
+    "g8"
+   ],
+   "comment": "Jogador 1 move uma peça (g7…g7) 1 casa(s) para cima."
+  },
+  {
+   "path": [
+    "d8",
+    "f8",
+    "g8"
+   ],
+   "comment": "Jogador 2 move uma falange de 3 peças (d8…f8) 1 casa(s) para a direita. Ao chegar à falange adversária de 1 peça(s), captura g8."
+  },
+  {
+   "path": [
+    "c1",
+    "d2",
+    "f4"
+   ],
+   "comment": "Jogador 1 move uma falange de 2 peças (c1…d2) 2 casa(s) na diagonal ↗. Na sua vez, o jogador 2 tem mais peças na última linha adversária e vence."
+  }
+ ]
+}

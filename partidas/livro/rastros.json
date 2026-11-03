@@ -1,0 +1,47 @@
+{
+ "game": "rastros",
+ "moves": [
+  {
+   "path": [
+    "e5"
+   ],
+   "comment": "Jogador 1 avança na diagonal para e5. A casa d4, de onde a peça saiu, vira um bloqueio permanente."
+  },
+  {
+   "path": [
+    "d6"
+   ],
+   "comment": "Jogador 2 desloca a peça para d6, deixando e5 bloqueada. Ele busca aproximar-se de a1, seu destino."
+  },
+  {
+   "path": [
+    "e7"
+   ],
+   "comment": "Jogador 1 responde subindo para e7, bloqueando d6 atrás de si."
+  },
+  {
+   "path": [
+    "f8"
+   ],
+   "comment": "Jogador 2 move para f8. Note que isso aproxima a peça do destino do adversário — cada jogada precisa ser pensada com cuidado."
+  },
+  {
+   "path": [
+    "g8"
+   ],
+   "comment": "Jogador 1 desliza lateralmente até g8, mantendo-se na linha 8."
+  },
+  {
+   "path": [
+    "g7"
+   ],
+   "comment": "Jogador 2 desce para g7 — não há outra casa vizinha livre a explorar."
+  },
+  {
+   "path": [
+    "h8"
+   ],
+   "comment": "Jogador 1 sobe até h8, seu destino. A partida termina com a vitória do Jogador 1."
+  }
+ ]
+}

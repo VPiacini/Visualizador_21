@@ -1,0 +1,12 @@
+{
+  "game": "ligue4",
+  "moves": [
+    { "path": ["a1"], "comment": "Eu comecei pela esquerda." },
+    { "path": ["h1"], "comment": "Meu amigo respondeu pela direita." },
+    { "path": ["a2"] },
+    { "path": ["h2"] },
+    { "path": ["a3"] },
+    { "path": ["h3"] },
+    { "path": ["a4"], "comment": "Quatro em linha: vitória." }
+  ]
+}

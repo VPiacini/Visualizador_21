@@ -1,0 +1,119 @@
+{
+ "game": "campanha",
+ "moves": [
+  {
+   "path": [
+    "e6"
+   ],
+   "comment": "Jogador 1 leva o Cavalo de d4 a e6 e deixa uma peça em d4."
+  },
+  {
+   "path": [
+    "c4"
+   ],
+   "comment": "Jogador 2 leva o Cavalo de e5 a c4 e deixa uma peça em e5."
+  },
+  {
+   "path": [
+    "f8"
+   ],
+   "comment": "Jogador 1 leva o Cavalo de e6 a f8 e deixa uma peça em e6."
+  },
+  {
+   "path": [
+    "a5"
+   ],
+   "comment": "Jogador 2 leva o Cavalo de c4 a a5 e deixa uma peça em c4."
+  },
+  {
+   "path": [
+    "d7"
+   ],
+   "comment": "Jogador 1 leva o Cavalo de f8 a d7 e deixa uma peça em f8."
+  },
+  {
+   "path": [
+    "b7"
+   ],
+   "comment": "Jogador 2 leva o Cavalo de a5 a b7 e deixa uma peça em a5."
+  },
+  {
+   "path": [
+    "b6"
+   ],
+   "comment": "Jogador 1 leva o Cavalo de d7 a b6 e deixa uma peça em d7."
+  },
+  {
+   "path": [
+    "c5"
+   ],
+   "comment": "Jogador 2 leva o Cavalo de b7 a c5 e deixa uma peça em b7."
+  },
+  {
+   "path": [
+    "c8"
+   ],
+   "comment": "Jogador 1 leva o Cavalo de b6 a c8 e deixa uma peça em b6."
+  },
+  {
+   "path": [
+    "a4"
+   ],
+   "comment": "Jogador 2 leva o Cavalo de c5 a a4 e deixa uma peça em c5."
+  },
+  {
+   "path": [
+    "e7"
+   ],
+   "comment": "Jogador 1 leva o Cavalo de c8 a e7 e deixa uma peça em c8. Já são 3 peças alinhadas: ameaça de vitória."
+  },
+  {
+   "path": [
+    "c3"
+   ],
+   "comment": "Jogador 2 leva o Cavalo de a4 a c3 e deixa uma peça em a4."
+  },
+  {
+   "path": [
+    "g6"
+   ],
+   "comment": "Jogador 1 leva o Cavalo de e7 a g6 e deixa uma peça em e7."
+  },
+  {
+   "path": [
+    "a2"
+   ],
+   "comment": "Jogador 2 leva o Cavalo de c3 a a2 e deixa uma peça em c3. Já são 3 peças alinhadas: ameaça de vitória."
+  },
+  {
+   "path": [
+    "h4"
+   ],
+   "comment": "Jogador 1 leva o Cavalo de g6 a h4 e deixa uma peça em g6."
+  },
+  {
+   "path": [
+    "c1"
+   ],
+   "comment": "Jogador 2 leva o Cavalo de a2 a c1 e deixa uma peça em a2."
+  },
+  {
+   "path": [
+    "f5"
+   ],
+   "comment": "Jogador 1 leva o Cavalo de h4 a f5 e deixa uma peça em h4."
+  },
+  {
+   "path": [
+    "b3"
+   ],
+   "comment": "Jogador 2 leva o Cavalo de c1 a b3 e deixa uma peça em c1."
+  },
+  {
+   "path": [
+    "e3"
+   ],
+   "comment": "Jogador 1 leva o Cavalo de f5 a e3 e deixa uma peça em f5. Forma 4 em linha e vence."
+  }
+ ]
+}
