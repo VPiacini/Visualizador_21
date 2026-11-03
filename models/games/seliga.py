@@ -1,5 +1,6 @@
-from .game import Game
-from .helpers import DIRS4, DIRS8, Builder, move, place, remove, step
+from ..piece import Piece
+from .game import Game, History, Rules
+from .helpers import DIRS4, DIRS8, Builder, move, place, remove, sq, step
 
 CENTER = ["d4", "e4", "d5", "e5"]
 PIECES = 12
@@ -122,6 +123,34 @@ def build() -> list:
     return b.moves
 
 
+def plays(pieces: list[Piece], player: int, history: History) -> list:
+    grid = {p.position: p.player for p in pieces}
+    if history.n < 2 * PIECES:
+        pid = f"p{player}-{sum(1 for v in grid.values() if v == player) + 1}"
+        return [
+            ((pos,), [place(pos, "stone", player, pid)])
+            for r in range(8)
+            for c in range(8)
+            if can_place(grid, pos := sq(c, r), player)
+        ]
+    ids = {p.position: p.id for p in pieces}
+    out = []
+    for path, taken in safe_moves(grid, player).items():
+        _, dropped = result_of(grid, path, taken, player)
+        out.append((path, [move(ids[path[0]], path[-1])] + [remove(t) for t in taken] + [remove(x) for x in dropped]))
+    return out
+
+
+def status(pieces: list[Piece], mover: int, history: History) -> tuple[str, bool]:
+    if history.n < 2 * PIECES:
+        return "", False
+    n1 = sum(p.player == 1 for p in pieces)
+    text = f"Peças — J1: {n1} · J2: {len(pieces) - n1}"
+    if not safe_moves({p.position: p.player for p in pieces}, 3 - mover):
+        return f"{text} · Vitória do jogador {mover}", True
+    return text, False
+
+
 SELIGA = Game(
     id="seliga",
     name="Se Liga",
@@ -134,4 +163,5 @@ SELIGA = Game(
     player_goal=None,
     initial_pieces=[],
     moves=build(),
+    rules=Rules(plays, status),
 )
