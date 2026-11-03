@@ -1,5 +1,5 @@
 from ..piece import Piece
-from .game import Game
+from .game import Game, History, Rules
 from .helpers import DIRS8, Builder, move, remove, sq, step, xy
 
 INITIAL = [
@@ -97,6 +97,30 @@ def build() -> list:
     return b.moves
 
 
+def plays(pieces: list[Piece], player: int, history: History) -> list:
+    """Caminho = (traseira, destino) para uma peça só; (traseira, frente, destino) para falanges."""
+    grid = {p.position: p.player for p in pieces}
+    ids = {p.position: p.id for p in pieces}
+    out = []
+    for (rear, d, ell, j), taken in all_moves(grid, player).items():
+        squares = run_from(grid, rear, d, player)[:ell]
+        dest = step(squares[-1], d, j)
+        path = (rear, dest) if ell == 1 else (rear, squares[-1], dest)
+        actions = [remove(t) for t in taken] + [
+            move(ids[s], step(s, d, j)) for s in reversed(squares)
+        ]
+        out.append((path, actions))
+    return out
+
+
+def status(pieces: list[Piece], mover: int, history: History) -> tuple[str, bool]:
+    grid = {p.position: p.player for p in pieces}
+    text = f"Última linha adversária — J1: {far_row_count(grid, 1)} · J2: {far_row_count(grid, 2)}"
+    if has_won(grid, 3 - mover):
+        return f"{text} · Vitória do jogador {3 - mover}", True
+    return text, False
+
+
 EPAMINONDAS = Game(
     id="epaminondas",
     name="Epaminondas",
@@ -109,4 +133,5 @@ EPAMINONDAS = Game(
     player_goal=None,
     initial_pieces=INITIAL,
     moves=build(),
+    rules=Rules(plays, status),
 )
