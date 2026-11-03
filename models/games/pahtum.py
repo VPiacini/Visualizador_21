@@ -1,5 +1,5 @@
 from ..piece import Piece
-from .game import Game
+from .game import Game, History, Rules
 from .helpers import Builder, place, sq
 
 BLOCKS = ["b2", "g2", "d4", "e4", "d5", "e5", "b7", "g7"]
@@ -59,6 +59,20 @@ def build() -> list:
     return b.moves
 
 
+def plays(pieces: list[Piece], player: int, history: History) -> list:
+    b = Builder(pieces)
+    return [((s,), [place(s, "disc", player)]) for r in range(8) for c in range(8) if b.empty(s := sq(c, r))]
+
+
+def status(pieces: list[Piece], mover: int, history: History) -> tuple[str, bool]:
+    b = Builder(pieces)
+    s1, s2 = score(b, 1), score(b, 2)
+    text = f"Pontos — J1: {s1} · J2: {s2}"
+    if len(pieces) < 64:
+        return text, False
+    return f"{text} · " + ("Empate" if s1 == s2 else f"Vitória do jogador {1 if s1 > s2 else 2}"), True
+
+
 PAHTUM = Game(
     id="pahtum",
     name="Pah Tum",
@@ -70,4 +84,5 @@ PAHTUM = Game(
     player_goal=None,
     initial_pieces=[Piece(id=f"block-{s}", type="block", position=s) for s in BLOCKS],
     moves=build(),
+    rules=Rules(plays, status),
 )
