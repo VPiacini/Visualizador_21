@@ -95,7 +95,7 @@ def status(pieces: list[Piece], mover: int, history: History) -> tuple[str, bool
     placed = {1: (history.n + 1) // 2, 2: history.n // 2}
     caps = {q: placed[3 - q] - sum(p.player == 3 - q for p in pieces) for q in (1, 2)}
     text = f"Capturas — J1: {caps[1]} · J2: {caps[2]}"
-    if len(pieces) < 64:
+    if len(pieces) < 64 and history.n < 2 * MAX_PIECES:
         return text, False
     return f"{text} · " + ("Empate" if caps[1] == caps[2] else f"Vitória do jogador {1 if caps[1] > caps[2] else 2}"), True
 
