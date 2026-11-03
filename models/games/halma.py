@@ -49,7 +49,7 @@ def paths_from(grid: dict[str, int], pos: str) -> list[tuple[str, ...]]:
 
 
 def goal_filled(grid: dict[str, int], player: int) -> bool:
-    return all(s in grid for s in GOAL[player])
+    return all(s in grid for s in GOAL[player]) and any(grid[s] == player for s in GOAL[player])
 
 
 def build() -> list:
