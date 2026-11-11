@@ -28,7 +28,7 @@ def replay(game: Game, entries: list[dict]) -> Game:
         state = play(game, pieces, player, history, path)
         if state is None:
             raise ValueError(f"lance {i} ilegal para o jogador {player}: {list(path)}")
-        moves.append(Move(player, state["actions"], e.get("comment", ""), state["status"]))
+        moves.append(Move(player, state["actions"], e.get("comment", ""), state["status"], path))
         pieces = [Piece(**p) for p in state["pieces"]]
         player, history = state["player"], History.from_json(state["history"])
     return replace(game, moves=moves)

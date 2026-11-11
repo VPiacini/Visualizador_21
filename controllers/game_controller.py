@@ -28,6 +28,7 @@ def serialize_game(game: Game) -> dict:
                 "comment": m.comment,
                 "move": m.move_action(),
                 "actions": m.actions,
+                "path": list(m.path),
                 "status": m.status,
             }
             for m in game.moves

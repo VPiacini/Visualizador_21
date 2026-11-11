@@ -5,6 +5,7 @@ Move = {player, actions: [...], comment}. Cada action:
   {"type": "remove", "position": ...}
   {"type": "flip",   "position": ..., "player": ...}   # troca o dono da peça
 Jogada sem actions = passar a vez. `status` é texto livre (placar, situação).
+`path` são as casas clicadas no lance, como no arquivo da partida.
 """
 from dataclasses import dataclass
 from typing import Any
@@ -18,6 +19,7 @@ class Move:
     actions: list[dict[str, Any]]
     comment: str = ""
     status: str = ""
+    path: tuple[str, ...] = ()
 
     def move_action(self) -> dict[str, Any] | None:
         return next((a for a in self.actions if a["type"] == "move"), None)
