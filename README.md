@@ -31,7 +31,10 @@ visualizador_jogos/
 │   └── index.html                # estrutura da página (Jinja2)
 ├── static/
 │   ├── css/style.css             # aparência
-│   └── js/board.js               # renderização do tabuleiro e navegação
+│   └── js/
+│       ├── board.js              # renderização do tabuleiro e navegação
+│       ├── timeline.js           # passos de animação de cada jogada (sem DOM)
+│       └── animator.js           # anima as peças (Web Animations API)
 └── tests/                        # pytest (só local — ignorado pelo .gitignore)
 ```
 

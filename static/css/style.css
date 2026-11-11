@@ -200,8 +200,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: left 400ms ease, top 400ms ease;
   pointer-events: none;
+  will-change: transform;
 }
 
 .piece .disc {

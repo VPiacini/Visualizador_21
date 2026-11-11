@@ -1,6 +1,9 @@
 // View (camada de apresentação): não conhece regras de jogo, apenas
 // desenha o que o Controller/Model já calculou (history + comentários).
 
+import { forwardSteps, backwardSteps } from "./timeline.js";
+import { createAnimator } from "./animator.js";
+
 const FILES = ["a", "b", "c", "d", "e", "f", "g", "h"];
 const RANKS = [1, 2, 3, 4, 5, 6, 7, 8];
 
@@ -43,24 +46,27 @@ function notation(actions, prevPieces) {
   );
 }
 
-let timer = null; // reprodução automática
+const animator = createAnimator(boardEl);
+
+// reprodução automática
+let timer = null;
+let autoplay = 0; // diferente de 0 enquanto toca; muda a cada parada
 
 function stopAutoplay() {
   clearTimeout(timer);
   timer = null;
+  autoplay = 0;
   btnPlay.innerHTML = "&#9654;";
 }
 
-function tick() {
+async function tick() {
+  const run = autoplay;
   if (currentIndex >= currentGame.moves.length) return stopAutoplay();
-  renderState(currentIndex + 1);
-  timer = setTimeout(tick, 1000 / Number(speedEl.value));
-}
-
-function squareToCoord(square) {
-  const col = FILES.indexOf(square[0]);
-  const row = parseInt(square.slice(1), 10) - 1;
-  return { col, row };
+  const interval = 1000 / Number(speedEl.value);
+  const t0 = performance.now();
+  await renderState(currentIndex + 1, "forward", interval);
+  if (run !== autoplay) return;
+  timer = setTimeout(tick, Math.max(0, interval - (performance.now() - t0)));
 }
 
 function buildStaticBoard() {
@@ -103,9 +109,8 @@ function clearHighlights() {
   });
 }
 
-function draw(pieces, prevPieces, actions, lastPlayer) {
+function markSquares(prevPieces, actions) {
   clearHighlights();
-  boardEl.querySelectorAll(".piece").forEach((el) => el.remove());
 
   const mark = (square, cls) => {
     const el = boardEl.querySelector(`[data-square="${square}"]`);
@@ -122,40 +127,26 @@ function draw(pieces, prevPieces, actions, lastPlayer) {
       mark(a.position, "gone");
     }
   });
-
-  pieces.forEach((piece) => {
-    const { col, row } = squareToCoord(piece.position);
-    const wrapper = document.createElement("div");
-    wrapper.className = "piece";
-    wrapper.style.left = `${(col / 8) * 100}%`;
-    wrapper.style.top = `${((7 - row) / 8) * 100}%`;
-
-    if (piece.type === "block") {
-      const block = document.createElement("div");
-      block.className = "block";
-      wrapper.appendChild(block);
-    } else {
-      const disc = document.createElement("div");
-      disc.className = "disc";
-      disc.dataset.type = piece.type;
-      const player = piece.player ?? lastPlayer;
-      disc.style.background =
-        player === 1 ? "var(--player1)" : player === 2 ? "var(--player2)" : "#b9af9a";
-      wrapper.appendChild(disc);
-    }
-    boardEl.appendChild(wrapper);
-  });
 }
 
-function renderState(index) {
+// mode: "forward" e "backward" animam só quando o índice anda exatamente 1; o resto é instantâneo
+function renderState(index, mode = "instant", budget) {
+  const from = currentIndex;
   currentIndex = index;
-  const lastMove = index > 0 ? currentGame.moves[index - 1] : null;
-  draw(
-    currentGame.history[index],
-    index > 0 ? currentGame.history[index - 1] : [],
-    lastMove ? lastMove.actions : [],
-    lastMove ? lastMove.player : null
-  );
+  const { history, moves } = currentGame;
+  const lastMove = index > 0 ? moves[index - 1] : null;
+  const player = lastMove ? lastMove.player : null;
+  markSquares(index > 0 ? history[index - 1] : [], lastMove ? lastMove.actions : []);
+
+  let done;
+  if (mode === "forward" && index === from + 1) {
+    done = animator.play(forwardSteps(history[from], lastMove), history[from], history[index], { player, budget });
+  } else if (mode === "backward" && index === from - 1) {
+    done = animator.play(backwardSteps(history[from], history[index]), history[from], history[index], { player, scale: 0.6 });
+  } else {
+    animator.reset(history[index], player);
+    done = Promise.resolve();
+  }
 
   counterEl.textContent = `${index}/${currentGame.moves.length}`;
   markActivePlayer(lastMove ? lastMove.player : 0);
@@ -164,6 +155,7 @@ function renderState(index) {
   commentEl.textContent = lastMove ? lastMove.comment : currentGame.objective;
   btnPrev.disabled = index <= 0;
   btnNext.disabled = btnEnd.disabled = index >= currentGame.moves.length;
+  return done;
 }
 
 const STORE = "partida:"; // localStorage: texto do JSON enviado, por jogo
@@ -255,11 +247,11 @@ srcRemove.addEventListener("click", () => {
 
 btnPrev.addEventListener("click", () => {
   stopAutoplay();
-  if (currentIndex > 0) renderState(currentIndex - 1);
+  if (currentIndex > 0) renderState(currentIndex - 1, "backward");
 });
 btnNext.addEventListener("click", () => {
   stopAutoplay();
-  if (currentIndex < currentGame.moves.length) renderState(currentIndex + 1);
+  if (currentIndex < currentGame.moves.length) renderState(currentIndex + 1, "forward");
 });
 btnReset.addEventListener("click", () => {
   stopAutoplay();
@@ -270,9 +262,10 @@ btnEnd.addEventListener("click", () => {
   renderState(currentGame.moves.length);
 });
 btnPlay.addEventListener("click", () => {
-  if (timer) return stopAutoplay();
+  if (autoplay) return stopAutoplay();
   if (currentIndex >= currentGame.moves.length) renderState(0);
   btnPlay.innerHTML = "&#10074;&#10074;";
+  autoplay = performance.now();
   timer = setTimeout(tick, 1000 / Number(speedEl.value));
 });
 
