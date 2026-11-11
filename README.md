@@ -11,17 +11,19 @@ Aplicação publicada em https://visualizador-21.onrender.com
 ```
 visualizador_jogos/
 ├── app.py                        # cria a app Flask (create_app + app para o gunicorn)
+├── LICENSE                       # MIT
 ├── requirements.txt              # Flask e gunicorn
 ├── models/                       # regras e dados — sem Flask
 │   ├── piece.py                  #   peça genérica {id, type, position, player}
 │   ├── board.py                  #   coordenadas do tabuleiro 8x8
 │   ├── move.py                   #   jogada + motor genérico (apply_move/build_history)
+│   ├── play.py                   #   valida um lance pelas regras e calcula o próximo estado
 │   ├── replay.py                 #   reproduz uma partida real (lista de lances) com as regras
 │   └── games/
-│       ├── game.py               #   Game = config inicial + moves + comentários
-│       ├── helpers.py            #   coordenadas, construtores de ação e Builder
+│       ├── game.py               #   Game, Rules (plays/status) e History
+│       ├── helpers.py            #   coordenadas, construtores de ação e Builder (consulta ao tabuleiro)
 │       ├── <jogo>.py             #   um módulo por jogo (regras e posição inicial)
-│       └── registry.py           #   registro central dos 21 jogos, na ordem do livro
+│       └── registry.py           #   registro dos 21 jogos, na ordem do livro, e JOGAVEIS
 ├── partidas/                     # dados das partidas, sem código
 │   ├── livro/<jogo>.json         #   partida de exemplo de cada jogo do livro
 │   └── modelo.json               #   modelo para quem quer mostrar a própria partida
@@ -32,7 +34,7 @@ visualizador_jogos/
 ├── static/
 │   ├── css/style.css             # aparência
 │   └── js/
-│       ├── board.js              # renderização do tabuleiro e navegação
+│       ├── board.js              # tabuleiro, navegação, modo Jogar e partidas enviadas
 │       ├── timeline.js           # passos de animação de cada jogada (sem DOM)
 │       └── animator.js           # anima as peças (Web Animations API)
 └── tests/                        # pytest (só local — ignorado pelo .gitignore)
@@ -41,9 +43,20 @@ visualizador_jogos/
 - **Model**: dados, regras de cada jogo e motor genérico do tabuleiro 8x8.
 - **Controller**: traduz requisições HTTP em chamadas ao Model e decide o que
   devolver (página HTML ou JSON).
-- **View**: template Jinja2 + CSS + JS. O JS busca os dados já processados via
-  `/api/games/<id>` e cuida de desenhar o tabuleiro e navegar entre jogadas
-  (botões ou setas ← → do teclado).
+- **View**: template Jinja2 + CSS + JS. O JS não conhece as regras: busca os
+  dados já processados via `/api/games/<id>`, desenha o tabuleiro, anima as
+  peças e navega entre jogadas. No modo Jogar, cada clique vira um lance que o
+  servidor valida.
+
+## Navegação
+
+- ← e → (botões ou setas do teclado) voltam e avançam uma jogada, com animação.
+- ⏭ vai para o final e ↻ volta ao início, sem animação.
+- ▶ reproduz a partida sozinha, em 0.5x, 1x ou 2x.
+- Abaixo do tabuleiro ficam a situação da partida (placar, vez, fim de jogo), a
+  notação da jogada (`d4→e5` mover, `+e5` colocar, `×e5` remover, `⟳e5` virar)
+  e o comentário do livro.
+- A casa de origem e as casas afetadas pela última jogada ficam destacadas.
 
 ## Jogos incluídos
 
@@ -76,13 +89,40 @@ partidas enviadas, resolve passes de vez e detecta o fim da partida.
 
 ## Modo Jogar
 
-Rastros, Amazonas, Konane e Gomoku e Quina (`JOGAVEIS` em `registry.py`) têm o
-switch **Visualizar / Jogar**; no modo Jogar o fundo fica num verde mais claro.
-Dois jogadores se alternam no mesmo navegador. O lance é montado clicando nas
-casas em sequência (colocar = 1 clique, mover = origem e destino, flecha ou
-saltos = o caminho inteiro; havendo lances mais longos, clicar de novo na última
-casa confirma). O servidor valida cada lance, resolve passes e detecta o fim. ←
-desfaz a última jogada e ↻ recomeça.
+Rastros, Amazonas, Konane e Gomoku e Quina, os quatro primeiros do livro, têm o
+switch **Visualizar / Jogar** no topo; no modo Jogar o fundo fica num verde mais
+claro e os controles de reprodução e de partidas somem. Dois jogadores se
+alternam no mesmo navegador.
+
+- O lance é montado clicando nas casas em sequência: colocar = 1 clique, mover =
+  origem e destino, flecha ou saltos = o caminho inteiro. As casas possíveis
+  ficam marcadas; havendo lances mais longos, clicar de novo na última casa
+  confirma.
+- O servidor valida cada lance, resolve passes de vez e detecta o fim. O
+  navegador guarda só o estado atual (`pieces`, `player`, `history`).
+- ← desfaz a última jogada e ↻ recomeça. Os lances também são animados.
+
+Os jogos são liberados aos poucos, na ordem do livro: `JOGAVEIS = 4` em
+`models/games/registry.py` marca os primeiros como `playable`. Para liberar mais,
+basta aumentar esse número (as regras de todos os 21 jogos já existem). Um jogo
+não jogável não mostra o switch e responde 404 em `/start` e `/play`.
+
+## Animações
+
+Ao avançar ou voltar uma jogada, as peças deslizam (passando por cada casa de
+saltos em cadeia, como no Halma), surgem, somem, viram de cor (Othello) ou são
+promovidas. Voltar anima mais rápido. Pular várias jogadas (⏭, ↻) ou trocar de
+jogo muda o tabuleiro sem animação.
+
+- `static/js/timeline.js` não toca no DOM: `forwardSteps(peças, jogada)`
+  converte as `actions` e o `path` da jogada em grupos de passos (`move`,
+  `place`, `remove`, `flip`, `promote`). Passos do mesmo grupo tocam juntos e os
+  grupos tocam em sequência. `backwardSteps(de, para)` compara duas posições
+  para voltar uma jogada.
+- `static/js/animator.js` mantém um elemento por peça (chave `id`) e toca os
+  passos com a Web Animations API. Uma nova jogada no meio de outra termina a
+  anterior na hora; na reprodução automática a duração se ajusta à velocidade.
+- Com `prefers-reduced-motion` ligado no sistema, o tabuleiro muda sem animação.
 
 ## Modelo de jogada
 
@@ -105,7 +145,7 @@ Jogada sem `actions` = passar a vez. Os construtores `move()`, `place()`,
 |------|---------|
 | `GET /` | página do visualizador |
 | `GET /api/games` | lista `[{id, name, subtitle}]` |
-| `GET /api/games/<id>` | jogo completo: metadados, `moves` e `history` (estado do tabuleiro após cada jogada); 404 se o id não existir |
+| `GET /api/games/<id>` | jogo completo: `id`, `name`, `subtitle`, `objective`, `playerGoal`, `playable`, `moves` (cada uma com `player`, `comment`, `status`, `actions` e `path`) e `history` (posição inicial + posição após cada jogada); 404 se o id não existir |
 | `GET /api/games/<id>/start` | estado inicial do modo Jogar: `pieces`, `player`, `history`, `plays` (caminhos legais); 404 se o jogo não for jogável |
 | `POST /api/games/<id>/play` | recebe `{pieces, player, history, path}` e devolve o próximo estado (`pieces`, `player`, `history`, `status`, `over`, `actions`, `plays`); 400 para lance ou estado inválido |
 | `POST /api/replay` | recebe `{game, moves: [{path, comment?}]}` e devolve a partida como `GET /api/games/<id>`; 400 com `error` se um lance for ilegal |
@@ -131,7 +171,8 @@ A pasta `tests/` fica fora do repositório (`.gitignore`). Localmente:
 
 ```bash
 pip install pytest
-pytest tests/ -v
+pytest tests/ -v                         # regras, partidas do livro e API
+node --test tests/timeline.test.mjs      # passos de animação (Node 18+)
 ```
 
 ## Visualizando uma partida sua
@@ -159,7 +200,8 @@ guarda nada: `POST /api/replay` com o mesmo JSON devolve a partida no formato de
 1. Criar `models/games/<jogo>.py` com as regras, a posição inicial e um `Game`
    com `rules=Rules(plays, status)` (veja `othello.py` ou `ligue4.py`).
 2. Criar `partidas/livro/<jogo>.json` com a partida de exemplo.
-3. Adicionar o jogo à lista em `models/games/registry.py`.
+3. Adicionar o jogo à lista em `models/games/registry.py`, na posição do
+   capítulo. Ele fica jogável se estiver entre os `JOGAVEIS` primeiros.
 4. Opcional: um validador de regra em `tests/test_game_data.py`
    (`GAME_RULE_VALIDATORS`).
 

@@ -1,4 +1,7 @@
+// Desenha as peças e toca os passos do timeline.js com a Web Animations API.
 // Um elemento por peça (chave: id), reaproveitado entre jogadas para poder animar.
+// API: reset(peças) desenha sem animar; play(grupos, antes, depois, opções) anima;
+// finish() encerra na hora a animação em curso. Respeita prefers-reduced-motion.
 
 const FILES = "abcdefgh";
 const DUR = { hop: 220, place: 180, remove: 180, flip: 260, promote: 260 };

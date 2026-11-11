@@ -1,3 +1,4 @@
+"""Rotas Flask: página do visualizador e API JSON (partidas, replay e modo Jogar)."""
 from dataclasses import replace
 
 from werkzeug.exceptions import RequestEntityTooLarge
@@ -15,6 +16,7 @@ MAX_UPLOAD = 1_000_000  # bytes
 
 
 def serialize_game(game: Game) -> dict:
+    """Jogo no formato de GET /api/games/<id>: metadados, jogadas (com `path`) e posições."""
     # manda o histórico inteiro de uma vez, sem 1 request por jogada
     history = build_history(game.initial_pieces, game.moves)
     return {
@@ -83,6 +85,7 @@ def api_replay():
 
 
 def playable_game(game_id: str) -> Game:
+    """Jogo liberado no modo Jogar; 404 se não existir ou ainda não for jogável."""
     game = get_game(game_id)
     if game is None or not game.playable:
         abort(404)

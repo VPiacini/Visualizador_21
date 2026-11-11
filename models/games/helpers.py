@@ -1,7 +1,9 @@
 """Utilidades comuns aos jogos: coordenadas, construtores de ação e o Builder.
 
 Cada jogo calcula as consequências das jogadas (capturas, viradas...) com as
-suas próprias regras e usa o Builder para montar a partida validando cada lance.
+suas próprias regras. Alguns usam o Builder para consultar o tabuleiro (quem
+está em cada casa) enquanto geram as jogadas legais; a partida em si é montada
+e validada por models/replay.py.
 """
 from ..board import FILES
 from ..move import Move, apply_move
@@ -47,7 +49,7 @@ def flip(pos: str, player: int) -> dict:
 
 
 class Builder:
-    """Acumula as jogadas aplicando-as ao tabuleiro, para consultar o estado atual."""
+    """Tabuleiro consultável (at, owner, empty); `add` aplica uma jogada e a guarda em `moves`."""
 
     def __init__(self, initial: list[Piece]):
         self.initial = list(initial)

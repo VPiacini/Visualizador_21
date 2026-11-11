@@ -1,5 +1,10 @@
-"""Registro central de jogos. Novo jogo = um módulo em models/games/ + uma entrada aqui
-+ a partida do livro em partidas/livro/<id>.json."""
+"""Registro central de jogos, na ordem dos capítulos do livro.
+
+Novo jogo = um módulo em models/games/ + uma entrada aqui + a partida do livro em
+partidas/livro/<id>.json. Ao importar, cada partida do livro é reproduzida com as
+regras do jogo (lance ilegal levanta ValueError) e os JOGAVEIS primeiros jogos
+ficam liberados no modo Jogar (`playable`).
+"""
 import json
 from dataclasses import replace
 from pathlib import Path
@@ -36,7 +41,8 @@ def com_partida(g: Game) -> Game:
     return replay(g, entries)
 
 
-# os primeiros do livro que já podem ser jogados
+# quantos jogos, a partir do primeiro do livro, já podem ser jogados (modo Jogar);
+# para liberar mais, basta aumentar
 JOGAVEIS = 4
 
 # mesma ordem dos capítulos do livro (2 a 22)

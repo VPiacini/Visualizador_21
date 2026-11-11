@@ -1,5 +1,8 @@
 // View (camada de apresentação): não conhece regras de jogo, apenas
 // desenha o que o Controller/Model já calculou (history + comentários).
+// Também cuida do modo Jogar (cliques -> /play) e das partidas enviadas
+// (localStorage -> /api/replay). As peças são desenhadas pelo animator.js
+// a partir dos passos calculados pelo timeline.js.
 
 import { forwardSteps, backwardSteps } from "./timeline.js";
 import { createAnimator } from "./animator.js";

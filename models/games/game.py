@@ -1,6 +1,8 @@
 """
-Jogo = configuração inicial + sequência de jogadas + comentários.
-Jogos jogáveis também trazem `rules`.
+Jogo = configuração inicial + regras + partida do livro (jogadas e comentários).
+
+Todos os jogos trazem `rules`, usadas para reproduzir e validar partidas;
+`playable` diz se o jogo já está liberado no modo Jogar (ver JOGAVEIS em registry.py).
 """
 from dataclasses import dataclass, field
 from typing import Callable

@@ -1,3 +1,4 @@
+"""Peça genérica do tabuleiro: id estável (usado pelas animações), tipo, casa e dono."""
 import hashlib
 from dataclasses import dataclass
 from typing import Optional
