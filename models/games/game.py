@@ -82,3 +82,4 @@ class Game:
     initial_pieces: list[Piece]
     moves: list[Move] = field(default_factory=list)
     rules: Rules | None = None
+    playable: bool = False  # liberado para o modo Jogar

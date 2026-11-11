@@ -3,9 +3,11 @@ from dataclasses import replace
 from werkzeug.exceptions import RequestEntityTooLarge
 from flask import Blueprint, abort, jsonify, render_template, request
 
-from models.games.game import Game
+from models.games.game import Game, History
 from models.games.registry import get_game, list_games
 from models.move import build_history
+from models.piece import Piece
+from models.play import play, start
 from models.replay import replay
 
 bp = Blueprint("game", __name__)
@@ -21,6 +23,7 @@ def serialize_game(game: Game) -> dict:
         "subtitle": game.subtitle,
         "objective": game.objective,
         "playerGoal": game.player_goal,
+        "playable": game.playable,
         "history": [[p.to_dict() for p in state] for state in history],
         "moves": [
             {
@@ -77,3 +80,34 @@ def api_replay():
         return jsonify(serialize_game(replace(replay(game, body.get("moves")), subtitle="Partida carregada")))
     except (KeyError, TypeError, ValueError, AttributeError) as e:
         return jsonify(error=str(e) or "partida inválida"), 400
+
+
+def playable_game(game_id: str) -> Game:
+    game = get_game(game_id)
+    if game is None or not game.playable:
+        abort(404)
+    return game
+
+
+@bp.route("/api/games/<game_id>/start")
+def api_start(game_id: str):
+    return jsonify(start(playable_game(game_id)))
+
+
+@bp.route("/api/games/<game_id>/play", methods=["POST"])
+def api_play(game_id: str):
+    game = playable_game(game_id)
+    body = request.get_json(silent=True)
+    try:
+        pieces = [Piece(**p) for p in body["pieces"]]
+        path = tuple(body["path"])
+        player = int(body["player"])
+        history = History.from_json(body["history"])
+        if player not in (1, 2) or not path or not all(isinstance(q, str) for q in path):
+            raise ValueError
+        state = play(game, pieces, player, history, path)
+    except (KeyError, TypeError, ValueError, AttributeError, IndexError, StopIteration):
+        return jsonify(error="estado inválido"), 400
+    if state is None:
+        return jsonify(error="lance ilegal"), 400
+    return jsonify(state)

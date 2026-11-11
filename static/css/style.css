@@ -21,6 +21,14 @@ body {
   transition: background 300ms ease;
 }
 
+body.jogando {
+  --bg: #24442f;
+}
+
+body.jogando .view-only {
+  display: none !important;
+}
+
 #app {
   min-height: 100vh;
   display: flex;
@@ -333,3 +341,63 @@ body {
 #source-switch .active { background: rgba(255, 255, 255, 0.25); font-weight: 700; }
 #source-switch [hidden] { display: none; }
 #source-switch.empty { display: none; }
+
+#mode-switch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 13px;
+  cursor: pointer;
+  user-select: none;
+}
+#mode-switch[hidden] { display: none; }
+#mode-switch span { opacity: 0.55; transition: opacity 150ms; }
+#mode-switch span:first-child,
+body.jogando #mode-switch span:last-child { opacity: 1; font-weight: 700; }
+body.jogando #mode-switch span:first-child { opacity: 0.55; font-weight: 400; }
+
+#mode-toggle {
+  appearance: none;
+  position: relative;
+  width: 40px;
+  height: 22px;
+  margin: 0;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+  transition: background 200ms;
+}
+#mode-toggle::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--parchment);
+  transition: transform 200ms;
+}
+#mode-toggle:checked { background: #4e8b6b; }
+#mode-toggle:checked::after { transform: translateX(18px); }
+#mode-toggle:focus-visible { outline: 2px solid var(--parchment); outline-offset: 2px; }
+
+#board.playing .square { cursor: pointer; }
+
+.square.hint::after {
+  content: "";
+  position: absolute;
+  inset: 38%;
+  border-radius: 50%;
+  background: rgba(78, 139, 107, 0.8);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.square.selected {
+  outline: 3px solid #e0b43c;
+  outline-offset: -3px;
+}

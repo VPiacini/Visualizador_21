@@ -17,11 +17,16 @@
     <header id="game-header">
       <h1 id="game-name"></h1>
       <p id="game-subtitle"></p>
-      <button id="btn-load" class="pill-btn">Carregar partida</button>
+      <label id="mode-switch" hidden>
+        <span>Visualizar</span>
+        <input id="mode-toggle" type="checkbox" role="switch" aria-label="Modo Jogar" />
+        <span>Jogar</span>
+      </label>
+      <button id="btn-load" class="pill-btn view-only">Carregar partida</button>
       <input id="file-load" type="file" accept=".json,application/json" hidden />
     </header>
 
-    <div id="source-switch" role="group" aria-label="Origem da partida">
+    <div id="source-switch" class="view-only" role="group" aria-label="Origem da partida">
       <button id="src-livro" class="pill-btn">Livro</button>
       <button id="src-mine" class="pill-btn" hidden>Minha partida</button>
       <button id="src-remove" class="pill-btn" aria-label="Remover minha partida" title="Remover minha partida" hidden>&#10005;</button>
@@ -38,13 +43,13 @@
     </div>
 
     <div id="controls">
-      <button id="btn-prev" aria-label="Jogada anterior">&#8592;</button>
+      <button id="btn-prev" aria-label="Jogada anterior" title="Jogada anterior">&#8592;</button>
       <span id="move-counter"></span>
-      <button id="btn-next" aria-label="Próxima jogada">&#8594;</button>
-      <button id="btn-end" aria-label="Ir para o final">&#9197;</button>
+      <button id="btn-next" class="view-only" aria-label="Próxima jogada">&#8594;</button>
+      <button id="btn-end" class="view-only" aria-label="Ir para o final">&#9197;</button>
       <button id="btn-reset" aria-label="Reiniciar">&#8635;</button>
-      <button id="btn-play" aria-label="Reproduzir">&#9654;</button>
-      <select id="play-speed" aria-label="Velocidade">
+      <button id="btn-play" class="view-only" aria-label="Reproduzir">&#9654;</button>
+      <select id="play-speed" class="view-only" aria-label="Velocidade">
         <option value="0.5">0.5x</option>
         <option value="1" selected>1x</option>
         <option value="2">2x</option>

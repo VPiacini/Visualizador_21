@@ -1,6 +1,7 @@
 """Registro central de jogos. Novo jogo = um módulo em models/games/ + uma entrada aqui
 + a partida do livro em partidas/livro/<id>.json."""
 import json
+from dataclasses import replace
 from pathlib import Path
 
 from ..replay import replay
@@ -35,14 +36,17 @@ def com_partida(g: Game) -> Game:
     return replay(g, entries)
 
 
+# os primeiros do livro que já podem ser jogados
+JOGAVEIS = 4
+
 # mesma ordem dos capítulos do livro (2 a 22)
 GAMES: dict[str, Game] = {
-    g.id: g
-    for g in map(com_partida, [
+    g.id: replace(g, playable=i < JOGAVEIS)
+    for i, g in enumerate(map(com_partida, [
         RASTROS, AMAZONAS, KONANE, GOMOKU, LIGUE4, PAHTUM, DAIHASAMI, CAMPANHA,
         INTERSECOES, HALMA, PEOES, GOGOL, DAMATURCA, HASAMI, MAKYEK, MINGMANG,
         OTHELLO, LINHASACAO, SELIGA, EPAMINONDAS, SZKWA,
-    ])
+    ]))
 }
 
 

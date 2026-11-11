@@ -17,6 +17,10 @@ def _state(game: Game, pieces: list[Piece], player: int, history: History, statu
     }
 
 
+def start(game: Game) -> dict:
+    return _state(game, game.initial_pieces, 1, History.compact([]), "", False, [])
+
+
 def play(game: Game, pieces: list[Piece], player: int, history: History, path: tuple[str, ...]) -> dict | None:
     """Próximo estado após a jogada, ou None se ela é ilegal."""
     rules = game.rules

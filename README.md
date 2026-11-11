@@ -74,6 +74,16 @@ anteriores (`n`, `last`, `seen`) para regras como en passant e repetição de po
 É com essas regras que o servidor valida cada lance das partidas do livro e das
 partidas enviadas, resolve passes de vez e detecta o fim da partida.
 
+## Modo Jogar
+
+Rastros, Amazonas, Konane e Gomoku e Quina (`JOGAVEIS` em `registry.py`) têm o
+switch **Visualizar / Jogar**; no modo Jogar o fundo fica num verde mais claro.
+Dois jogadores se alternam no mesmo navegador. O lance é montado clicando nas
+casas em sequência (colocar = 1 clique, mover = origem e destino, flecha ou
+saltos = o caminho inteiro; havendo lances mais longos, clicar de novo na última
+casa confirma). O servidor valida cada lance, resolve passes e detecta o fim. ←
+desfaz a última jogada e ↻ recomeça.
+
 ## Modelo de jogada
 
 Uma jogada (`Move`) tem `player`, `comment`, `status` (texto livre: placar,
@@ -96,6 +106,8 @@ Jogada sem `actions` = passar a vez. Os construtores `move()`, `place()`,
 | `GET /` | página do visualizador |
 | `GET /api/games` | lista `[{id, name, subtitle}]` |
 | `GET /api/games/<id>` | jogo completo: metadados, `moves` e `history` (estado do tabuleiro após cada jogada); 404 se o id não existir |
+| `GET /api/games/<id>/start` | estado inicial do modo Jogar: `pieces`, `player`, `history`, `plays` (caminhos legais); 404 se o jogo não for jogável |
+| `POST /api/games/<id>/play` | recebe `{pieces, player, history, path}` e devolve o próximo estado (`pieces`, `player`, `history`, `status`, `over`, `actions`, `plays`); 400 para lance ou estado inválido |
 | `POST /api/replay` | recebe `{game, moves: [{path, comment?}]}` e devolve a partida como `GET /api/games/<id>`; 400 com `error` se um lance for ilegal |
 
 ## Rodando localmente
