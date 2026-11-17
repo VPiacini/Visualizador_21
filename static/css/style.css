@@ -338,6 +338,13 @@ body.jogando .view-only {
   font-size: 13px;
 }
 #btn-load { margin-top: 8px; }
+a.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: top;
+  margin-top: 8px;
+  text-decoration: none;
+}
 #source-switch .active { background: rgba(255, 255, 255, 0.25); font-weight: 700; }
 #source-switch [hidden] { display: none; }
 #source-switch.empty { display: none; }

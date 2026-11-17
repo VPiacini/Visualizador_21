@@ -2,10 +2,10 @@
 from dataclasses import replace
 
 from werkzeug.exceptions import RequestEntityTooLarge
-from flask import Blueprint, abort, jsonify, render_template, request
+from flask import Blueprint, abort, jsonify, render_template, request, send_from_directory
 
 from models.games.game import Game, History
-from models.games.registry import get_game, list_games
+from models.games.registry import LIVRO, get_game, list_games
 from models.move import build_history
 from models.piece import Piece
 from models.play import play, start
@@ -64,6 +64,17 @@ def api_game(game_id: str):
     if game is None:
         abort(404)
     return jsonify(serialize_game(game))
+
+
+@bp.route("/api/games/<game_id>/exemplo.json")
+def api_sample(game_id: str):
+    """Partida do livro como arquivo, no formato aceito por Carregar partida."""
+    if get_game(game_id) is None:
+        abort(404)
+    return send_from_directory(
+        LIVRO, f"{game_id}.json", as_attachment=True,
+        download_name=f"{game_id}-exemplo.json", mimetype="application/json",
+    )
 
 
 @bp.route("/api/replay", methods=["POST"])

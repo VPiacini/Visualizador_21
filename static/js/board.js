@@ -341,6 +341,7 @@ function showGame(game, from) {
   live = null;
   boardEl.classList.remove("playing");
   modeSwitchEl.hidden = !game.playable;
+  document.getElementById("btn-sample").href = `/api/games/${gameId}/exemplo.json`;
 
   nameEl.textContent = currentGame.name;
   subtitleEl.textContent = currentGame.subtitle;
